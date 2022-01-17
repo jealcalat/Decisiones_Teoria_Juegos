@@ -1,0 +1,87 @@
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+% \usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+\usepackage{exercise}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\usepackage{dtj_iteso} % creación mía
+\usepackage{kpfonts}
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Tarea - Unidad 3 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\begin{summarybox}{Instrucciones}
+
+  \begin{description}
+      \item[1] - Puedes contestar en papel, tomar fotos y colocarlas en un archivo Word y convertirlo a pdf, luego subirlo en la entrada de CANVAS correspondiente al examen. 
+      \item[2] - Coloca claramente los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta. 
+      \item[3] - Si existe una situación \textit{extraordinaria} que te impida \textit{terminar} y subir la tarea a tiempo, házmelo saber en ese momento. Sin embargo, si es el último día y no haz hecho nada, por día que pase sin que hayas subido la tarea, perderás 10\% de puntos.
+  \end{description}
+  
+\end{summarybox}
+
+\begin{Exercise}[name=Pregunta]
+\textit{3 pt}
+
+  Considerar una subasta de sobre cerrado a la primera puja con 3 jugadores
+
+  Valoraciones $ x_1, x_2, x_3 \sim \text{uniforme}(0, 30) $
+  
+  Supón que los jugadores 2 y 3 anuncian que pujarán de la siguiente manera
+
+  \begin{align*}
+    b_2(x_2) = \frac{3}{4}x_2 \\ 
+    b_3(x_3) = \frac{4}{5}x_3
+  \end{align*}
+
+  Y que el jugador 1 puja con $ b_1 $ tal que gana si $ b_1 > ax_2 $ y $ b_1 > ax_3 $ para los valores de $a$ de los jugadores 2 y 3 mencionados antes.
+
+  \textit{Resuelve:}
+
+  ¿Qué valor debe tomar $ a $ para que la puja del jugador 1 ($ b_1 $) sea óptima contra la puja de los otros jugadores? 
+
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+  \textit{4pt}
+
+Tomando el ejercicio anterior, desechar los valores de $ a $ para los jugadores 2 y 3 (es decir, ahora su puja será $ b_j(x_j)=ax_j $ para $ j=\{2, 3\} $).  
+
+\textit{Resuelve:}
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+  \item Vuelve a calcular el valor de $ a $ en equilibrio para el jugador 1.
+  \item Compara este valor de $ a $ contra los que usaron los jugadores en la anterior pregunta. ¿De qué depende el valor de $ a $ en equilibrio?
+\end{enumerate}
+  
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+  \textit{3pt}
+
+  En una subasta de sobre cerrado al primer precio, dos jugadores tienen función de utilidad cóncava $ u(w_i)=w_i^\alpha $, en donde $ w_i $ es la ganancia que obtienen si ganan la subasta, $ w_i = x_i - b_i $ si $ b_i > b_j $. Si los jugadores pujan una fracción $0 < a < 1$ de su valuación $ x_i \sim \text{uniforme} (0, 1) $ (es decir, distribuida uniformemente entre 0 y 1).
+
+  \textit{Resuelve:}
+
+  ¿Para qué valor de $ \alpha $ se obtendría un valor de $ a = 1/1.5 $?
+  
+\end{Exercise}
+
+
+
+\end{document}
