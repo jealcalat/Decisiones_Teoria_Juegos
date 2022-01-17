@@ -1,0 +1,1340 @@
+% !TEX TS-program = lualatex
+\documentclass[12pt]{article}
+\usepackage{dtj_notas}
+\usepackage{sectsty}
+\allsectionsfont{\normalfont\sffamily\bfseries}
+\usepackage{pgfplots}
+\usetikzlibrary{arrows}
+\pgfplotsset{samples=300}
+\usepackage{ulem}
+\newcommand{\UE}[2]{UE_{\text{#1}}(#2)}
+
+\title{\sffamily Notas de Unidad 3\\ \textbf{Juegos estáticos con información incompleta}\\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá}
+\date{}
+
+\begin{document}
+% \setlength{\parskip}{5mm}
+
+\maketitle
+
+\hrule
+
+\begin{summarybox}{Resumen}
+	\begin{description}
+		\item[Incertidumbre] - Desconocimiento de un jugador sobre el estado del mundo. Se puede modelar de forma probabilística.
+		\item[Tipos] - Información que no es de conocimiento común. En ocasiones representada como $ t_i $ o como $ \theta_i $. Los tipos un juego son información privada, y se puede pensar en ellos como una asignación de la Naturaleza (o el azar), que siguen una distribución. Usualmente, la distribución es uniforme. representamos la distribución de los tipos como $ t_i \sim \text{uniforme}(a, b) $.
+	\end{description}
+\end{summarybox}
+
+\section{Introducción: información}
+
+% c7 de Essentials of game theory, by Leyton-Brown
+
+Los juegos con información completa han asumido que el número de jugadores, las acciones disponibles para los jugadores y los pagos asociados con cada acción son de conocimiento común entre los jugadores.
+
+\begin{summarybox}[colback=red!15]{Nota}
+	Información \textbf{incompleta} no es lo mismo que información \textbf{imperfecta}. La información imperfecta es la situación en la que los movimientos de los jugadores no son de conocimiento común (recordar la relación con el conjunto de información).
+\end{summarybox}
+
+Si hay información que no es de conocimiento común, entonces hay información \textit{privada}: un agente tiene información sobre sus propias acciones que no saben los otros jugadores. A este fenómeno se le conoce como \textit{información asimétrica}.
+
+El jugador (por ejemplo, A) que desconoce las características de otro jugador (por ejemplo, B) tiene \textit{incertidumbre} sobre las preferencias de dicho jugador. Esto implica que A puede tener conjeturas (creencias) sobre las acciones o los pagos de B. A este conjunto de creencias le llamaremos \textit{tipos}
+
+\begin{exbox}{Ejemplos}
+	\begin{myitemize}
+		\item Competencia entre empresas que desconocen los costes de sus rivales. Por ejemplo, en el modelo de Cournot, una empresa 2 que recién entra al mercado puede conocer los costes de la empresa 1 y los suyos propios, pero la empresa 1 solo puede darse una idea de los costes de la empresa 2.
+		\item Una subasta en la que cada participante conoce su propia valoración del objeto, pero no las de los demás.
+		\item Un regateo entre un vendedor y un comprador en la que el primero no conoce la valoración del segundo. Por ejemplo, el comprador ya valuó una casa y sabe su costo: el máximo que está dispuesto a pagar, pero el vendedor no sabe esto.
+		\item Un vendedor conoce la verdadera calidad del producto, pero el comprador no. Por ejemplo, la venta de libros usados en Amazon, o la venta de coches seminuevos.
+		\item Un trabajador nuevo en la empresa conoce su verdadera productividad y el empresario no.
+	\end{myitemize}
+\end{exbox}
+
+\subsection*{Subastas (auctions)}
+
+Las subastas son una rama aplicada de la teoría de juegos. Aunque parezcan informales, en realidad tiene una larga tradición de estudio y formalismo matemático, y son usadas por instituciones. Por ejemplo, el Gobierno Federal realiza subastas de bienes improductivos y confiscados por medio del INDEP\footnote{\color{blue}\href{http://subastas.indep.gob.mx/Paginas/Subastas.aspx}{Instituto para Devolverle al Pueblo lo Robado}}.
+
+Las subastas son un \textit{mecanismo} de venta o compra caracterizado por un conjunto de reglas por el que se determina la asignación de recursos y su precio en función de las pujas (oferta) de los participantes. Algunas de sus características benéficas son:
+
+\begin{myitemize}
+	\item Eficiencia: se asignan rápidamente a los que la valoran más.
+	\item Maximizan los ingresos del vendedor.
+	\item Son trasparentes.
+\end{myitemize}
+
+Algunas características de la subasta son conocidas (las reglas y la certeza de que se aplicarán, asi como el compromiso del vendedor para no retractarse), pero otras no, como la valoración del objeto a subastar.
+
+Existen varios tipos de subasta, según los mecanismos. Las más comunes son:
+
+\begin{itemize}
+	\item \textbf{Inglesa}: el precio se va incrementando sucesivamente hasta que queda un único comprador, el que se adjudica el bien al precio final. Una forma de fijar los precios es que el postor canta su puja (oralmente, mediante un mecanismo electrónico o con un tarjetón a la vista de todos). Mientras superen la puja más alta, pueden ofrecer tantas pujas como deseen.
+
+	\item \textbf{Holandesa}: lo contrario a la anterior. Comienza con un precio muy alto, que va disminuyendo sucesivamente.
+
+	\item \textbf{Sobre cerrado al primer precio}: los postores presentan sus pujas en sobre, el bien se adjudica al mejor postor y el precio es el de la puja más alta. En este caso, \textit{los postores no conocen las pujas de los demás, y cada postor puede presentar una única puja. }
+
+	\item \textbf{Sobre cerrado al segundo precio (subasta de Vickrey)}: igual al anterior, pero el precio del bien no es la puja ganadora, sino la segunda puja más alta.
+\end{itemize}
+
+\begin{exbox}{Subasta de dos juadores a sobre cerrado}
+	\begin{myitemize}
+		\item Dos personas participan en una subasta en sobre cerrado para comprar un cuadro.
+		\item Deben elegir \textit{simultáneamente} sus pujas $b_1$ y $b_2$, y el bien se lo adjudica el que haga la puja más alta, pagando lo que ha pujado, y en caso de empatar, se lanza una moneda.
+		\item Las \textit{valoraciones} (el valor que las personas le dan al cuadro) son $x_1$ y $x_2$. Las utilidades para el jugador 1 son:
+		\[ u_1(b_1, b_2) =
+			\begin{cases}
+				x_1 - b_1              & \mbox{si } b_1 > b_2 \\
+				\frac{1}{2}(x_1 - b_1) & \mbox{si } b_1 = b_2 \\
+				0                      & \mbox{si } b_1 < b_2
+			\end{cases}
+		\]
+
+	\end{myitemize}
+
+	En este caso, hay información \textit{incompleta} porque cada jugador conoce su propia valoración $x_i$ pero desconoce la del rival. Solo sabe, y esto es \textit{conocimiento común}, que cada valoración se ha determinado \textit{ex ante} (antes del cuseo) de forma aleatoria e independiente, por lo que vada valoración tiene una probabilidad asignada, y existe una distribución de probabilidad $\Pr(x_1, x_2)$
+
+\end{exbox}
+
+Una noción importante es que este tipo de juegos es considerar que el movimiento \textit{ex ante} lo ha realizado la Naturaleza, que con cierta probabilidad asigna un \textit{tipo} de juego (por ejemplo, un tipo $x_1$ o $x_2$). El siguiente ejemplo lo dejará más claro.
+
+\subsection*{Juego de entrante e incumbente}
+
+\begin{figure}[H]
+	\centering
+	\footnotesize{Second
+		\begin{forest} decision tree,for tree={s sep=25pt}
+				[E1, plain content
+						[{0, 2};Salir,plain content,elo={yshift=4pt}]
+						[E2;Entrar,plain content,elo={yshift=4pt}
+								[{-1,-1};Pelear]
+								[{1,1};Acomodar]
+						]
+				]
+		\end{forest}}
+	\caption{Juego de entrada simple}
+	% \label{fig:fig6}
+\end{figure}
+
+Considerar ahora que existe un jugador 1 y dos \textit{tipos} de jugador 2, y el jugador 1 podría jugar con cualquiera de ellos. El primer tipo de jugador 2 obtiene las mismas ganancias, pero el segundo tipo, un jugador loco, disfruta pelear y obtendría 2 en vez de -1 si juega (Entrar, Pelear).
+
+\begin{figure}[H]
+	\centering
+	\footnotesize{
+		\begin{forest} decision tree,for tree={s sep=25pt}
+			[Naturaleza, plain content
+			[E1;p,plain content,elo={yshift=4pt},alias=e1i
+			[{0, 2};S,plain content,elo={yshift=4pt}]
+			[E2;En,plain content,elo={yshift=4pt}
+				[{-1,-1};P]
+				[{1,1};A]
+			]
+			]
+			[E1;1-p,plain content,elo={yshift=4pt},alias=e1d
+			[{0, 2};S,plain content,elo={yshift=4pt}]
+			[E2;En,plain content,elo={yshift=4pt}
+				[{-1,2};P]
+				[{1,1};A]
+			]
+			]
+			]
+			\draw[dashed,transform canvas={yshift=-6pt}] (e1i) to[right=45] (e1d);
+		\end{forest}}
+	\caption{Juego de entrada con información incompleta.}
+	% \label{fig:fig6}
+\end{figure}
+
+En el segundo juego, conceptualizamos a un nuevo jugador Naturaleza que elige con qué tipo de jugador 2 va a jugar el jugador 1, con una probabilidad $p, 1-p$. La estructura del juego no cambia mucho, dado que existen $i=1,...,N$ jugadores con las mismas acciones $A_i$.
+
+Asumimos, además, que $p$ representa una creencia del jugador 1 sobre los tipos del jugador 2. A esto se le conoce como \textit{la asunción a priori común}. Significa que todos los jugadores están de acuerdo en que la Naturaleza escoja con cuerta probabilidad los diferentes tipos de jugadores.
+
+
+
+\textbf{En resumen:}
+\begin{myitemize}
+	\item Por \textit{tipos} nos referiremos a cualquier información que describa por completo \textit{la información que no es de conocimiento común}, sino privada.
+	\item Cada jugador conoce su propio \textit{tipo} con certidumbre completa.
+	\item Las creencias de un jugador sobre los \textit{tipos} de otros jugadores son capturadas por una distribución de probabilidad conjunta sobre esos tipos, y esta distribución es de \textit{conocimiento común}.
+	\item Los tipos pueden representarse como \textit{tipos de juego}.
+	\item Un jugador, Naturaleza, \textit{decide} qué tipo de juego se juega.
+	\item La incertidumbre sobre tipos es descrita como la Naturaleza escogiendo tipos \textit{para} los jugadores.
+	\item Dado que la incertidumbre sobre los tipos son conjeturas (o creencias) que se modelan como una distribución de probabilidad \textit{a priori} (o anterior), esta distribución es de conocimiento común. Es decir, es de \textit{conocimiento común} cómo la Naturaleza escoge los tipos para los jugadores.
+\end{myitemize}
+
+Por ejemplo, en un juego de Cournot, E1 puede no saber el costo de producción de E2, $C_2(q_2)$, pero puede conjeturar que sus costos marginales (constantes) pueden ser altos o bajos, $c_A$ y $c_B$, en cuyo caso podría ser $C_2(q_2)=c_Aq_2$ o $C_2(q_2)=c_Bq_2$.
+
+E1 tiene un solo tipo,  $T_1 = \{c\}$, mientras que E2 tiene dos tipos, $T_2 = \{c_A, c_B\}$. Dado que el costo de E2 \textit{impone} restricciones sobre el juego que jugará E1 (dado que la Naturaleza escoge el tipo que habrán de jugar), existe cierta dependencia entre ambos. Si es de conocimiento común la distribución sobre los tipos $p(t)$, E1 podría resolver su incertidumbre formándose una conjetura.
+
+En particular, si E1 conjetura que el costo de E2 depende del de E1, podría usar esa información condicionando el tipo de E2 a su tipo, $p(c_A|c), p(c_B|c)$. Ya que tiene una forma de tratar sus creencias sobre los tipos (costos) de E2, podría evaluar sus estrategias puras $S_i$, o, para simplificarlo, dado que se trata de estrategias puras, usaremos $A_i$, por ejemplo, $a_1$ sería la cantidad $q_1$. La función de ganancias de E1 será $u_1(q_1, q_2;c) = [a - (q_1 + q_2) - c]q_1$, pero en este caso, E2 tendrá dos funciones de ganancia:
+
+\begin{align*}
+	u_2(q_1, q_2;c_A) =  [a - (q_1 + q_2) - c_A]q_2 \\
+	u_2(q_1, q_2;c_B) =  [a - (q_1 + q_2) - c_B]q_2
+\end{align*}
+
+Aún nos falta cómo se obtiene un EN en este caso, dado que E1 debe escoger una BR para la BR de E2, que puede depender de $c_A$ o $c_B$ \footnote{Este juego se resuelve más adelante.}.
+
+\subsection{Forma normal de un juego bayesiano}
+
+\begin{summarybox}[colback=red!15]{Nomenclatura}
+
+	Para todo jugador $i \in N$:
+
+	\begin{myitemize}
+		\item $T_i$: el conjunto o espacio de tipos del jugador $i$. Tadelis usa una nomenclatura diferente para los tipos, $\Theta \text{ en vez de } T$.
+		\item $t_{i1}, t_{i2}, ..., t_{ik}$: $k$ tipos del jugador $i$, con $t_{i} \in T_i$. En Tadelis, $t_{i}$ es $\theta_{i}$.
+		\item $T_{-i}$ y por extensión $t_{-i}$: son los tipos de los jugadores no-\textit{i}. En Tadelis es $\Theta_{-i}, \theta_{-i}$.
+		\item $p(t_{-i}|t_i)$: probabilidad condicional que representa la conjetura que el jugador $i$ tiene sobre el tipo del jugador $-i$. Es decir, es la conjetura que $i$ tiene sobre los tipos $t_{-i}$ de los otros jugadores, \textit{dado} su conocimiento sobre su propio tipo $t_i$. Lo que el jugador $i$ sabe es $t_i$, y lo que desconoce es $t_{-i}$, y la $p(\cdot, \cdot)$ es la \textit{asignación} de credibilidad a las posibilidades, que se resolverá con el teorema de Bayes más adelante. En Tadelis, $p_i$ se denota con $\phi_i$
+		\item $A_i$: espacio de acción del jugador $A_i$.
+	\end{myitemize}
+\end{summarybox}
+
+\begin{mybox}{Definición: Forma normal de un juego bayesiano}
+	\begin{defi}
+		La representación normal de un juego Bayesiano de información incompleta con $n$-jugadores es:
+		\[ \langle N, \{A_i \}_{i=1}^n, \{ T_i \}_{i=1}^n, \{u_i(\cdot; t_i ), t_i \in T_i\}_{i=1}^n, \{ p_i \}_{i=1}^n \rangle \]
+
+		Para los espacios $A_1, A_2, ..., A_n$, con $a_{i1}, a_{i2}, ..., a_{ik} \in A_i$; los espacios de los \textit{tipos} por jugador $T_1, ..., T_n$ con $t_{i1}, t_{i2}, ..., t_{ik} \in T_i$; para un tipo de jugador $i$, $t_i$, conocido solo por el jugador $i$, determina la función de ganancia $u_{i}(a_1, a_2, ..., a_n; t_i)$; la conjetura de $i$ sobre los tipos $t_{-i}$, $p_i(t_{-i}|t_i)$ describe la incertidumbre de $i$ respecto a los posibles tipos de los $n-1$ jugadores, dado el tipo de $i$.
+
+	\end{defi}
+\end{mybox}
+
+En el duopolio de Cournot, $N = \{1, 2\}$, $A=\{q_1, q_2 \}$,  con, por ejemplo,  $a_2 = q_2$, $T = \{\{c\}, \{c_A, c_B\}\}$, con, por ejemplo, $t_{21} = c_A$; la función de ganancias $u_i(q_1, q_2; t_i)$, por ejemplo $u_1(q_1, q_2; c)$; y finalmente, $p_i(t_{-1}|t_i)$, con por ejemplo, $p_1(c_B|c)$ la conjetura o creencia de E1 con respecto al tipo $c_B$ condicionado sobre su costo.
+
+\begin{summarybox}[colback=red!15]{Nota}
+	En la mayoría de los juegos analizados, los tipos son independientes, por lo que $p_i(t_{-1}|t_i) = p_i(t_{-i})$. Es decir, la creencia del jugador $i$ sobre el tipo de otro jugador, condicionada a su propio tipo $t_i$, es simplemente la probabilidad del tipo del jugador $-i$. Los casos en los que esto no sucede son los juegos donde las estrategias de los jugadores están correlacionadas, pero no los analizaremos.
+\end{summarybox}
+
+\subsubsection{Desarrollo temporal de un juego bayesiano}
+
+Una vez que introducimos al \textit{jugador} Naturaleza, podemos suponer que el juego se desarrolla de la siguiente forma:
+
+\begin{myenum}
+	\item La Naturaleza (= azar) determina un vector de tipos $t = (t_1,...,t_n)$, que se obtiene a partir de un conjunto de tipos \textit{posibles} $T_i$.
+	\item Se revela el tipo $t_i$ al jugador $i$, pero a ningún otro jugador.
+	\item Los jugadores toman sus decisiones de forma \textit{simultánea}; $i$ elige $a_i$ de $A_i$.
+	\item Se reciben las ganancias $u_i(a_1,...,a_n;t_i)$.
+\end{myenum}
+
+Es importante señalar: la introducción de Naturaleza como otro jugador convierte un juego con información \textit{incompleta} en un juego con información \textit{imperfecta}.
+
+Esto es así porque en una etapa del juego, al jugador que le corresponde decidir \textit{desconoce} el desarrollo del juego previo la etapa. Dado que la Naturaleza revela el tipo de juego al jugador $i$, pero no al jugador $j$, $j$ no conoce la historia completa del juego cuando toma su decisión en el paso \textbf{3}.
+
+Aún falta algo. Dada la creencia \textit{a priori} sobre la distribución de los tipos, $p(t)$, ¿cómo resolvemos la conjetura de $i$, $p_i(t_{-i}|t_i)$?
+
+Con el \textbf{teorema de Bayes}:
+
+\[ p_i(t_{-i}|t_i) = \frac{p(t_{-i}, t_i)}{p(t_i)} \]
+
+% \subsubsection{Teorema de Bayes}
+
+% Sea ${ B}_1, { B}_2, { B}_3, ... { B}_n$ una \emph{partición} del espacio muestral (i.e., son disjuntos y su unión es el espacio muestral entero).
+
+% \begin{align*} 
+% P({ A}) &= P({ A} | { B}_1)P({ B}_1) + P({ A} | { B}_2)P({ B}_2) + \dots + P({ A} | { B}_n)P({ B}_n)\\
+% P({ A}) &= P({ A} \cap { B}_1)+ P({ A} \cap { B}_2)+ \dots + P({ A} \cap { B}_n)
+% \end{align*} 
+
+% Como se puede ver en la siguiente figura, la totalidad de $A$ se obtiene con la unión de la intersección de $A$ con $B$. Es decir, 
+
+% \[A=\bigcup^n_{i=1}(A \cap B_i)\]
+
+% \begin{figure}[H]
+%     \centering
+%     	\includegraphics[scale=0.7]{particion}
+%     \caption{Partición de A en 4}
+%     % \label{fig:my_label}
+% \end{figure}
+
+% Suponiendo que $n=4$, por lo tanto, la probabilidad de $A$ se obtiene con la probabilidad de la unión de la intersección de $A$ con $B$, es decir.
+
+% \begin{equation}
+%     P(A)=\sum_{i=1}^{4}P(A \cap B_i)
+%     \label{eq:p_total}
+% \end{equation}
+
+% A la ecuación \ref{eq:p_total} se le conoce como \textit{Ley de probabilidad total}.
+
+% Si $A$ y $B$ ocurren conjuntamente, su probabilidad se puede obtener como
+
+% \begin{align*} 
+% P(A,B) &= P(A)P(B|A) \\
+% P(A,B) &= P(B)P(A|B)
+% \end{align*}
+
+% Igualando la parte derecha de ambas ecuaciones, nos lleva al teorema de Bayes
+
+% \begin{align}
+%     P(A)P(B|A) = P(B)P(A|B) \\
+%     P(B|A)     = \frac{P(B)P(A|B)}{P(A)}
+%     \label{eq:teo_bayes}
+% \end{align}
+
+% En la ecuación \ref{eq:teo_bayes}, a la cantidad $P(B|A)$ se le conoce como probabilidad (o distribución) posterior, que es \textit{desconocida } antes de que $A, B$ y $A,B$ (conjuntamente) ocurran. Todas las probabilidades de la derecha son, en cierto sentido, \textit{a priori}, aunque en el contexto de la estadística tienen otros nombres y solo $P(A)$ es considerada \textit{a priori}. 
+
+\subsection{Equilibrio de Nash Bayesiano, ENB}
+
+\begin{mybox}{Definición (estrategias en juegos bayesianos)}
+	\begin{defi}
+		En un juego bayesiano estático, una estrategia del jugador $i$ es una función $s_i(t_i)$ donde, para cada tipo $t_i \in T_i$, la función $s_i(t_i)$ \textit{determina} la acción del conjunto $A_i$ que \textbf{sería} elegida si la Naturaleza \textit{decide} que el jugador $i$ será de tipo $t_i$.
+		Es decir:
+
+		\[s_i\colon t_i \mapsto A_i \]
+
+	\end{defi}
+\end{mybox}
+
+Nótese que la estrategia no forma parte de la representación normal, a diferencia de los juegos con información completa. La estrategia se determina \textit{a partir} de los tipos y acciones diponibles. Por ejemplo, en el duopolio de Cournot que hemos descrito, E1, aunque solo tiene un tipo-costo $c$, deberá elegir una $q_1$ \textit{por cada} costo-tipo de E2, de tal forma que pueda determinar si la cantidad $q_1^*$ constituye en efecto su BR a E2.
+
+En el juego de entrada, si los dos tipos del jugador E2 son $t_2 = (racional, loco)$, las acciones de E2 serán
+
+\begin{figure}[H]
+	\centering
+	\footnotesize{
+		\begin{forest} decision tree,for tree={s sep=25pt}
+			[Naturaleza, plain content
+			[E1;p,plain content,elo={yshift=4pt},alias=e1i
+			[{0, 2};S,plain content,elo={yshift=4pt}]
+			[E2;En,plain content,elo={yshift=4pt}
+				[{-1,-1};P]
+				[{1,1};A]
+			]
+			]
+			[E1;1-p,plain content,elo={yshift=4pt},alias=e1d
+			[{0, 2};S,plain content,elo={yshift=4pt}]
+			[E2;En,plain content,elo={yshift=4pt}
+				[{-1,2};P]
+				[{1,1};A]
+			]
+			]
+			]
+			\draw[dashed,transform canvas={yshift=-6pt}] (e1i) to[right=45] (e1d);
+		\end{forest}}
+	\caption{Juego de entrada con información incompleta.}
+	% \label{fig:fig6}
+\end{figure}
+
+\begin{align*}
+	s_2(t_2) =
+	\begin{cases}
+		Pelear \text{ si } t_2 = loco \\
+		Acomodar \text{ si } t_2 = racional
+	\end{cases}
+\end{align*}
+
+
+La noción de ENB es una idea simple: la estrategia de cada jugador debe ser una MR (mejor respuesta) a las estrategias de los restantes jugadores (que, de nuevo, dependerán del tipo que sea seleccionado por Naturaleza). El ENB es un equilibrio de Nash en un juego bayesiano. Un juego bayesiano es aquel donde la incertidumbre respecto de los tipos se representa como una distribución de probabilidad sobre los posibles tipos. Un tipo posible es aquel cuyo soporte es positivo, $p_i(t_{-i})>0$.
+
+\begin{mybox}{Equilibrio de Nash Bayesiano}
+	\begin{defi}
+		En el juego bayesiano estático,
+
+		\[ \langle N, \{A_i \}_{i=1}^n, \{ T_i \}_{i=1}^n, \{u_i(\cdot; t_i ), t_i \in T_i\}_{i=1}^n, \{ p_i \}_{i=1}^n \rangle \]
+
+		las estrategias $s^* = (s_1^*, s_2^*, ..., s_n^*)$ forman un equilibrio de Nash bayesiano (\textbf{ENB}) \textit{en estrategias puras} si, para cada jugador $i$ y para cada uno de sus tipos $t_i$, la función de estrategia $s_i^*(t_i)$ es una solución de
+
+		\[ \sum_{t_{-i} \in T_{-i}} u_i(s_i^*(t_i), s_{-i}(t_{-i}); t_i)p(t_{-i} | t_i) \geq
+			\sum_{t_{-i} \in T_{-i}} u_i(a_i, s_{-i}(t_{-i}); t_i)p(t_{-i} | t_i)
+		\]
+
+		Recordar que la estrategia mapea un tipo a una acción, es decir, $s(t) = a$. Por $a_i$ nos referimos a cualquier {\color{blue}$a$} \textit{que no sea} resultado de $s_{i}^*(t_i)$.
+
+		La expresión anterior se puede expresar altenativamente como:
+
+		\[\max \sum_{t_{-i} \in T_{-i}} u_i(s_i(t_i), s_{t_{-i}}^*; t_i)p(t_{-i} | t_i) \]
+
+	\end{defi}
+\end{mybox}
+
+\begin{summarybox}[colback=red!15]{Nota}
+	Recordar la definición de valor esperado
+
+	\[
+		\textbf{E}[X] = \sum_i p_i x_i
+	\]
+	Por lo que
+	\[ \sum_{t_{-i} \in T_{-i}} u_i(s_i^*(t_i), s_{-i}(t_{-i}); t_i)p(t_{-i} | t_i) \]
+	es se puede escribir como
+
+	\[
+		\textbf{E}[u_i(s_i^*(t_i), s_{-i}(t_{-i}); t_i)]
+	\]
+
+	Que es el valor esperado de la utilidad del jugador $i$. El problema se convierte entonces en
+
+	\[
+		\max_{t_{-i}} \textbf{E}[u_i(s_i^*(t_i), s_{-i}(t_{-i}); t_i)]
+	\]
+
+\end{summarybox}
+
+\section{Ejemplos}
+
+\begin{exbox}{NoC bayesiano}
+	Suponer que Ale y Fer conocen sus propias ganancias, pero desconocen las de la otra, que podrían ser ligeramente mayores a 2. $t_A$ define el tipo de Ale, y $t_F$ el de Fer.
+
+	\begin{center}
+		\begin{game}{2}{2}[Fer][Ale]
+			&      N         &   C     \\
+			N  &  2+$t_F$, 1    &  0,0    \\
+			C  &   0,0          &  1, 2+$t_A$
+		\end{game}
+	\end{center}
+
+	La naturaleza asigna $t_A$ a Ale y $t_F$ a fer, de modo que las ganancias de cada una por su actividad preferida son ligeramente mayores que dos si $t_i > 0$. Para continuar con el ejemplo, asumamos que $t_A, t_F \sim \text{Unif}(0, 2)$, que $t_A, t_F $ solo afectan a las ganancias.
+
+	El juego se puede representar como
+
+	\[J=\{ Ale, Fer, A_A, A_F; T_A, T_F; p(t_A), p(t_F); u_A, u_F  \} \]
+
+	Con $A_A=A_F=\{N, C \}$, y $T_A, T_F \in (0, 2)$. No usaremos un árbol, porque son espacios de decisión continuos. Ahora, ¿cómo podemos resolverlo? Las jugadoras podrian usar la siguiente estrategia
+
+	\[
+		s_F(t_F) = \begin{cases}
+			N \text{ si } t_F \geq k \\
+			C \text{ si } t_F < k
+		\end{cases}
+	\]
+
+	Lo mismo para Ale
+
+	\[
+		s_A(t_A) = \begin{cases}
+			N \text{ si } t_A \geq l \\
+			C \text{ si } t_A < l
+		\end{cases}
+	\]
+
+	Es decir, si su tipo es mayor a un valor $k\in (0, 2)$, cada jugadora eligirá su actividad favorita. ¿Con qué probailidad eligirán dicha actividad? La función de densidad de $x \sim \text{uniforme}(a, b)$ es
+
+	\[ p(x) = \frac{1}{b-a} \]
+
+	Para encontrar la probabilidad deseada, debemos integrar $p(x)$ entre $[\theta, 2]$, que se logra con
+
+	\begin{align*}
+		p(t_i \geq \theta) & = 1 - p(t_i < \theta)                                 \\
+		                   & = 1 - \int_0^\theta \frac{1}{2} dx                    \\
+		                   & = 1 - \Bigg[ \frac{x}{2} \Bigg]_0^\theta              \\
+		                   & = 1 - \frac{1}{2} (\theta - 0) = 1 - \frac{\theta}{2}
+	\end{align*}
+
+	para $\theta=\{k, l\}$.
+
+	Existe otra forma más sencilla para calcular. Dado que la distribución uniforme se puede describir como un rectángulo
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->,ultra thick] (0,0)--(6,0);
+			\draw[->,ultra thick] (0,0)--(0,5);
+			\fill[red!50]    (2.5,0) rectangle  ++ (2.5,4) node[below right] {\color{black}$1/2$} ;
+			\draw            (0,0) node[below left] {0} rectangle  ++ (5,4);
+			\draw (5, 0) node[below] {2} (2.5, 0) node[below] {$\theta$};
+			\draw (2.5+2.5/2,2) node {$\leftarrow t_i \geq \theta \rightarrow$};
+			\draw (2.5/2,2) node {$\leftarrow t_i < \theta \rightarrow$};
+		\end{tikzpicture}
+	\end{center}
+
+	El área de la zona en rojo es
+
+	\[ \underbrace{(2-\theta)}_{\text{base}} \times \underbrace{ \frac{1}{2}}_{\text{altura}} \]
+
+	$\frac{2-k}{2}$
+
+	El problema se resuelve como ya sabemos
+
+	\begin{center}
+		\begin{game}{3}{3}[Fer][Ale]
+			&      N         &   C         &   \\
+			N  &  2+$t_F$, 1    &  0,0        & $1 - k/2$  \\
+			C  &   0,0          &  1, 2+$t_A$ & $1-(1-k/2)=k/2$ \\
+			&  $l/2$    &    $1-l/2$ & \\
+		\end{game}
+	\end{center}
+
+
+	\begin{align*}
+		UE_{Fer}(N) & = \frac{l}{2}\Bigg(2+t_F\Bigg) + \Bigg(1-\frac{1}{2}\Bigg)0=\frac{l}{2}(2+t_F) \\
+		UE_{Fer}(C) & = \frac{l}{2}0 + \Bigg(1-\frac{1}{2}\Bigg)1=1-\frac{1}{2}
+	\end{align*}
+
+	Sabemos que no es óptimo para Fer si $UE_{Fer} \geq UE_{Fer}(C)$
+
+	De lo cual resulta $t_F \geq \frac{2}{l}-3$. Dato que nos preguntamos $t_F\geq k$ entonces $\frac{2}{l}-3= k$.
+
+	Para Ale resulta algo similar, en donde $UE_{Ale}(C)\geq UE_{Ale}(N)$, con resultado de $t_{A}\frac{2}{k}-3=l$.
+
+	Debemos resolver el sistema
+
+	\begin{align*}
+		t_{F} & \geq k = \frac{2}{l}-3 \\
+		t_A   & \geq l = \frac{2}{k}-3
+	\end{align*}
+
+	Resolviendo esto nos da
+
+	\[
+		\theta^2 + 3\theta - 2=0\quad \text{para } \theta=(l, k)
+	\]
+
+	Que se resuelve con la fórmula general para ecuaciones cuadráticas, par $ax^2 + bx + c$
+
+	\[
+		\frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+	\]
+
+	La probabilidad de que Fer elija N era $p_F(t_F\geq k) = 1 - \frac{1}{2}k$, por lo tanto
+
+	\[
+		1 - \frac{1}{2} \Bigg(\frac{-3 + \sqrt{9 - 4(1)(-2)}}{2}\Bigg) = 0.72
+	\]
+
+	Lo mismo para Ale.
+
+	(Solo sumamos la raíz, dado que su resta daría una probabilidad negativa).
+
+	Suponer ahora que $t_A, t_F \in [0, x]$, ¿qué pasa conforme $x \rightarrow 0$?
+
+	Se tiene que resolver
+
+	\[
+		\lim_{x\rightarrow 0} \Bigg [ 1 - \Bigg ( \frac{-3+\sqrt{9+4x}}{2x} \Bigg) \Bigg ]
+	\]
+
+	Usando regla de L'Hopital
+
+	\[
+		\lim_{x\rightarrow c} \frac{f(x)}{g(x)} = \lim_{x\rightarrow c} \frac{f'(x)}{g'(x)}
+	\]
+
+	Para $f(x)$
+
+	\[
+		\frac{d(\sqrt{9+4x} - 3)}{dx} = \frac{2}{\sqrt{9+4x}}
+	\]
+
+	Para $g(x)$
+
+	\[
+		\frac{d(2x)}{dx} = 2
+	\]
+
+	Aplicando regla de L'Hopital
+
+	\[
+		\lim_{x\rightarrow 0} \frac{f'(x)}{g'(x)} = \frac{\frac{2}{\sqrt{9+4x}}}{2} = \frac{2}{2 \sqrt{9+4x}}=\frac{1}{3}
+	\]
+
+	¿Cuál es el resultado de un juego con información completa, pero con estrategias mixtas, para el juego de NoC?
+
+	\begin{center}
+		\begin{game}{2}{2}[Fer][Ale]
+			&      N     &   C\\
+			Netflix   & $2,1$  & $0,0$\\
+			Café      & $0,0$  & $1,2$
+		\end{game}
+	\end{center}
+
+	Cuando se elimina la información incompleta (la incertidumbre), el resultado es el de estrategias mixtas.
+
+\end{exbox}
+
+\begin{exbox}{Subasta de sobre cerrado a la primera puja}
+
+	Dos jugadores pujan por una pintura. La pintura se la gana el jugador con la mayor puja, con un precio al costo de su puja.
+
+	Por ejemplo, si J1 puja 290 y J2 310, J2 gana y paga por la pintura 310.
+
+	Si J2 valúa en $x_2$ la pintura, su ganancia sería $x_2 - 310$, y la de J1 sería 0. En general
+
+	\[
+		u_i(b_i, b_j)=\begin{cases}
+			x_i - b_i\quad & \text{ si } b_i > b_j \\
+			0 \quad        & \text{ si } b_i < b_j
+		\end{cases}
+	\]
+
+	Supongamos que el jugador $i$ puja una fracción $a$ de su valuación $x_i$, es decir $b_i = ax_i$. Suponer que $j$ también ofrece $b_i = a x_j$, y dado que es la misma $a$, la estrategia es simétrica.
+
+	Para simplificar un poco la notación, supongamos que la puja de $i$ es $y$. El jugador $i$ gana si y solo si la puja de $j$ es menor que $y$, es decir $b_i<y$ o $ab_j<y$.
+
+	Asumir que
+	$$
+		x_i \sim \text{uniform}(0, 100)
+	$$
+
+	y la puja de ambos jugadores $b_i \in [0, x_i], i= \{1, 2\}$.
+
+	¿Cuál es el ENB $(b_1, b_2)$? (simétrico).
+
+	Sol.
+
+	El jugador $j$ puja $b_i = ax_j$, $i$ puja $y$. Necesitamos la utilidad esperada, y maximizar esta utilidad. Maximizar $\textbf{E}[u_i(s_i^*(t_i), s_{-i}(t_{-i}); t_i)]$
+
+	\[
+		UE_i(y, b_j) = \underbrace{x_i-y}_{u_i\text{ si gana }} \times p(\text{gana}) + \underbrace{0}_{u_i\text{si pierde}} p(\text{perder})
+	\]
+
+	¿Cuál es la probabilidad de ganar? el jugador $i$ gana si $y>b_j$, es decir si $y>ax_j$. Dicho de otra forma, el jugador $i$ debe ofrecer $x_j < y/a$, y la probabilidad de que esto suceda es
+
+	\[
+		p(x_j < y/a) = \int_0^{y/a} \frac{1}{100}dw = \Bigg[\frac{w}{100} \Bigg]_0^{y/a} = \frac{y}{100a} \]
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->,ultra thick] (0,0)--(6,0);
+			\draw[->,ultra thick] (0,0)--(0,5);
+			\fill[red!50]    (0,0) rectangle  ++ (2.5,4) node[below right] {\color{black}$1/100$} ;
+			\draw         (0,0) node[below left] {0} rectangle  ++ (5,4);
+			\draw (5, 0) node[below] {$100$} (2.5, 0) node[below] {$y/a$};
+			\draw (2.5/2,2) node {$\leftarrow x_j \rightarrow$};
+		\end{tikzpicture}
+	\end{center}
+
+	La probabilidad de ganar entonces es
+
+	\begin{align*}
+		UE_i(y, b_j) & =p(\text{gana})(x_i - y)                          \\
+		             & =\frac{y}{100a}(x_i - y)=\frac{x_i y - y^2}{100a}
+	\end{align*}
+
+	Recordar cómo obtenemos el ENB:
+
+	\[\max \sum_{t_{-i} \in T_{-i}} u_i(s_i(t_i), s_{t_{-i}}^*; t_i)p(t_{-i} | t_i) \]
+
+	Que se convierte en este problema en
+
+	\[\max \sum_{b_j \in B} u_i(y, b_j; b_i)p_i(b_j) = \max_{y} UE_i(y) = \max_y \frac{x_i y - y^2}{100a} \]
+
+	O alternativamente
+
+	\[ y^* = \argmax_{0<y<x_i} \frac{x_i y - y^2}{100a} \]
+
+	Que se resuelve con condiciones de primer orden
+
+	CPO:
+
+	\[
+		\frac{\partial UE_i}{\partial y} = 0 \Longrightarrow \frac{x_i - 2y}{100a}
+	\]
+
+	Nota:
+
+	\[
+		\frac{\partial}{\partial y}\frac{x_i y - y^2}{100a} = \frac{1}{100a}\frac{\partial}{\partial y}(x_iy - y^2)=\frac{1}{100a}(x_i - 2y)=0
+	\]
+
+	Eliminamos $1/100a$, por lo tanto
+
+	\[
+		x_i - 2y = 0 \Longrightarrow y = \frac{1}{2}x_i
+	\]
+
+	Dado que el jugador $i$ ofrece $y=ax_i$, concluimos que $a = 1/2$. El juego claramente lo va a ganar alguien que valore más.
+
+	Por ejemplo, si $x_1 = 200, x_2 = 300$, entonces $b_1 = (1/2)200 = 100, b_2 = (1/2)300 = 150$ y $b_1 < b_2$.
+
+\end{exbox}
+
+\subsection{Información asimétrica}
+
+\begin{mybox}[colback=red!30, coltitle=black]{Nota}
+	\textit{Cita adaptada de Tadelis, p. 258}
+
+	Una de las mayores concluisiones del análisis de mercados competitivos es que los mercados distribuyen bienes a los agentes que más los valoran. Si un bien es mal asignado, de tal manera que lo obtiene una persona que que lo valúa menos que otra, las ``presiones del mercado'' causarán que el precio del bien incremente a un nivel que los poseedores actuales preferirán venderlo que quedárselo (es decir, si su valuación es $v_1$ y la valuación de un potencial comprador es $v_2$ con $v_2 > v_1$ tendrían una potencial ganancia $v_2 - v_1$), y la gente que lo valore más estará dispuesta a comprarlo. Mecanismos como negociación, subastas o el mercado de intermediarios podrían ayudar a fijar el precio.
+
+	El anterior argumento está basado en algunas asunciones. Por ejemplo, que el valor del bien es conocido y entendido por todos los participantes, es decir, existe \textit{información perfecta} sobre el valor  del bien.
+
+\end{mybox}
+
+Cuando existe información asimétrica (un jugador mejor información sobre la cualidad de un bien) pueden suceder efectos de \textit{selección adversa}. Esta situación sucede cuando una de las partes no es capaz de decidir la calidad de un producto o servicio ofrecido por la otra parte.
+
+El término surgió originalmente en las agencias de seguros, en donde las personas propensas a contratar seguros normalmente son las más expuestas a riesgos. Por ejemplo, en una población $P$ con una fracción de fumadores $\alpha, 0 < \alpha < 1$, y una fracción de no fumadores $1-\alpha$. Si la aseguradora no puede distinguir entre ambos (en donde el cliente no fumador es de 'mejor' calidad), en una selección adversa la aseguradora puede terminar asegurando $\alpha P > (1-\alpha)P$, dedibo a que los no fumadores podrían considerar que al comprar el seguro subsidian a los fumadores.
+
+
+\begin{exbox}{Mercado de coches usados (The Market for Lemons)}
+
+	En el mercado de coches usados existe información asimétrica
+
+	\begin{myitemize}
+		\item El vendedor conoce mucho mejor la calidad del producto. Por ejemplo, si ha tenido accidentes y reparaciones. El comprador no necesariamente conoce esto, ni puede acceder a esa información antes de la compra.
+		\item Existe un incentivo para que el vendedor pase productos de baja calidad por productos de alta calidad.
+		\item Existen deficiencias de seguridades públicas efectivas que vigile la calidad y por lo tanto al comprador. Por ejemplo, un PROFECO indiferente. En EU existe la \textit{lemon law}.
+	\end{myitemize}
+
+	Un comprador en este contexto será en extremo cuidadoso debido a su incertidumbre y a la carencia de mecanismos, con muy poca disposición de compra.
+
+	Situación:
+
+	Tenemos a dos jugadores (vendedor, Harry, y comprador, Troncha Toro). El comprador va a comprar un coche:
+
+	\begin{myitemize}
+		\item Con probabilidad $q \in [0, 1]$ el coche es de baja calidad.
+		\item Con probabilidad $1-q$ el coche es de alta calidad.
+	\end{myitemize}
+
+	Donde $q$ es la creencia del comprador (Troncha Toro). Existen dos \textit{tipos} de coche, desde la perspectiva de Troncha Toro:
+
+	\begin{itemize}
+		\item Si el tipo es $L$ (low quality)
+		      \begin{itemize}
+			      \item Harry puede venderlo por $x>\$0$.
+			      \item Troncha puede comprarlo por \$1000.
+		      \end{itemize}
+
+	\end{itemize}
+
+	\begin{itemize}
+		\item Si el tipo es $H$ (high quality)
+		      \begin{itemize}
+			      \item Harry puede venderlo por $x\geq \$2000$.
+			      \item Troncha puede comprarlo por $\$3000$.
+		      \end{itemize}
+	\end{itemize}
+
+	Para Harry, $x$ es la mínima cantidad que aceptaría. Para Troncha, $x$ es la máxima cantidad que pagaría. Suponer que consultan el libro azul, que fija el precio del coche en $y$.
+
+	Las ganancias serían:
+
+	\begin{myitemize}
+		\item Para Harry
+		\begin{itemize}
+			\item $u_{\text{Harry}}=y-x_{\text{Harry}}$
+			      \[
+				      u_{\text{Harry}}=\begin{cases}
+					      y      & \text{ si } t_i = t_L \\
+					      y-2000 & \text{ si } t_i = t_H
+				      \end{cases}
+			      \]
+		\end{itemize}
+		\item Para Troncha
+		\begin{itemize}
+			\item $u_{\text{Troncha}}=x_{\text{Troncha}} - y$
+			      \[
+				      u_{\text{Troncha}}=\begin{cases}
+					      1000 - y & \text{ si } t_i = t_L \\
+					      3000 - y & \text{ si } t_i = t_H
+				      \end{cases}
+			      \]
+		\end{itemize}
+	\end{myitemize}
+
+	El juego se puede plantear de la siguiente manera:
+
+	\begin{center}
+		\begin{tikzpicture}[
+				auto,
+				level 1/.style={sibling distance=78mm},
+				level 2/.style={sibling distance=10mm}]
+			\tikzstyle{hollow node}=[circle,draw,inner sep=1.5]
+			\tikzstyle{solid node}=[circle,draw,inner sep=1.5,fill=black]
+			\node[hollow node]{N}
+			child{node[solid node]{}
+					edge from parent
+					node[left]{$t_H, q$}
+				}
+			child{node[solid node]{}
+					edge from parent
+					node[right]{$t_L, 1-q$}
+				}
+			;
+		\end{tikzpicture}
+	\end{center}
+	\vspace*{-1.4cm}
+	\begin{center}
+		\begin{minipage}[t]{0.48\linewidth}\centering
+			\begin{game}[2][2]{Troncha}{Harry}
+				& T & N \\
+				T & $3000-y$,$y$ & 0, 2000\\
+				N & 0, 2000      & 0, 2000\\
+			\end{game}
+		\end{minipage}\hfill%
+		\begin{minipage}[t]{0.48\linewidth}\centering
+			\begin{game}[2][2]{Troncha}{Harry}
+				& T & N \\
+				T & $1000-y$,$y$ & 0, 0\\
+				N & 0, 0         & 0, 0\\
+			\end{game}
+		\end{minipage}
+	\end{center}
+
+	En donde la estrategia T es \textit{Trade} y N \textit{No Trade}. La utilidad esperada de Troncha si hay \textit{T} es
+
+	\[
+		\UE{Troncha}{T}=q(3000-y)+(1-q)(1000-y)
+	\]
+
+	Si no, la utilidad des de 0. Troncha estará dispuesta a comprar \textit{ssi} $\UE{Troncha}{T}\geq 0$
+
+	\begin{align*}
+		q(3000-y)+(1-q)(1000-y)            & \geq 0                                                                    \\
+		3000q - qy + 1000 - y - 1000q + qy & \geq 0                                                                    \\
+		2000q + 1000                       & \geq y, {\color{red}\text{ Notar q si } y < 2000 \text{ Harry no vende} } \\
+		                                   & \therefore                                                                \\
+		2000q + 1000                       & \geq y \geq 2000                                                          \\
+		q \geq \frac{2000 - 1000}{2000}    & \geq \frac{1}{2}
+	\end{align*}
+
+	Es decir, a menos de que $q<1/2$, \textit{no existe} un equilibrio  en donde los coches buenos sean vendidos. Es decir, la proporción de coches malos debe ser menor del 50\%.
+
+	Por ejemplo, suponiendo que $q=1/4$, ¿a qué precio estaría dispuesta a comprar Troncha? ¿Qué pasaría, a la larga, con un mercado así?
+
+\end{exbox}
+
+\subsection{Subasta al primer precio con pujadores aversos al riesgo}
+
+En el ejemplo anterior de subasta en sobre cerrado al primer precio, modelamos dos jugadores neutrales al riesgo. Su puja fue de $b_i = ax_i$ con $a=1/2$. Ahora analizaremos un caso en donde la función de utilidad de los jugadores es cóncava, dada por
+
+\begin{equation}
+	u(w) = w^\alpha
+	\label{eq:bern}
+\end{equation}
+
+La equación \ref{eq:bern} es una función de utilidad de Bernoulli, donde $0 < \alpha \leq 1$ es el parámetro de aversión al riesgo. De acuerdo con el coeficiente de aversión al riesgo de  Arrow-Pratt
+
+\[
+	r_A(w) = \frac{u''(w)}{u'(w)}
+\]
+
+$u'(w)=\alpha w^{\alpha - 1}$ y $u''(w)=\alpha (\alpha - 1) w^{\alpha - 2}$, con lo cual tendríamos un $r_A(w)$ de
+
+\[
+	r_A(w) = \frac{1-\alpha}{w}
+\]
+
+Cuando $\alpha = 1$, $r_A(w) = 0$, por lo que el jugador es neutral al riesgo.
+
+\begin{exbox}{Subasta de sobre cerrado al primer precio (aversión al riesgo)}
+
+	Encontrar la función óptima de puja $b_i(x_i)$ para $i=\{1, 2\}$, en donde los jugadores compiten por un objeto con su valuación $x_i \sim \text{uniforme}(0, 1)$. Explicar cómo esta función es afectada cuando $r_A(w)$ tiende a 1, con $\alpha \rightarrow 0$.
+
+	\textbf{Sol.}
+
+	Recordar que la fracción de $x_i$ que los jugadores pujan es $0 < a \leq 1$, y que el jugador $i$ gana solo si $b_i > b_j$, es decir, si $b_i > a x_j$, por lo que $p(\text{ganar}) = p(a x_j < b_i)$ o $p(x_j < b_i/a)$.
+
+	Esta probabilidad es
+
+	\[
+		p(x_j < b_i/a) = \int_0^{b_i/a} dz = \Bigg[z\Bigg]_0^{b_i/a} = \frac{b_i}{a}
+	\]
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->,ultra thick] (0,0)--(6,0);
+			\draw[->,ultra thick] (0,0)--(0,5);
+			\fill[red!50]    (0,0) rectangle  ++ (2.5,4) node[below right] {\color{black}$1$} ;
+			\draw         (0,0) node[below left] {0} rectangle  ++ (5,4);
+			\draw (5, 0) node[below] {$1$} (2.5, 0) node[below] {$b_i/a$};
+			\draw (2.5/2,2) node {$\leftarrow x_j \rightarrow$};
+			\draw (2.5/2,1.5) node {$b\times h = \frac{b_i}{a}(1)$};
+		\end{tikzpicture}
+	\end{center}
+
+	Como vemos, la probabilidad no se ve afectada por la función de utilidad cóncava. Sabemos que la utilidad esperada del jugador $i$ está dada por
+
+	\[
+		\UE{i}{b_i}=p_i(\text{ganar})\times u_i(\text{ganar})
+	\]
+
+	Conocemos la primera. La utilidad de ganar está dada por $u_i(\text{ganar})=(x_i - b_i)^\alpha$. Por lo tanto
+
+	\[
+		\UE{i}{b_i}=\frac{b_i}{a}(x_i - b_i)^\alpha
+	\]
+
+	El jugador $i$ puja una cantidad $b_i^*$ que satisface
+
+	\[
+		b_i^* = \argmax_{0 < b_i \leq x_i}  \frac{b_i}{a}(x_i - b_i)^\alpha
+	\]
+
+	Tomando las CPO con respecto a $b_i$ tenemos%
+	\footnote{
+		Regla del producto: \[ [f(x)\cdot g(x)]'=f'(x)\cdot g'(x) \]
+		Para nuestra función
+		\[
+			\frac{1}{a}\frac{\partial}{\partial b_i}b_i \Biggl(x_i - b_i)^\alpha\Biggr)
+		\]
+
+		Para el primero $f'(x) = \frac{\partial b_i}{\partial b_i} = 1$, y $g'(x)=\alpha(x_i-b_i)^{\alpha - 1}\frac{\partial(x_i-b_i)}{\partial b_i} = -\alpha(x_i-b_i)^{\alpha-1}$
+	}
+
+	\begin{align*}
+		\frac{\partial}{\partial b_i} \Biggl( \frac{b_i}{a}(x_i - b_i)^\alpha\Biggr) & = 0                                                 \\
+		\frac{1}{a}(x_i - b_i)^\alpha -\frac{b_i}{a}\alpha(x_i-b_x)^{\alpha - 1}     & =0                                                  \\
+		\text{ simplificando }                                                       &                                                     \\
+		b_i\alpha(x_i - b_i)^{\alpha - 1}                                            & = (x_i - b_i)^\alpha                                \\
+		b_i\alpha                                                                    & = \frac{(x_i - b_i)^\alpha}{(x_i - b_i)^{\alpha-1}} \\
+		b_i\alpha - b_i                                                              & = x_i                                               \\
+		b_i^*                                                                        & = \frac{x_i}{1+\alpha}
+	\end{align*}
+
+	Notar que cuando $\alpha=1$, la puja óptima es $\frac{1}{2}x_i$. ¿Qué sucede si $\alpha$ disminuye?
+	% funcion bid = x/(1 + alfa)
+	\newcommand\bid[1]{x/(1 + #1)}
+	% \begin{tikzpicture}
+	%     \begin{axis}[grid=major, xmin=0, xmax=1, ymin=0, ymax=1, xlabel=$x_i$, ylabel=$b_i$];
+	%     \foreach \a in {0.2, 0.4,..., 0.8}{
+	%     \addplot [domain=0:1, samples=100, color=cyan]{(\bid{\a})};
+	%     \expandafter\addlegendentry\expandafter{\a};
+	%     };
+	%     \end{axis}
+	% \end{tikzpicture}
+
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[%
+					title={$b_i^*$ con diferentes $\alpha$},
+					xmin=0,
+					xmax=1,
+					ymin=0,
+					ymax=1,
+					xlabel=$x_i$,
+					ylabel=$b_i^*$,
+					legend pos=north west
+				]%
+				\foreach [evaluate=\m as \redfrac using \m*100] \m in {0.8, 0.6, 0.4, 0.2}{
+						\edef\temp{\noexpand\addplot[red!\redfrac!blue]{\bid{\m}};
+							\noexpand\addlegendentry{$\alpha=\m$}}
+						\temp
+					}
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+	\[
+		\frac{\partial b_i^*}{\partial \alpha} =-\frac{x_i}{(1-\alpha)^2}
+	\]
+
+	Conforme $\alpha$ decrece, $b_i^*$ crece. Una función con $\alpha \rightarrow 1$ se aproxima más a una función identidad, de agentes neutrales al riesgo, con $a=1/2$. Notar que si $\alpha \rightarrow 1$, $b_i = x_i$. Los agentes aversos al riesgo tienen pujas más agresivas, para minimizar la probabilidad de perder la subasta.
+
+	Considerar que el sujeto $j$ tiene un $\alpha = 0.9$, y un sujeto $i$ tiene un $\alpha=0.2$. La puja de $j$ será $\frac{1}{1.9}x_j$, mientras que la de $i$ será $\frac{1}{1.2}x_i$. La valuación del jugador $j$ debería ser al menos $\frac{1.9}{1.2}x_i$ para ganar (casi 1.6 veces el valor de $i$). Notar, sin embargo, que las utilidades de $i$ disminuyen conforme $\alpha \rightarrow 0$
+
+	\newcommand\bidutil[1]{(x*(1-1/(1+#1)))^(#1)}
+
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[%
+					title={$u_i$ con diferentes $\alpha$},
+					xmin=0,
+					xmax=5,
+					ymin=0,
+					ymax=2,
+					xlabel=$w_i$,
+					ylabel=$u_i(w_i; b_i^*)$,
+					legend pos=north west
+				]%
+				\foreach [evaluate=\m as \redfrac using \m*100] \m in {0,0.05, 0.1,...,1}{
+						\edef\temp{\noexpand\addplot[red!\redfrac!blue]{\bidutil{\m}};}\temp
+					}
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+\end{exbox}
+
+\begin{exbox}{Grupo de estudio}
+
+	En un grupo de estudio con dos jugadores que se reunen a hacer su \sout{examen} tarea de teoría de juegos, cada uno puede esforzarse una cantidad $e_i=1$ o holgazanear $e_i=0$, con un costo de $c<1$ si se esfuerzan y de 0 si no. Si uno o ambos se esfuerzan, se obtiene éxito. Si no, fallan.
+
+	Ambos varían respecto a su preocupación por el éxito educativo, que es su tipo $t_i \in [0, 1]$, que es $iid$ uniformemente en este intervalo, $t_i \sim \text{uniforme}(0,1)$. El valor del estudiante por éxito educativo está dado por el cuadrado de su tipo $t_i^2$. Si un estudiante escoge esforzarse, su utilidad sería $t_i^2 - c$. Si escoge holgazanear, su pago depende de lo que haga el compañero. Si el compañero $j$ se esfuerza, la ganancia de $i$ es $t_i^2$, mientras que si holgazanea, el pago es 0.
+
+	Cada jugador necesita determinar si contribuir con esfuerzo basado en su tipo, en lo que cree sobre el tipo del otro jugador y en el costo de su esfuerzo.
+
+	Podemos definir esta estrategia como $ s_i(ti) $ que mapea algún valor $t_i \in [0,1]$ a un esfuerzo correspondiente $ e_i \in \{0, 1\} $. De esta manera, $ s_i(t_i) $ retorna 0 (holgazanear) o 1 (contribuir), dependiendo del tipo $t_i$ escogido para el jugador $ i $.
+
+	Sea $ p $ la probabilidad de que $ j $ contribuye con esfuerzo. Podemos definir la utilidad esperada del jugador $ i $ por holgazanear como
+
+	$$ \underbrace{pt_i^2}_{j \text{ contribuye }} + \underbrace{(1-p)0}_{j \text{ holgazanea}} = pt_i^2 $$
+
+	Si $ i $ contribuye, no importa qué haga $ j $, siempre obtendrá
+
+	$$ t_i^2 - c $$
+
+	Por lo tanto, la MR de $ i $ por esforzarse será esforzarse si su ganancia es \textit{al menos tan buena} como su ganancia esperada por holgazanear.
+
+	$$ t_i^2 - c \geq pt_i^2 $$
+
+	Resolviendo para $ t_i $,
+
+	$$ t_i \geq \sqrt{\frac{c}{1-p}} $$
+
+	La parte derecha es una constante. Esto implica que existe un umbral de $t_i$, $\hat{t}i$ por el cual el jugador $ i $ contribuye si $ t_i \geq \hat{t}_i $, pero no contribuye si $ t_i < \hat{t}_i $. Esto es una regla de umbral.
+
+	Si el jugador $ i $ cree que $ j $ holgazaneará seguramente (i.e., $ p=0 $) responderá solamente si $ t_i \geq \sqrt{c} $, y dado que $ c<1 $ es posible que el jugador $ i $ contribuya si su compañero holgazanear.
+
+	Por otro lado, si $ i $ cree que $ j $ se esforzará con probabilidad positiva (i.e., $ p > 0 $), podría hacer que $ \sqrt{\frac{c}{1-p}} $ sea mayor a 1. En ese caso, $ i $ nunca contribuirá dado que $ t_i \in [0, 1] $. El jugador preferirá un ``paseo gratis'' (parasitismo) y beneficiarse del esfuerzo de otros.
+
+	Buscamos un ENB en el que cada estudiante tenga un umbral $ \hat{t}_i $ tal que
+
+	\begin{align*}
+		s_i(t_i)=\begin{cases}
+			0 & \text{ si } t_i < \hat{t}_i \text{ (holgazanea)}    \\
+			1 & \text{ si } t_i \geq \hat{t}_i \text{ (contribuye)}
+		\end{cases}
+	\end{align*}
+
+	Ahora podemos derivar la MR del jugador $ i $ para algún valor de  $ \hat{t}_j $.
+	Sabemos que $ j $ contribuye si $ t_j \geq \hat{t}_j $. ¿Cuál es esa probabilidad?
+
+	$$ p(t_j \geq \hat{t}_j ) = 1 - p(t_j < \hat{t}_j) = 1-\hat{t}_j$$
+
+	\begin{center}
+		\begin{tikzpicture}
+			\draw[->,ultra thick] (0,0)--(6,0);
+			\draw[->,ultra thick] (0,0)--(0,5);
+			\fill[red!50]    (0,0) rectangle  ++ (2.5,4) node[below right] {\color{black}$1$} ;
+			\draw         (0,0) node[below left] {0} rectangle  ++ (5,4);
+			\draw (5, 0) node[below] {$1$} (2.5, 0) node[below] {$\hat{t}_i$};
+			\draw (2.5/2,2) node {$\leftarrow \hat{t}_j \rightarrow$};
+			\draw (2.5/2,1.5) node {$b\times h = 1\times \hat{t}_j$};
+		\end{tikzpicture}
+	\end{center}
+
+	Ahora, sabemos que $i$ contribuye si
+
+	$$ t_i \geq \sqrt{\frac{c}{1-p}} = \sqrt{\frac{c}{1-(1-\hat{t}_j)}} = \sqrt{\frac{c}{\hat{t}_j}}$$
+
+	\begin{myitemize}
+		\item ¿Qué si $ \hat{t}_j > c $? Entonces, la parte derecha de la desigualdad será menor que 1, $ \sqrt{\frac{c}{\hat{t}j}} <1 $.
+		\item ¿Qué si $ \hat{t}_j < c $? $ \sqrt{\frac{c}{\hat{t}j}} > 1 $
+	\end{myitemize}
+
+	%  \begin{center}
+	%     \include{study_group_types.tex}
+	%  \end{center}
+
+	%  \begin{center}
+	%     \begin{tikzpicture}
+	%         \begin{axis}[%
+	%             title={$u_i$ con diferentes $\alpha$},
+	%             xmin=0, 
+	%             xmax=1, 
+	%             ymin=0, 
+	%             ymax=1, 
+	%             xlabel=$\hat{t}_i$, 
+	%             ylabel=$\hat{t}_j$, 
+	%             legend pos=north west
+	%             ]%
+	%             \addplot[smooth, thick, color=red, domain = 0:1](x, \typetype{0.3});
+	%             \addplot[smooth, thick, color=blue, domain = 0:1](\typetype{0.3}, x);
+	%             \foreach \c in {0.3, sqrt(0.3)}{
+	%                 \addplot[thick, dashed, smooth,domain=0:1] coordinates {(\c,0)(\c,1)};
+	%                 \addplot[thick, dashed, smooth,domain=0:1] coordinates {(0,\c)(1, \c)};
+	%             };
+	%             \pgfplotsinvokeforeach{0.3, 0.55}{
+	%                 \node at (axis cs:{#1,0.1}) [anchor=north east] {$c$};
+	%             }
+	%         \end{axis}
+	%         \end{tikzpicture}
+	% \end{center}
+
+
+
+	\newcommand\typetype[1]{(sqrt(#1/x))}
+	\newcommand{\nRoot}[2]{exp(ln(#1)/#2)}
+	\newcommand*{\ListWithLabels}{0.3/$c$, 0.55/$c^{1/2}$}
+	\newcommand*\pgfplotsinvokeforeachmacro[1]
+	{\expandafter\pgfplotsinvokeforeach\expandafter{#1}}
+	\begin{center}
+		\begin{tikzpicture}
+			\begin{axis}[%
+					title={Funciones MR},
+					xmin=0,
+					xmax=1,
+					ymin=0,
+					ymax=1,
+					xtick={0, 1},
+					ytick={0,1},
+					xlabel=$\hat{t}_i$,
+					ylabel=$\hat{t}_j$,
+					legend pos=north west
+				]%
+				\addplot[smooth, thick, color=red, domain = 0:1](x, \typetype{0.3});
+				\addplot[smooth, thick, color=blue, domain = 0:1](\typetype{0.3}, x);
+				\addplot[mark=*] coordinates {(\nRoot{0.3}{3},\nRoot{0.3}{3})} node[pin=75:{$(c^{1/3},c^{1/3})$}]{} ;
+				\pgfplotsset{my plot/.code args={#1/#2}{%
+							\addplot[thick, dashed, smooth,domain=0:1] coordinates {(#1,0)(#1,1)};
+							\addplot[thick, dashed, smooth,domain=0:1] coordinates {(0,#1)(1,#1)};
+							\node at (axis cs:{#1,0.1}) [anchor=north east] {#2};
+							\addplot[thick, dashed, smooth,domain=0:1] coordinates {(0,#1)(1,#1)};
+							\addplot[thick, dashed, smooth,domain=0:1] coordinates {(#1,0)(#1,1)};
+							\node at (axis cs:{0.15, #1}) [anchor=north east] {#2};
+						}
+				}%
+
+				\pgfplotsinvokeforeachmacro\ListWithLabels{\pgfplotsset{my plot={#1}}}
+
+			\end{axis}
+		\end{tikzpicture}
+	\end{center}
+
+	Para econtrar las MRs, necesitamos sustituir $ \hat{t}_j = \frac{c}{\hat{t}_i} $ en $ \hat{t}_i \ \frac{c}{\hat{t}_i} $
+
+	$$
+		\hat{t}_i = \sqrt{\frac{c}{\sqrt{\frac{c}{\hat{t}_i}}}} = \frac{c^{1/2}}{\frac{c^{1/4}}{\hat{t}_i^{1/4}}} = \frac{c^{1/2}\hat{t}_i^{1/4}}{c^{1/4}}
+	$$
+
+	Que rearreglando nos queda
+
+
+	\[
+		\frac{\hat{t}_i}{\hat{t}_i^{1/4}}=\frac{c^{1/2}}{c^{1/4}} \Longrightarrow \hat{t}_i^{3/4}=c^{1/4}
+	\]
+
+	Y finalmente $\hat{t}_i = c^{1/3}$, y lo mismo para $\hat{t}_j$.
+
+	%\addplot[red, ultra thick] (x*x,x);
+
+\end{exbox}
+
+\subsection{Duopolio de corunot con información incompleta}
+
+\begin{exbox}{Duopolio de Cournot: información privada sobre costos}
+
+	\textbf{Ejemplo 1}
+
+	Considerar el duopolio de Cournot con función de demanda $ p(Q) = 10 - Q $, con $ Q $ siendo la cantidad agregada. La empresa 1 escoge $ q_1 $ con costo de 0. La empresa 2 tiene costo de producción que es información privada. Con probabilidad de 1/2 produce a costo 0, y con probabilidad de 1/2 produce a costo de 4. El primer costo será denominado B y el segundo A (por Bajo y Alto). La empresa 1 solo conoce la distribución de probabilidad sobre los tipos de costo de la empresa 2. La empresa 2 produce $ q_2^B $ y $ q_2^A $ cuando su costo es B o A, respectivamente.
+
+	\[
+		u_2(q_1, q_2^t) = \begin{cases}
+			(10 - q_1 - q_2^B)q_2^B; \text{ si $t$ = B} \\
+			(10 - q_1 - q_2^A)q_2^A - 4q^A; \text{ si $t$ = A}
+		\end{cases}
+	\]
+
+	La empresa 1 tendrá una utilidad esperada computada sobre las cantidades de la empresa 2. Esto es
+
+	$$ u_1(q_1;q_2^B, q_2^A ) = \frac{1}{2}(10 - q1 - q_2^B)q_1 + \frac{1}{2} (10 -q_1 - q_2^A)q_1$$
+
+	Simplificando queda
+
+	$$
+		\Biggl(10-q1-\frac{q_2^B}{2} - \frac{q_2^A}{2} \Biggr)q_1
+	$$
+
+	Notar, de nuevo, que la utilidad de la empresa 1 es una utilidad esperada, promediando las utilidades por cada tipo que enfrente de la empresa 2. Podemos considerar al jugador 2 como dos jugadores separados. El ENB corresponde a las soluciones del problema de optimización
+
+	\begin{align*}
+		q_1^*    & = \argmax_{0\leq q_1 \leq \infty} u_1(q_1; q_2^A, q_2^B) \\
+		q_2^{A*} & = \argmax_{0\leq q_1^A \leq \infty} u_2(q_1, q_2^A)      \\
+		q_2^{B*} & = \argmax_{0\leq q_1^B \leq \infty} u_2(q_1, q_1^B)
+	\end{align*}
+
+	que se encuentra con las CPO para cada jugador-tipo
+
+	$$ \frac{\partial u_1}{\partial q_1}=0,\quad \frac{\partial u_2^B}{\partial q_2^B},\quad \text{y } \frac{\partial u_2^A}{\partial q_2^A} $$
+
+	Resolviendo, encontramos
+
+	\begin{align*}
+		                                             & \text{para la empresa 1}                                         \\
+		10 - 2q_1 -\frac{q_2^B}{2} - \frac{q_2^A}{2} & = 0 \Longrightarrow q_1^* = 5 -\frac{q_2^B}{4} - \frac{q_2^A}{4} \\
+		                                             & \text{para la empresa 2}                                         \\
+		10 - q_1 - 2q_2^B                            & = 0 \Longrightarrow q_2^{B*} = 5 - \frac{q_1}{2}                 \\
+		10 - q_1 - 2q_2^A                            & = 0 \Longrightarrow q_2^{A*} = 5 - \frac{q_1}{2}
+	\end{align*}
+
+	Resolviendo el sistema de ecuaciones nos quedaría $ q_1^* = 4, q_2^{B*} = 3, q_2^{A*} = 1 $. Notar que la incertidumbre en los costos provoca que la cantidad en equilibrio de la empresa 2 sea menor en promedio que la cantidad de la empresa 1.
+
+	\rule{2cm}{1pt}
+
+	\textbf{Ejemplo 2}
+
+Caso general.
+
+Considera una industria con dos empresas compitiendo a la Cournot con precios $ p(Q) = 1 - Q $. Las empresas interactúan en información incompleta. La 2 tiene un costo marginal que puede ser $ c_A $ o $ c_B $, la 1 solo tiene $ c_B$. El costo alto ocurre con probabilidad $ \theta $.
+
+Encuentra la mejor función de mejor respuesta para cada empresa, $ q_i^k $ con $ k = \{A, B\} $. Asume que el costo bajo es de 0.
+
+Para la empresa 1
+
+\[ q_1^* = \argmax_{q_1 \geq 0}~\theta\biggl([1 - q_1 - q_2^A]q_1 -cq_1\biggr) + (1 - \theta)\biggl([1 - q_1 - q_2^B]q_1 -cq_1\biggr) \]
+
+Para la empresa 2
+
+\begin{align*}
+q_2^{A*} & = \argmax_{ q_1^A\geq 0}~[(1-q_1 - q_2^A)q_2^A - c_Aq_2^A]      \\
+q_2^{B*} & = \argmax_{q_1^B\geq 0 }~[(1-q_1 - q_2^B)q_2^B - c_Bq_2^B]  
+\end{align*}
+
+La mejor respuesta de $ q_1 $ se puede reacomodar. Crece con $(1-c)/2 $ y decrece con la producción de la empresa 2.
+
+Encontrar el ENB, y evaluar cómo cambia la cantidad de $q_2$ con respecto a su costo. 
+
+
+% 	Considera un duopolio de Cournot con información completa. Primero, la naturaleza escoge una cantidad $ a $ que puede ser alta o baja ($ a^A, a^B $).
+
+% 	La empresa 1 hace investigación de mercado para conocer la demanda y observa qué $ a $ sucede. La empresa 2 no observa $ a $. Luego, las empresas simultáneamente seleccionan las cantidades $ q_1 $ y $ q_2 $, y el precio de mercado es determinado por la función
+
+% 	$$ p(Q) = a_k - Q; \text{ con } k = \{A, B\} $$
+
+% 	Asumir, por simplicidad, que producen con costo de 0. Las utilidades son
+
+% 	\begin{align*}
+% 		                       & \text{para la empresa 1}                                            \\
+% 		u_1(q_1, q_2)          & = (x - q_1 - q_2)q_1 \Longrightarrow                                \\
+% 		u_2(q_1, q_2^t)        & = \begin{cases}
+% 			(10 - q_1^B - q_2)q_1^B, \text{ si $t$ = B} \\
+% 			(10 - q_1^A - q_2^A)q_1^A, \text{ si $t$ = A}
+% 		\end{cases}                                        \\
+% 		                       & \text{para la empresa 2}                                            \\
+% 		u_2(q_1, q_2)          & = (x-q_1-q_2)q_2 \Longrightarrow                                    \\
+% 		u_2(q_1^A, q_1^B; q_2) & = \frac{1}{2}(8-q_1^A-q_2)q_1^A + \frac{1}{2}(4 - q_1^B - q_2)q_1^B \\
+% 	\end{align*}
+
+% 	Ahora notar que los tipos ocurren para la empresa 1, dado que es la empresa 1 quien tiene información privada. Si la demanda es alta ($ x = 8 $), el tipo de la empresa 1 es $ q_1^A $, si no es $ q_1^B $.
+
+% 	Obtener el EBN.
+
+% 	\textbf{Sol.}
+
+% 	Las funciones de utilidad quedan como
+
+
+% 	Tenemos que encontrar las soluciones al problema de optimización
+
+% 	\begin{align*}
+% 		q_2^*    & = \argmax_{0\leq q_2 \leq \infty} u_2(q_1^A, q_1^B; q_2) \\
+% 		q_1^{A*} & = \argmax_{0\leq q_1^A \leq \infty} u_2(q_1^A, q_2)      \\
+% 		q_1^{B*} & = \argmax_{0\leq q_1^B \leq \infty} u_2(q_1^B, q_2)
+% 	\end{align*}
+
+% 	Que corresponden a las CPO
+
+% 	$$ \frac{\partial u_2}{\partial q_2}=0,\quad \frac{\partial u_1^B}{\partial q_1^B},\quad \text{y } \frac{\partial u_1^A}{\partial q_1^A} $$
+
+% 	Estas soluciones son
+
+% 	\begin{align*}
+% 		                                            & \text{para la empresa 2}                                         \\
+% 		6 - 2q_2 -\frac{q_1^B}{2} - \frac{q_1^A}{2} & = 0 \Longrightarrow q_2^* = 3 -\frac{q_1^B}{4} - \frac{q_1^A}{4} \\
+% 		                                            & \text{para la empresa 1}                                         \\
+% 		8 - 2q_1^B - q_2                            & = 0 \Longrightarrow q_1^{B*} = 4 - \frac{q_2}{2}                 \\
+% 		4 - 2q_1^A - q_2                            & = 0 \Longrightarrow q_1^{A*} = 2 - \frac{q_2}{2}
+% 	\end{align*}
+
+% 	Resolviendo (sustituyendo $ q_1^{A*}, q_1^{B*} $ para $ q_2^* $) encontramos $ q_2^* = 2, q_1^{A*} = 3, q_1^{B*}=1 $.
+
+\end{exbox}
+
+\subsection{Subasta al segundo precio}
+% felix muñoz 2ed y Tadelis 13.1.1
+
+Recorda que las subastas al segundo precio, el ganador puja la cantidad más grande, pero paga la cantidad de la \textit{segunda} puja más grande.
+
+Las reglas son: % tadelis 13.1.1
+
+\begin{enumerate}
+	\setlength{\itemsep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	\item Los jugadores saben sus probias valuaciones, pero conocen solo la distribución de las valuaciones del resto.
+	\item Cada jugador somete una puja $ b_i >0 $.
+	\item Las pujas son reveladas, la puja más alta gana y paga el precio igual a la segunda puja más alta (también llamada \textit{la puja perdedora más alta}).
+\end{enumerate}
+
+Cada jugador tiene una ganancia dada por
+
+\[
+	u_i(b_i, b_j; x_i) =%
+	\begin{cases}
+		x_i - b_j^*; & \text{ si } b_i > b_j\; \forall j\neq i \text{ y } b_j^* \equiv\max_{j\neq i}\{b_j\} \\
+		0            & \text{ si } b_i \leq b_j \text{ para algún } j\neq i
+	\end{cases}
+\]
+
+(Nota: el símbolo $ \equiv $ indica que la puja del jugador $ j $ debe ser la puja más alta \textit{diferente} de $ i $, la puja perdedora más alta). La acción del jugador es su puja, así que una estrategia para el jugador asigna una puja no negativa a cada uno de sus tipos (valuaciones $ x_i $, que son información privada). La utilidad del jugador $ i $ es su tipo menos la cantidad de la puja perdedora más alta, $ b_j^* $.
+
+La acción del jugador es una puja $b_i$, así que su estrategia asigna una puja a cada una de sus valuaciones, $s_i(x_i) = b_i$. La función de utilidad del jugador $i$ es
+
+\[
+	UE_i(u_i(b_i, b_j;x_i)) = p(i \text{ gana y paga} b_j^*)\times (x_i - b_j^*) + p(i \text{ pierde}) \times 0
+\]
+
+La probabilidad de que el jugador $ i $ gane es igual a la probabilidad de que todos los otros jugadores estén debajo de su puja $ b_i $, y en ese caso el jugadores paga $ b_j^* $. ¿Cuánto es esa probabilidad, que a su vez depende de las estrategias de los otros jugadores?
+
+Sucede que todos los jugadores tienen una estrategia débilmente dominante en donde su puja iguala a su valuación, es decir $ b_i = x_i $.
+
+Considerar el caso en que $ b_i < x_i $.
+
+\begin{center}
+	%With Transparency    
+	\begin{tikzpicture}[scale=7]
+		\draw[->, thick] (0,0) -- (1.05,0);
+		\foreach \x/\xtext in {0/,0.3/$b_i$,0.7/$x_i$,1/}
+		\draw (\x,-0.65pt) node[below] {\xtext};
+
+		\draw (0.15,0.5pt) node[above] {$L$};
+		\draw (0.5,0.5pt) node[above] {$K$};
+		\draw (0.85,0.5pt) node[above] {$T$};
+		% \draw[-, ultra thick, blue] (0,0) -- (0.01,0);
+		% \draw[-, ultra thick, blue] (0.19,0) -- (0.2,0);
+		\fill[opacity = 0.2, blue] (0,-0.2ex) -- (0.3, -0.2ex) -- (0.3, 0.45ex) -- (0,0.45ex) -- cycle;
+		\fill[opacity = 0.2, red] (0.7,-0.2ex) -- (1, -0.2ex) -- (1, 0.45ex) -- (0.7,0.45ex) -- cycle;
+		\fill[opacity = 0.2, black] (0.3,-0.25ex) -- (0.7, -0.25ex) -- (0.7, 0.25ex) -- (0.3,0.25ex) -- cycle;
+		% \draw (-0.25,0) node {$x=1$};
+	\end{tikzpicture}
+\end{center}
+
+Existen tres posibilidades:
+
+\begin{enumerate}
+	\setlength{\itemsep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	\item El jugador $ i $ tiene la puja más grande, por lo tanto gana y paga $ b_j^* < b_i $ para $ j \neq i $. Esto corresponde a la situación en donde $ b_j^*, j\neq i $ está en la región $ L $. Suponiendo que en vez de $ b_i < x_i $ puja $ b_i = x_i $, de todas formas ganaría y, crucial, \textit{obtendría la misma utilidad}.
+	\item El jugador $ j $ puja $ b_j^* > x_i $, por lo que $ i $ pierde (región $ T $). Aún así, $ i $ perdería incluso pujando $ b_i = x_i $.
+	\item El jugador $ j $ puja $ b_i < b_j ^* <x_i $, en cuyo caso cae en la región $ K $, y el jugador $ i $ pierde, pero ganaría si pujara $ b_i = x_i $ y recibiría \[ u_i(b_i=x_i, b_j^*)=x_i - b_j^*\]
+	      En este caso, pujar su valuación es estrictamente mejor que $ b_i < x_i $.
+\end{enumerate}
+
+Claramente, $ b_i = x_i $ dominante débilmente cualquier cantidad menorporque dicha estrategia \textit{nunca} es peor, y a veces es mejor. Similarmente, $ b_i > x_i $ es una estrategia débilmente denominada por $ b_i=x_i $ por las mismas razones, aunque en este caso, su utilidad no sería de 0, sino negativa.
+
+Además de lo anterior, si las valuaciones son privadas, en subasta al segundo precio los jugadores no se preocupan por la distribución de probabilidad de los competidores.
+
+Por último, el resultado de la subasta al segundo precio es \textit{Pareto óptima}\footnote{
+	Una estrategia es Pareto-óptima si no empeora la situación de nadie más pero mejora la de un jugador. Es decir, $ u_i(s_i) \geq ui(s_i') $ para todos los $ i $, y $ u_i(s_i) > ui(s_i') $ para \textit{al menos} un $ i $.
+}. La persona que más valora el bien es la que lo obtiene.
+
+% \begin{tikzpicture}[>=stealth']
+
+%   \begin{scope}[scale = 2]
+
+%     \def\zval{1.65}
+
+%     \draw[|-|, thick] (-\zval, 1) -- (\zval, 1);
+%     \draw[fill = green] (0, 1) circle (1pt);
+%     \node[below = 1ex] at (0, 1) {$\overline{y}$};
+%     % \node[below] at (-\zval, 1) {$\overline{y} - \textcolor{cyan}{z_{\alpha/2}}\cdot \sigma/\sqrt{n}$};
+%     % \node[below] at (\zval, 1) {$\overline{y} + \textcolor{orange}{z_{\alpha/2}}\cdot \sigma/\sqrt{n}$};
+
+%     \draw [yshift = 1ex, decorate, decoration = {brace, amplitude = 5pt}] (-\zval, 1) -- (0, 1)
+%       node [black, midway, yshift = 1.5em] {$e = z_{\alpha/2}\cdot \sigma/\sqrt{n}$};
+
+%     \draw [yshift = 1ex, decorate, decoration = {brace, amplitude = 5pt}] (-\zval, 1.5) -- (\zval, 1.5)
+%       node [black, midway, yshift = 1.5em] {$2e$};
+
+%   \end{scope}
+
+% \end{tikzpicture}%
+
+\section*{Recordatorio}
+\subsection*{Tratamiento sistemático de los juegos con información incompleta}
+\textbf{En un juego con información incompleta} se tienen que seguir los siguientes pasos e indicaciones para obtener el ENB.
+
+\begin{enumerate}
+	\setlength{\itemsep}{0pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+	\item Los tipos (qué información es privada, y para qué jugador es privada).
+	\item La distribución de probabilidad de los tipos.
+	\item Si el juego es de información asimétrica (como el mercado de coches usados, o como en la competencia de Cournot ), o simétrica (como en las subastas, donde todos los jugadores tienen información privada).
+	\item La función de utilidad para cada jugador.
+	      \begin{itemize}
+		      \item Si el juego es de información asimétrica, como en Cournot, los jugadores tendrán diferente función de utilidad: el jugador con más de un tipo, tendrá tantas funciones de utilidad como tipos; el jugador con un solo tipo solo tendrá una función de utilidad, pero promediada a través de los tipos de (los) otro (s) jugadores (su utilidad esperada será la suma de la utilidad cuando el otro jugador juega un tipo, multiplicada por la probabilidad de ese tipo, más la suma de la utilidad cuando el otro jugador juega su otro tipo, multiplicada por la probabilidad de ese otro tipo, etc.).
+		      \item Si el juego es de información simétrica como en la subasta de sobre cerrado al primer precio, y si los jugadores usan estrategias simétricas (por ejemplo, si usan una fracción $ a $ común a todos los jugadores) la solución será la misma para todos los jugadores. (De hecho, en una subasta de sobre cerrado al primer precio, la solución de la puja óptima depende de la cantidad de jugadores, no de lo que los otros pujen).
+	      \end{itemize}
+	\item Maximizar la utilidad esperada de los juagdores. De nuevo, la utilidad esperada será una suma de utilidad multiplicada por la probabilidad de la ocurrencia del evento. Por ejemplo, en un duopolio de Cournot, la utilidad esperada del jugador con un solo tipo es la suma de dos utilidades (una cuando el otro jugador tiene, por ejemplo, costo alto; otra cuando el otro jugador tiene costo bajo) multiplicada por dos probabilidad (respectivamente, la probabilidad de que el otro jugador tenga costo bajo y la probabilidad de que el otro jugador tenga costo bajo).
+\end{enumerate}
+
+\end{document}
