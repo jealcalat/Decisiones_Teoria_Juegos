@@ -1,0 +1,148 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+% \usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+\usepackage{exercise}
+\usepackage{tikzsymbols}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\usepackage{dtj_iteso} % creación mía
+\usepackage{kpfonts}
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Tarea - Unidad 4 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\begin{summarybox}{Instrucciones}
+
+  \begin{description}
+      \item[1] - Puedes contestar en papel, tomar fotos y colocarlas en un archivo Word y convertirlo a pdf, luego subirlo en la entrada de CANVAS correspondiente al examen. 
+      \item[2] - Coloca claramente los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta. 
+      \item[3] - Si existe una situación \textit{extraordinaria} que te impida \textit{terminar} y subir la tarea a tiempo, házmelo saber en ese momento. Sin embargo, si es el último día y no haz hecho nada, por día que pase sin que hayas subido la tarea, perderás 10\% de puntos.
+  \end{description}
+  
+\end{summarybox}
+
+\begin{center}
+  \Coffeecup[1.5]
+\end{center}
+
+\begin{Exercise}[name=Pregunta]
+\textit{3 pt}
+
+Abajo se encuentra un juego de señalización representado de forma genérica.
+
+\begin{center}
+	\begin{tikzpicture}[scale=1.4,font=\footnotesize]
+		\tikzset{%
+			% Two node styles for game trees: solid and hollow
+			solid node/.style={circle,draw,inner sep=1.5,fill=black},
+			solid nature/.style={circle,draw=black,inner sep=2.5},
+			hollow node/.style={circle,draw,inner sep=1.5}
+		}
+		% Specify spacing for each level of the tree
+		\tikzstyle{level 1}=[level distance=12mm,sibling distance=25mm]
+		\tikzstyle{level 2}=[level distance=15mm,sibling distance=15mm]
+		\tikzstyle{level 3}=[level distance=17mm,sibling distance=10mm]
+		% The Tree
+		\node(0)[solid nature,label=right:{N}]{}
+		child[grow=up]{
+		% node[solid node,label=above:{
+		% \begin{tabular}{c}
+		% 	Sender \\ $t=t_1$
+		% \end{tabular}
+		% }] {}
+		node[solid node,label=above:{Emisor}] {}
+		node[solid node,label=below left:{\rotatebox{90}{$t_2$}}] {}
+		child[grow=left]{
+		node(1)[solid node,label=below:{$[p]$}]{}
+		child{node[hollow node,label=left:{}]{} edge from parent node [above]{$a_1$}}
+		child{node[hollow node,label=left:{}]{} edge from parent node [below]{$a_2$}}
+		edge from parent node [above]{$m_1$}
+		}
+		child[grow=right]{node(3)[solid node,label=below:{$[q]$}]{}
+		child{node[hollow node,label=right:{}]{} edge from parent node [below]{$a_2$}}
+		child{node[hollow node,label=right:{}]{} edge from parent node [above]{$a_1$}}
+		edge from parent node [above]{$m_2$}
+		}
+		edge from parent node [right]{$\theta$}
+		}
+		child[grow=down]{
+		node[solid node,label=above left:{\rotatebox{90}{$t_1$}}] {}
+		node[solid node,label=below:{Emisor}] {}
+		child[grow=left]{node(2)[solid node,label=above:{$[1-p]$}]{}
+		child{node[hollow node,label=left:{}]{} edge from parent node [above]{$a_1$}}
+		child{node[hollow node,label=left:{}]{} edge from parent node [below]{$a_2$}}
+		edge from parent node [above]{$m_1$}
+		}
+		child[grow=right]{node(4)[solid node,label=above:{$[1-q]$}]{}
+		child{node[hollow node,label=right:{}]{} edge from parent node [below]{$a_2$}}
+		child{node[hollow node,label=right:{}]{} edge from parent node [above]{$a_1$}}
+		edge from parent node [above]{$m_2$}
+		}
+		edge from parent node [right]{$1-\theta$}
+		};
+		% information set
+		\draw[dashed,rounded corners=10]($(1) + (-.45,.45)$)rectangle($(2) +(.45,-.45)$);
+		\draw[dashed,rounded corners=10]($(3) + (-.45,.45)$)rectangle($(4) +(.45,-.45)$);
+		% specify mover at 2nd information set
+		\node[rotate=90] at ($(1)!.5!(2)$) {$\underset{h_1}{\text{Receptor}}$};
+		\node[rotate=90] at ($(3)!.5!(4)$) {$\underset{h_2}{\text{Receptor}}$};
+	\end{tikzpicture}
+\end{center}
+
+Considera los siguientes datos del juego:
+
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item Jugadores: Trabajador y Empleador.
+  \item Tipos del trabajador: Alto desempeño (Alto), o Bajo desempeño (Bajo).
+  \item La probabilidad del tipo Alto es de 0.2, y la del bajo de 0.8.
+  \item El conjunto de mensajes del trabajador es $ m = \{\text{Estudiar (E), No Estudiar (NE)}\} $.
+  \item Las acciones del Empleador son $ A = \{\text{Adm, Tec}\} $, en donde Adm es de administración, Tec de técnico.
+  \item El Empleador ofrece salarios $ w_{\text{Alto}} = 10, w_{\text{Bajo}}=6 $, y tiene ganancias según
+  \begin{center}
+    \begin{game}{2}{2}[tipo de Trabajador][empleo]
+            & Adm 	& 	Tec \\ 
+      Alto 	&	12 		& 	7	 \\
+      Bajo 	&	1			& 	4
+    \end{game}
+  \end{center}
+  \item El trabajador tiene un costo privado $ c_{\text{Bajo}} = 4 $ y un costo $ c_{\text{Alto}} = 1 $ por estudiar, y \textbf{si no estudia} su costo es 0 para ambos tipos $ c_{\text{Bajo}} = c_{\text{Alto}} = 0$.
+  \item Las ganancias del trabajador están dadas por el salario menos el costo, es decir $ w_t - c_t $.
+\end{enumerate}
+ 
+\textbf{Resuelve lo siguiente}
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+  \item A partir de los anteriores datos, representa nuevamente el juego actualizando correctamente $ m_1, m_2, t_1, t_2, \theta, 1-\theta, a_1, \text{ y } a_2 $ \textbf{(3 pt)}.
+  \item Describe los posibles equilibrios separadores y agrupadores \textbf{(2 pt)}.
+  \item Evalúa cada uno de los posibles equilibrios, y concluye cuál(es) es(son) EBP, escribiendo correctamente el perfil de estrategias para ambos, que incluye las creencias del jugador no informado \textbf{(5 pt)}.
+\end{enumerate}
+  
+\end{Exercise}
+
+\begin{center}
+  ¡Suerte! 
+  
+  \LARGE\Cat[1.2] 
+\end{center}
+
+
+
+\end{document}

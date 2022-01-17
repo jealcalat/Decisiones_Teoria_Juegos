@@ -1,0 +1,111 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{dtj_iteso}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\title{Tarea - Unidad 1 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{summarybox}{Instrucciones}
+
+    \begin{description}
+        \item[1] - Puedes contestar en papel, tomar fotos y colocarlas en un archivo Word y convertirlo a pdf, luego subirlo en la entrada de CANVAS correspondiente al examen. 
+        \item[2] - Coloca claramente los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta. 
+        \item[3] - Si existe una situación \textit{extraordinaria} que te impida \textit{terminar} y subir la tarea a tiempo, házmelo saber en ese momento. Sin embargo, si es el último día y no haz hecho nada, por día que pase sin que hayas subido la tarea, perderás 10 puntos.
+    \end{description}
+    
+\end{summarybox}
+
+Contesta \textbf{correcta y detalladamente}:
+
+\begin{Exercise}[name={Ejercicio}]
+\textbf{1pt}
+
+Un axioma sobre ordenación para la relación de preferencia $\succeq$ nos asegura que cualesquiera dos resultados $x,y\in X$ pueda ser ordenado. ¿Cuál es ese axioma?
+\end{Exercise}
+
+\begin{Exercise}[name={Ejercicio}]
+\textbf{1pt}
+
+Sea $X=\{0, 1, 2, 1, 10, 5\}$. Obtener el valor esperado.
+\end{Exercise}
+
+\begin{Exercise}[name={Ejercicio}]
+\textbf{2pt}
+
+Un individuo posee una riqueza de \$100 y tiene que hacer una declaración al SAT. Si la hace bien, debe pagar solo \$10, pero si defrauda (y no lo descubren) pagaría solo \$2.65. Ahora bien, la probabilidad de una inspección es de 0.05. Si hacen la inspección y ha defraudado deberá pagar una multa de \$82.94 además de los \$2.65 que ya pagó. Supongamos que la función de utilidad de este individuo es $u(x)=\sqrt{x}$. Si el individuo \textit{no defrauda}, su utilidad es $u(100-10)$
+
+Contestar:
+\begin{myenum}
+\item Con base en si es averso o propenso al riesgo, ¿qué debería decidir? (La respuesta completa requiere demostrar si $u(\mathbf{E}[X])\geq \mathbf{E}[u(x)]$ o no).
+\item ¿A partir de qué probabilidad de inspección el individuo cambiaría su decisión, asumiendo que es racional?
+\end{myenum}
+\end{Exercise}
+
+\begin{Exercise}[name={Ejercicio}]
+\textbf{3pt}
+
+\textit{Estrategias mixtas}
+
+Los medios neoyorkinos reportaron un asesinato ocurrido en 1964. Kitty Genovese fue atacada en un complejo departamental en NYC. Pese a sus gritos, ninguna de las 38 personas que la escucharon fueron en su ayuda. Estudios experimentales han encontrado que una persona es menos probable que ofrezca ayuda en grupo que sola (\textit{bystander effect}).
+
+Suponer que existen $n \geq 2$ personas en posibilidad de ayudar. Cada una escoge simultáneamente entre dos acciones: ayudar o ignorar. Asumimos que, aunque están dispuestas a ayudar, ayudar tiene un costo, y no tendría mucho caso ayudar si los otros ayudan. Los pagos de un jugador (en la fila) con respecto al resto $n-1$ (en la columna) pueden ser como sigue:
+
+\begin{table}[H]
+    \centering
+    \begin{game}{2}{2}[Jugador 1][Otros jugadores]
+      & Todos ignoran     & Al menos 1 ayuda   \\
+Ayuda   & $a$  & $c$\\
+Ignora   & $d$  & $b$
+    \end{game}
+\end{table}
+
+Los pagos $a, b, c$ y $d$ deben satisfacer las siguientes condiciones: $a > d$ (una persona prefiere ayudar a la víctima si nadie más lo hace) y $b > c$ (una persona prefiere \textit{no ayudar} si alguien más lo hace).
+
+Cada persona ayuda con una probabilidad $p$. Una estrategia en equilibrio consiste en hallar un $p^*$ tal que si cada $n-1$ personas ayude con probabilidad $p^*$, es óptimo también para el jugador 1 jugar cn $p^*$, y el jugador sería indiferente entre ayudar o ignorar.
+
+Resolver:
+
+1) Encontrar una expresión para $p^*$ (aquella que lleve a un equilibrio). Calcular desde la perspectiva del jugador 1.
+
+\textbf{Pista:} situados en las columnas, si $p$ es la probabilidad de que \textit{una persona} ayude, la probabilidad de que \textit{una persona} no ayude es $1-p$. Para $n-1$ personas, la probabilidad de que ninguna de las $n-1$ ayude es $(1-p)^{n-1}$, dado que son probabilidades independientes. La utilidad que el jugador 1 obtiene por ayudar cuando nadie más lo hace es $a$, para obtener la utilidad esperada por ayudar, se debe resolver $UE(ayudar)_{j1}=(1-p)^{n-1}a + ??c$ (los signos de interrogación son intencionales). Luego, econtrar $p$ tal que $UE(ayudar)_{j1} \geq UE(ingnorar)_{j1}$.
+
+% \textbf{Hint:} Existen dos clases de eventos. En uno, la víctima recibe ayuda por al menos uno de los otros $n-1$ jugadores, en otro nadie la ayuda (son eventos excluyentes). La suma de esas dos probabilidades es 1. La probabilidad de que ninguno de los otros $n-1$ jugadores la ayude es $1-p$, sus elecciones son \textit{independientes}, así que la probabilidad de que los $n-1$ la ayuden es $1-p$ multiplicada $n-1$ veces, y la probabilidad de que al menos uno de los $n-1$ jugadores la ayude es el complemento de la probabilidad anterior. El mismo argumento aplica para la ganancia esperada por ignorar.
+
+Resultado esperado:
+
+\[ p^* =1 - \Bigg [ \frac{b-c}{(a-d) + (b-c)} \Bigg]^{\frac{1}{n-1}} \]
+
+2) Asumir $a=4, b=3, c=2, d=1$
+
+a) Obtener una expresión de $p^*$ con dichos valores y graficar $p^*$ como función de $n$ para $n \in [2, 12]$.
+
+b) ¿Cuál es la probabilidad de que \textit{al menos 1} persona ayude? (Ojo: la probabilidad de que al menos una ayude incluye la posibilidad de que ayude más de una).
+
+c) ¿Esta probabilidad es mayor si $n$ crece? Demostrarlo.
+
+\end{Exercise}
+
+\begin{Exercise}[name={Ejercicio}]
+\textbf{3pt}
+
+\textit{Duopolio de Cournot}
+
+Dos empresas que comparten mercado producen el mismo producto. Las empresas tienen que decidir simultáneamente las cantidades $q_1$ y $q_2$  a producir. La cantidad agregada del producto es $Q=q_1+q_2$. Asumir que el precio es una función de demanda inversa $P(Q)=100-Q$, y que el costo de producción es una función cuadrática de $q$, es decir $c_i(q_i)=q^2_i$.
+
+Responder:
+
+1) Escribir el juego en su forma normal. 
+
+2) Encontrar la cantidad $q_i^*$  en equilibrio (de Nash), asumiendo estrategias simétricas para ambas empresas. Especificar qué condición debe cumplirse para considerar que $q_i^*$ (la mejor respuesta del jugador $i$) constituye un equilibrio de Nash (esto viene en la parte de la definición de Equilibrio de Nash).
+\end{Exercise}
+
+
+\end{document}
+
