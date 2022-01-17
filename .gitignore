@@ -13,3 +13,8 @@
 *.cb
 *.cb2
 .*.lb
+
+# otros
+.Unidad*
+.tarea*
+.Tarea*
