@@ -12,7 +12,7 @@ Nota: las clases serán en línea durante el mes de Enero. Comenzando Febrero, l
 
 ## Guía de estudio
 
-La guía de estudio en PDF se encuentra en [Guía](Guía/Guia_DTJ_6-8pm.pdf)
+La guía de estudio en PDF se encuentra en [Guía](Guía/GuiaAprendizajeTJ.pdf)
 
 ---
 
