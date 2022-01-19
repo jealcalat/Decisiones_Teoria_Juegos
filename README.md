@@ -19,3 +19,11 @@ La guía de estudio en PDF se encuentra en [Guía](Guía/GuiaAprendizajeTJ.pdf)
 ## Estilo LaTeX
 
 Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentra en [MWE](MWE), con el archivo `tex` en [tex](MWE/MWE.tex); se verá [así](MWE/MWE.pdf). Puedes comprimirla en formato `zip` y cargarla a Overleaf.
+
+---
+
+# Notas del curso
+
+## Unidad 1 - Teoría de utilidad y Juegos estáticos con información completa
+
+- [Unidad 1](Unidad_1/main.pdf), de 17 de enero a -
