@@ -1,3 +1,5 @@
+% !TEX TS-program = lualatex
+
 \documentclass[12pt]{scrartcl}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish,mexico]{babel}
@@ -85,6 +87,30 @@
      delay={for descendants={split option={content}{;}{content,decision}}},
      }
  }
+
+ \usepackage{pgfplots} 
+\pgfplotsset{compat=newest}
+\pgfplotsset{plot coordinates/math parser=false}
+\pgfplotsset{
+    every non boxed x axis/.style={
+        xtick align=center,
+        enlarge x limits=true,
+        x axis line style={line width=0.8pt, -latex}
+},
+    every boxed x axis/.style={}, enlargelimits=false
+}
+\pgfplotsset{
+    every non boxed y axis/.style={
+        ytick align=center,
+        enlarge y limits=true,
+        y axis line style={line width=0.8pt, -latex}
+},
+    every boxed y axis/.style={}, enlargelimits=false
+}
+\usetikzlibrary{
+   arrows.meta,
+  intersections,
+}
 
 \newtcolorbox{mybox}[2][]{%
 	enhanced,
@@ -216,8 +242,8 @@ $A = \{1, 2\}$, $B = \{5, 6\}$. El producto $A\times B = \{(1, 5), (1, 6), (2, 5
 
 	\item[Valor esperado] - (a.k.a.~\emph{media}, \emph{esperanza}, o \emph{promedio}) es una suma ponderada de los posibles resultados de nuestra variable aleatoria. Matemáticamente, si $x_1, x_2, x_3, \dots$ son todas distintos posibles valores que $X$ puede tomar, el valor esperado de $X$ es
 	\begin{align*}
-		E(X) &= \sum\limits_{i}x_i p(X=x_i), \text{ si $x$ es discreta}\\
-		E(X) &= \int_\mathbb{R} xf(x)dx, \text{ si $x$ es continua}
+		E[X] &= \sum\limits_{i}x_i p(X=x_i), \text{ si $x$ es discreta}\\
+		E[X] &= \int_\mathbb{R} xf(x)dx, \text{ si $x$ es continua}
 	\end{align*}
 	
 	Por brevedad, podemos simplemente escribir $p(x_i)$ para el caso discreto. Para el caso continuo, $f(x)$ denota la función de densidad de probabilidad.
@@ -225,13 +251,24 @@ $A = \{1, 2\}$, $B = \{5, 6\}$. El producto $A\times B = \{(1, 5), (1, 6), (2, 5
 	Si tenemos $n$ datos, todos con la misma probabilidad de ser tomados por $X$, entonces la esperanza es simplemente la media aritmética:
 	
 	\begin{center}
-		$E(X) = \frac{1}{n}\sum\limits_{i}x_i$
+		$E[X] = \frac{1}{n}\sum\limits_{i}x_i = \frac{x_1 + x_2 + \dots + x_n}{n}$
 	\end{center}
 	
-	Con $p(x_1)=p(x_2)=...=p(x_n)=1/n$
+	Con $p(x_1)=p(x_2)=...=p(x_n)=1/n$.
+
+    \textbf{LOTUS: Law of the unconscious statistician} si $ g(x) $ es una transformación de no identidad de $ x $, $ E[g(X)] $ tiene el mismo significado:
+
+
+    \[
+        E[X] = \sum\limits_{i} g(x_i) p(x_i)
+    \]
+
+    Este teorema nos sirve para lo siguiente: si conocemos la probabilidad de $ x $ pero no la de $ g(x) $ aún podemos calcular el valor esperado de $ g(x) $. 
+    
+    Notar que si la transformación $ g(x) = x $ (identidad), $ E[g(X)] = E[X] $. 
 
 	\item[Linealidad] - Para cualesquier variables aleatorias $X$ y $Y$, y constantes $a,b,c,$ 
-	\[E(aX + bY + c) = aE(X) + bE(Y) + c \]
+	\[E(aX + bY + c) = aE[X] + bE[Y] + c \]
 	
 	\begin{minipage}{\linewidth}
 		\centering
@@ -249,9 +286,11 @@ $A = \{1, 2\}$, $B = \{5, 6\}$. El producto $A\times B = \{(1, 5), (1, 6), (2, 5
 	Donde por $|\cdot|$ entendemos la \textit{cardinalidad}, o el número de elementos. 
 	\item[Probabilidad] - Variables y espacios:
 	
-		\textbf{Variable aleatoria}: es una función que mapea los resultados de un experimento aleatorio al conjunto de los números reales (comúnmente). Se suele representar con letra mayúscula (e.g., $X$).\\
-		\textbf{Espacio muestral}: el conjunto de todos los resultados posibles. Se suele representar con $\Omega$. De este conjunto la $X$ mapea a los reales: $X: \Omega \rightarrow \mathbb{R}$. Es decir, a cada elemento de $\Omega$ asigna un número real, $X(\omega)$.\\
-		\textbf{Evento}: subconjunto de $\Omega$, usualmente representado por una vocal mayúscula, e.g., $A$. Si lanzamos una moneda dos veces, $\Omega = \{HH,HT,TT,TH\}$. El evento ``la primera moneda cae H'' es $A=\{HH,HT\}$. \\
+		\textbf{Variable aleatoria}: es una función que mapea los resultados de un experimento aleatorio al conjunto de los números reales (comúnmente). Se suele representar con letra mayúscula (e.g., $X$).
+
+		\textbf{Espacio muestral}: el conjunto de todos los resultados posibles. Se suele representar con $\Omega$. De este conjunto la $X$ mapea a los reales: $X: \Omega \rightarrow \mathbb{R}$. Es decir, a cada elemento de $\Omega$ asigna un número real, $X(\omega)$.
+
+		\textbf{Evento}: subconjunto de $\Omega$, usualmente representado por una vocal mayúscula, e.g., $A$. Si lanzamos una moneda dos veces, $\Omega = \{HH,HT,TT,TH\}$. El evento ``la primera moneda cae H'' es $A=\{HH,HT\}$. 
 
 		\item[Axiomas de Kolmokorov] - La función $p(A)$ asigna un valor numérico a cada evento $A$. Se llama probabilidad de $A$ si satisface los siguientes axiomas:
 		\begin{itemize}
@@ -266,28 +305,87 @@ $A = \{1, 2\}$, $B = \{5, 6\}$. El producto $A\times B = \{(1, 5), (1, 6), (2, 5
 		$\ E(X | A) = \sum\limits_{x}p(x|A)x$
 	\end{center}
 	
-	\item[Función convexa] - Una función $f\colon \mathrm{I} \mapsto \mathbb{R}$ es convexa si para todo $x, y \in \mathrm{I}, x < y$, existe un $\lambda \in [0, 1]$ tal que 
+	\item[Función convexa] - Una función $f\colon \mathrm{I} \mapsto \mathbb{R}$ es convexa si para todo $x_1, x_2 \in \mathrm{I}, x_1 < x_2$, existe un $\lambda \in [0, 1]$ tal que 
 	
-	\begin{center}
-	    $f(\lambda x + (1 - \lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)\quad \forall x,y\in \mathrm{I}  \text{ y } \forall \lambda \in [0, 1]$
-	\end{center}
+	% \begin{center}
+	%     $$
+	% \end{center}
+    \[
+        f[\lambda x_1 + (1 - \lambda)x_2] \leq \lambda f(x_1) + (1-\lambda)f(x_2)\quad \forall x_1,x_2\in \mathrm{I}  \text{ y } \forall \lambda \in [0, 1]    
+    \]
 	\begin{summarybox}[colback=red!15]{Nota}
 		$\forall \Longleftrightarrow \text{para todos; para cada uno}$. \\
-		La combinación lineal $\lambda x + (1 - \lambda)y$ es llamada \textit{combinación convexa}. Es equivalente a $y + \lambda(x-y)$
+		La combinación lineal $\lambda x_1 + (1 - \lambda)x_2$ es llamada \textit{combinación convexa}. Es equivalente a $y + \lambda(x_1-x_2)$.
 	\end{summarybox}
 
+    \begin{tikzpicture}
+        \begin{axis}[width=5in,axis equal image,
+            axis lines=middle,
+            xmin=0,xmax=8,
+            xlabel=$x$,ylabel=$y$,
+            ymin=-0.25,ymax=4,
+            xtick={\empty},ytick={\empty}, axis on top
+        ]
+        
+        % 
+        \addplot[thick,domain=0.25:7,red!90!black,name path = A]  {-x/3 + 2.75} coordinate[pos=0.4] (m) ;
+        \draw[thick,blue, name path =B] (0.15,4) .. controls (1,1) and (4,0) .. (6,2) node[pos=0.95, color=black, right]  {$f(x)$} coordinate[pos=0.075] (a1)  coordinate[pos=0.95] (a2);
+        \path [name intersections={of=A and B, by={a,b}}];
+        
+        % 
+        \draw[densely dashed] (0,0) -| node[pos=0.5, color=black, label=below:$a$] {}(a1);
+        \draw[densely dashed] (0,0) -| node[pos=0.5, color=black, label=below:$x_{1}$] {}(a);
+        \draw[densely dashed, name path=D] (3,0) -|node[pos=0.5, color=black, label=below:$\lambda x_{1}+ (1-\lambda)x_{2}$] {} node[pos=1, fill,circle,inner sep=1pt] {}(m);
+        \draw[densely dashed] (0,0) -|node[pos=0.5, color=black, label=below:$x_{2}$] {}(b);
+        \draw[densely dashed] (0,0) -|node[pos=0.5, color=black, label=below:$b$] {}(a2);
+        
+        % 
+        \path [name intersections={of=B and D, by={c}}] node[fill,circle,inner sep=1pt] at (c) {}; 
+        
+        % 
+        \node[anchor=south west, text=black] (d) at (0.75,3) {$f[\lambda x_{1}+(1-\lambda)x_{2}]$};
+        \node[anchor=south west, text=black] (e) at (5,2.5) {$\lambda f(x_{1})+(1-\lambda)f(x_{2})$};
+        \draw[-{Latex[width=4pt,length=6pt]}, densely dashed] (d) -- (c);
+        \draw[-{Latex[width=4pt,length=6pt]}, densely dashed] (e) -- (m);
+        \end{axis}
+        \end{tikzpicture}
+
 	
-	\item[Función cóncava] - Una función $f\colon \mathrm{I} \mapsto \mathbb{R}$ es \textit{cóncava} si para todo $x, y \in \mathrm{I}, x < y$ existe un $\lambda \in [0, 1]$ tal que 
+	\item[Función cóncava] - Una función $f\colon \mathrm{I} \mapsto \mathbb{R}$ es \textit{cóncava} si para todo $x_1, x_2 \in \mathrm{I}, x_1 < x_2$ existe un $\lambda \in [0, 1]$ tal que 
 	
 	\begin{center}
-	    $f(\lambda x + (1 - \lambda)y) \geq \lambda f(x) + (1-\lambda)f(y)\quad \forall x,y\in \mathrm{I} \text{ y } \forall \lambda \in [0, 1]$
+	    $f[\lambda x_1 + (1 - \lambda)x_2] \geq \lambda f(x_1) + (1-\lambda)f(x_2)\quad \forall x_1,x_2\in \mathrm{I} \text{ y } \forall \lambda \in [0, 1]$
 	\end{center}
 	
 	\begin{summarybox}[colback=red!15]{Nota}
     	Si $\lambda$ es una probabilidad, las condiciones de convexidad y concavidad se siguen satisfaciendo, dados los axiomas de Kolmmogorov.
 	\end{summarybox}
 	
-	\textit{Ejemplo: $\lambda = 0.3, x = 2, y = 4,\; f(x) = x^2$}
+	\textit{Ejemplos:} $\lambda = 0.3, x_1 = 2, x_2 = 4$
+
+    \begin{align*}
+        f(x) &= x^2\\
+        f(x) &= \log(x)\\
+        f(x) &= x^\alpha; \alpha = \{0.5, 1.5\}
+    \end{align*}
+
+    %% Relación entre funciones convexas y criterios de optimalidad
+
+    % \item[Condiciones de primer y segundo orden] - Si $ f(x) $ es dos veces diferenciable
+%  https://www.princeton.edu/~aaa/Public/Teaching/ORF523/S16/ORF523_S16_Lec7_gh.pdf
+    
+% Si $ f $ es convexa, por definición 
+
+%     \[
+%         f[\lambda x_1 + (1 - \lambda)x_2] \leq \lambda f(x_1) + (1-\lambda)f(x_2)\quad \forall x_1,x_2\in \mathrm{I}  \text{ y } \forall \lambda \in [0, 1]        
+%     \]
+
+%     Rescribiendo 
+
+%     \begin{align*}
+%         f(x_1 + \lambda(x_1 - x_2)) &\leq f(x) + \lambda[f(x_1) - f(x_2)] \\
+%         f(x_1) - f(x_2) &\geq \frac{f[x_2 + \lambda(x_1 - x_2)] - f(x_1)}{\lambda}
+%     \end{align*}
 
 \end{description}
 
