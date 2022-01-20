@@ -1,4 +1,4 @@
-# Decisiones_Teoria_Juegos
+# Decisiones y Teoria de Juegos
 
 Repositorio para la clase de Decisiones y Teoría de Juegos de Ingeniería Financiera, impartida en ITESO.
 
@@ -12,13 +12,13 @@ Nota: las clases serán en línea durante el mes de Enero. Comenzando Febrero, l
 
 ## Guía de estudio
 
-La guía de estudio en PDF se encuentra en [Guía](Guía/GuiaAprendizajeTJ.pdf)
+La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf)
 
 ---
 
 ## Estilo LaTeX
 
-Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentra en [MWE](MWE), con el archivo `tex` en [tex](MWE/MWE.tex); se verá [así](MWE/MWE.pdf). Puedes comprimirla en formato `zip` y cargarla a Overleaf.
+Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentra en [`MWE`](MWE), con el archivo `tex` en [`tex`](MWE/MWE.tex); se verá [`así`](MWE/MWE.pdf). Puedes comprimirla en formato `zip` y cargarla a Overleaf.
 
 ---
 
@@ -26,4 +26,6 @@ Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentr
 
 ## Unidad 1 - Teoría de utilidad y Juegos estáticos con información completa
 
-- [Unidad 1](Unidad_1/main.pdf), de 17 de enero a -
+- [`Unidad 1`](Unidad_1/main.pdf):
+  - 19 de enero. *Repaso de matemáticas necesarias*. Zoom
+
