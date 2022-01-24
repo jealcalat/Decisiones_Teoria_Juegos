@@ -24,7 +24,7 @@ Nota: las clases serán en línea durante el mes de Enero. Comenzando Febrero, l
 Normalmente, los estudiantes se preguntan *¿para qué me sirve esto?*, especialmente si una materia es demandante. Al respecto, mi postura acerca de la educación es la misma que la expresada en las **Orientaciones fundamentales del ITESO**:
 
 <p align="center">
-  <img width="340" src="iteso_mision.png" />
+  <img width="380" src="iteso_mision.png" />
 </p>
 
 En específico
@@ -40,7 +40,7 @@ Por lo tanto, mi tarea principal como profesor es formar *universitarios*, más 
 - De acuerdo con el [`Reglamento de evaluación para alumnos de licenciatura de ITESO`](https://www.iteso.mx/documents/2624322/0/Reglamento+de+evaluaciones+acad%C3%A9micas+para+los+estudiantes+de+licenciatura.pdf/faf8a50e-4411-4f8c-adfd-6097ef8f3881), deben acreditar por lo menos el 80 % de asistencia.
 
 <p align="center">
-  <img width="340" src="evaluacion80.png" />
+  <img width="360" src="evaluacion80.png" />
 </p>
 
 - El curso estará compuesto de 4 unidades, y un examen por unidad. Consultar la Guía (siguiente apartado) y en CANVAS para más información sobre el programa.
