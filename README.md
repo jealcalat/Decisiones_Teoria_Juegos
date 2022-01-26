@@ -70,4 +70,4 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
 - [`Unidad 1`](Unidad_1/main.pdf):
   - 18 de enero. Asuntos administrativos: presentación, horarios, salón, evaluación e introducción al curso.
   - 19 de enero. *Repaso de matemáticas necesarias*. [Zoom](https://iteso.zoom.us/rec/share/4fPTcTIiIkfroaTJXNjMrda86l6UOKnj_d8DkMs1PC6nMGulxVuQjxsng7fBh1Wq.bQ4OqX-wbSTFD2r6?startTime=1642636844000)
-
+  - 24 de enero. *Teoría de utilidad, funciones de utilidad*. [YT](https://youtu.be/iDQsm-UXDjk)
