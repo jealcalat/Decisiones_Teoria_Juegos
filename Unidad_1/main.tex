@@ -799,8 +799,8 @@ Un jugador $i$, para optimizar sus ganancias en un juego, debe escoger su mejor 
 
 \begin{mybox}{Mejor respuesta, \textit{BR}}
 	\begin{defi}
-		La estrategia $s_i \in S$ es la mejor respuesta del jugador $i$ a las estrategias $s_{-i} \in S_{-i}$ si
-		\[ u_i(s_i, s_{-i})\geq u_i(s'_i, s_{-i}),\ \forall s'_i \in S_i \] 
+		La estrategia $s_i \in S$ es la mejor respuesta del jugador $i$ a las estrategias $s_{j} \in S_{j}$ si
+		\[ u_i(s_i, s_{j})\geq u_i(s'_i, s_{j}),\ \forall s'_i \in S_i \] 
 	\end{defi}
 \end{mybox}
 
@@ -818,7 +818,7 @@ El equilibrio de Nash \textit{requiere} que el jugador 1 \textit{no pueda mejora
 
 \begin{mybox}{Equilibrio de Nash}
 	\begin{defi}
-		Un perfil de estrategias puras $s^*=(s_1^*, ..., s_n^*) \in S$ es un \textit{equilibrio de Nash} si $s_i^*$ es la mejor respuesta del jugador $i$ a la(s) mejor(es) respuesta(s) $s_{-i}^*$ del/los jugadores $-i$
+		Un perfil de estrategias puras $s^*=(s_1^*, ..., s_n^*) \in S$ es un \textit{equilibrio de Nash} si $s_i^*$ es la mejor respuesta del jugador $i$ a la(s) mejor(es) respuesta(s) $s_{j}^*$ del/los jugadores $j$
 	 Es decir (para dos jugadores):
 	 
 		\[u_i(s_1^*, s_2^*)\geq u_i(s'_1, s_2^*)\quad \forall i \in N\]
@@ -830,7 +830,7 @@ El equilibrio de Nash \textit{requiere} que el jugador 1 \textit{no pueda mejora
 	\end{defi}
 \end{mybox}
 
-Recordar que $-i$ es un conjunto diferencia de los índices de los jugadores, $I$ y el jugador $i$, $I\setminus\{i\}=-i$. Es decir, $(s_i, s_{-i}^*)$ es una forma conveniente de abreviar al vector en donde un agente $i$ escoge $s_i$ como su estrategia y los agentes $i \neq j$ restantes escogen $s_j^*$. Aquel $s_i$ que maximice la función de utilidad $u_i$ cuando el resto de jugadores usan $s_j^*$ es denotado como $s_i^*$.
+Recordar que $j$ es un conjunto diferencia de los índices de los jugadores, $I$ y el jugador $i$, $I\setminus\{i\}=j$. Es decir, $(s_i, s_{j}^*)$ es una forma conveniente de abreviar al vector en donde un agente $i$ escoge $s_i$ como su estrategia y los agentes $i \neq j$ restantes escogen $s_j^*$. Aquel $s_i$ que maximice la función de utilidad $u_i$ cuando el resto de jugadores usan $s_j^*$ es denotado como $s_i^*$.
 
 El EN es un \textbf{concepto de solución}. Técnicamente, un concepto de solución es un método de análisis de juegos con el objetivo de predecir las acciones y los resultados de todos los jugadores, restringiendo el conjunto de posibles resultados al conjunto más razonable. Además del EN, hay otros conceptos de solución, como veremos en las siguientes unidades.
 
@@ -840,15 +840,15 @@ El EN es un \textbf{concepto de solución}. Técnicamente, un concepto de soluci
 	
 	\begin{table}[H]
     \centering
-    \begin{game}{2}{2}[JFila][JCol]
-            &  $s_j1$    & $s_j2$  \\
-        $s_i1$   & $u(s_i1, s_j1)_f, u(s_i1, s_j1)_c$  & $u(s_i1, s_j2)_f, u(s_i1, s_j2)_c$\\
-        $s_i1$   & $u(s_i2, s_j1)_f, u(s_i2, s_j2)_c$  & $u(s_i2, s_j2)_f, u(s_i2, s_j2)_c$
+    \begin{game}{2}{2}[JFila ($i$)][JCol ($j$)]
+            &  $s_{j1}$    & $s_{j2}$  \\
+        $s_{i1}$   & $u_i(s_{i1}, s_{j1}), u_j(s_{i1}, s_{j1})$  & $u_i(s_{i1}, s_{j2}), u_j(s_{i1}, s_{j2})$\\
+        $s_{i2}$   & $u_i(s_{i2}, s_{j1}), u_j(s_{i2}, s_{j2})$  & $u_i(s_{i2}, s_{j2}), u_j(s_{i2}, s_{j2})$
             \end{game}
     \end{table}
 	\end{summarybox}
 	
-	Cada celda es un par $u(s_i, s_j)_f, u(s_i, s_j)_c$ donde $u(s_i, s_j)_f$ es el pago del jugador fila por jugar $s_i$ cuando el jugador columna juega $s_j$. De igual manera, $u(s_i, s_j)_c$ es el pago del jugador columna por jugar $s_j$ cuando el jugador fila juega $s_i$.
+	Cada celda es un par $u_i(s_i, s_j), u_j(s_i, s_j)$ donde $u_i(s_i, s_j)$ es el pago del jugador fila por jugar $s_i$ cuando el jugador columna juega $s_j$. De igual manera, $u_j(s_i, s_j)$ es el pago del jugador columna por jugar $s_j$ cuando el jugador fila juega $s_i$.
 
 \begin{exbox}{Ejemplos}
 
@@ -886,11 +886,11 @@ Una manera sencilla de encontrar el EN es eliminando las estrategias menos prefe
 
 \begin{mybox}{Estrategia dominada}
     \begin{defi}
-        Si $s_i$ y $s_i'$ son dos estrategias posibles para $i$, y $S_{-i}$ el conjunto de estrategias de los otros jugadores:
+        Si $s_i$ y $s_i'$ son dos estrategias posibles para $i$, y $S_{j}$ el conjunto de estrategias de los otros jugadores:
         
         \begin{itemize}
-            \item $s_i$ domina estrictamente a $s_i'$ si $\forall s_{-i} \in S_{-i}$ se cumple $u_i(s_i, s_{-i}) > u_i(s_i', s_{-i})$, por lo que denotamos la preferencia estricta como $s_i \succ s_i'$
-            \item $s_i$ domina \textit{débilmente} a $s_i'$ si $\forall s_{-i} \in S_{-i}$ se cumple $u_i(s_i, s_{-i}) \geq u_i(s_i', s_{-i})$, por lo que denotamos la preferencia débil usando el símbolo de "al menos tan bueno como": $s_i \succeq s_i'$
+            \item $s_i$ domina estrictamente a $s_i'$ si $\forall s_{j} \in S_{j}$ se cumple $u_i(s_i, s_{j}) > u_i(s_i', s_{j})$, por lo que denotamos la preferencia estricta como $s_i \succ s_i'$
+            \item $s_i$ domina \textit{débilmente} a $s_i'$ si $\forall s_{j} \in S_{j}$ se cumple $u_i(s_i, s_{j}) \geq u_i(s_i', s_{j})$, por lo que denotamos la preferencia débil usando el símbolo de "al menos tan bueno como": $s_i \succeq s_i'$
         \end{itemize}
         
     \end{defi}
@@ -1023,7 +1023,7 @@ Luego, para obtener $q_i(q_j^*)$ sustituimos la ecuación (1) en (2) (o al revé
     Solución:
     
     \begin{myitemize}
-        \item[a)] $N=\{1, 2, ..., n\}$, $q_i \in S$ con el conjunto de estrategias $S_i=[0, \infty)$. Considerar que la función de utilidad para el jugador $i$ tiene la forma $u_i(q_i,q_{-i})=a-(q_i + Q_{-i})q_i+cq_i$.
+        \item[a)] $N=\{1, 2, ..., n\}$, $q_i \in S$ con el conjunto de estrategias $S_i=[0, \infty)$. Considerar que la función de utilidad para el jugador $i$ tiene la forma $u_i(q_i,q_{j})=a-(q_i + Q_{j})q_i+cq_i$.
     \begin{equation}
         u_i(q_i, q_j)=\begin{cases}
             \Big(a - q_i - \sum\limits_{j=1}^n q_j\Big)q_i -cq_i,\quad & \text{ si } \sum\limits_{j=1}^nq_i < a\\
@@ -1165,19 +1165,19 @@ Ahora, en estrategias mixtas, cada jugador evalúa la utilidad de una estrategia
 
 \begin{mybox}{Definición: utilidad esperada para un jugador}
     \begin{defi}
-        La utilidad (o pago) esperado para el jugador $i$ cuando escoge la estrategia pura $s_i \in S_i$ y su oponente juega la estrategia mixta $\sigma_{-i} = \Delta S_{-i}$ es 
-        \[ u_i(s_i, \sigma_{-i}) = \sum_{s_{-i}} \sigma_{-i}(s_{-i})u_i(s_i,s_{-i}) \]
+        La utilidad (o pago) esperado para el jugador $i$ cuando escoge la estrategia pura $s_i \in S_i$ y su oponente juega la estrategia mixta $\sigma_{j} = \Delta S_{j}$ es 
+        \[ u_i(s_i, \sigma_{j}) = \sum_{s_{j}} \sigma_{j}(s_{j})u_i(s_i,s_{j}) \]
         
         La utilidad cuando ambos juegas estrategias mixtas es:
         
-        \[ u_i(\sigma_i, \sigma_{-i}) = \sum_{s_{i}} \sigma_{i}(s_i)u_i(s_i,\sigma_{-i}) \]
+        \[ u_i(\sigma_i, \sigma_{j}) = \sum_{s_{i}} \sigma_{i}(s_i)u_i(s_i,\sigma_{j}) \]
         \label{def:def_mix_util}
     \end{defi}
 \end{mybox}
 
-Notar que en la definición \ref{def:def_mix_util}, en el primer caso la utilidad del jugador $i$ se compara \textit{dejando fija} la estrategia mixta del jugador $j$. Se compara la utilidad de una estrategia pura vs una estrategia mixta. Ahora, si el jugador $j$ juega una estrategia mixta, entonces el jugador $i$ enfrenta incertidumbre en sus decisiones. Es decir, si elige una opción versus otra, enfrenta diferentes loterías, por lo que su utilidad es en realidad una utilidad esperada $u_i(s_i, \sigma_{-i}) = UE_i(s_i, \sigma_{-i})$. 
+Notar que en la definición \ref{def:def_mix_util}, en el primer caso la utilidad del jugador $i$ se compara \textit{dejando fija} la estrategia mixta del jugador $j$. Se compara la utilidad de una estrategia pura vs una estrategia mixta. Ahora, si el jugador $j$ juega una estrategia mixta, entonces el jugador $i$ enfrenta incertidumbre en sus decisiones. Es decir, si elige una opción versus otra, enfrenta diferentes loterías, por lo que su utilidad es en realidad una utilidad esperada $u_i(s_i, \sigma_{j}) = UE_i(s_i, \sigma_{j})$. 
 
-En el segundo caso, cuando ambos juegan estrategias mixtas, la utilidad del jugador $i$ se computa \textit{a través} de las estrategias mixtas del jugador $j$. Sigue siendo una utilidad esperada. Notar que $u_i(s_i,\sigma_{-i})$ en la segunda ecuación se computa usando la primera ecuación.
+En el segundo caso, cuando ambos juegan estrategias mixtas, la utilidad del jugador $i$ se computa \textit{a través} de las estrategias mixtas del jugador $j$. Sigue siendo una utilidad esperada. Notar que $u_i(s_i,\sigma_{j})$ en la segunda ecuación se computa usando la primera ecuación.
 
 Ahora definimos un EN para estrategias mixtas.
 
@@ -1187,9 +1187,9 @@ Ahora definimos un EN para estrategias mixtas.
     \begin{defi}
         Considerar un perfil de estrategias $\sigma^* = (\sigma_1^*, ..., \sigma_n^*)$ con $\sigma_i \in \Delta S_i$ para cada jugador $i$. Un perfil $\sigma$ es un EN en estrategias mixtas \textit{ssi} 
         
-        \[u_i(\sigma_1^*, \sigma_{-i}^*)\geq u_i(\sigma'_i, \sigma_{-i}^*)\] 
+        \[u_i(\sigma_1^*, \sigma_{j}^*)\geq u_i(\sigma'_i, \sigma_{j}^*)\] 
         
-        Esto es, $\sigma_i^*$ es la MR a $\sigma_{-i}^*$
+        Esto es, $\sigma_i^*$ es la MR a $\sigma_{j}^*$
     \end{defi}
     \label{def:def7}
 \end{mybox}
@@ -1273,10 +1273,10 @@ Ahora ya estamos listos para calcular las utilidades esperadas para cada jugador
 
 \begin{mybox}{Definición: utilidad esperada para estrategias mixtas}
     \begin{defi}
-        La utilidad (o pago) esperado para el jugador $i$ cuando escoge la estrategia pura $\sigma_i \in \Delta S_i$ y su oponente juega la estrategia mixta $\sigma_{-i} = \Delta S_{-i}$ es
+        La utilidad (o pago) esperado para el jugador $i$ cuando escoge la estrategia pura $\sigma_i \in \Delta S_i$ y su oponente juega la estrategia mixta $\sigma_{j} = \Delta S_{j}$ es
         \begin{align*}
-            u_i(\sigma_i, \sigma_{-i}) &= \sum_{s_{i}} \sigma_{i}(s_{i})u_i(s_i,\sigma_{-i}) \\
-            u_i(\sigma_i, \sigma_{-i}) &= \sum_{s_{i}} \sigma_i(s_i)\Bigg ( \sum_{s_{-i}} \sigma_{-i}(s_{-i})u_i(s_i,s_{-i}) \Bigg )
+            u_i(\sigma_i, \sigma_{j}) &= \sum_{s_{i}} \sigma_{i}(s_{i})u_i(s_i,\sigma_{j}) \\
+            u_i(\sigma_i, \sigma_{j}) &= \sum_{s_{i}} \sigma_i(s_i)\Bigg ( \sum_{s_{j}} \sigma_{j}(s_{j})u_i(s_i,s_{j}) \Bigg )
         \end{align*} 
     \end{defi}
 \end{mybox}
@@ -1386,7 +1386,7 @@ u_c(\sigma_f, \sigma_c) =%
 
 \begin{exbox}{Ejemplos de estrategias mixtas}
 
-Encontrar el equilibrio de estrategias mixtas (es decir, el perfil de estrategias $\sigma^*$ para cada jugador) así como los pagos (es decir, la utilidad $u_i(\sigma_i^*,\sigma_{-i}^*)$) para los siguientes juegos:
+Encontrar el equilibrio de estrategias mixtas (es decir, el perfil de estrategias $\sigma^*$ para cada jugador) así como los pagos (es decir, la utilidad $u_i(\sigma_i^*,\sigma_{j}^*)$) para los siguientes juegos:
 
 \textbf{Ejercicio 1.1}\\
 \rule[15pt]{2.5cm}{1pt}
