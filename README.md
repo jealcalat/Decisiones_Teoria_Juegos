@@ -72,3 +72,12 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
   - 19 de enero. *Repaso de matemáticas necesarias*. [Zoom](https://iteso.zoom.us/rec/share/4fPTcTIiIkfroaTJXNjMrda86l6UOKnj_d8DkMs1PC6nMGulxVuQjxsng7fBh1Wq.bQ4OqX-wbSTFD2r6?startTime=1642636844000)
   - 24 de enero. *Teoría de utilidad, funciones de utilidad*. [YT](https://youtu.be/iDQsm-UXDjk)
   - 26 de enero. *Teoría de utilidad, decisiones bajo incertidumbre, utilidad esperada*. [YT](https://youtu.be/zlnxZpKQtZA)
+
+---
+
+## *Tareas*
+
+Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, las que lleven `b` son en grupos de 3. Ambas tendrán su respectiva entrada de CANVAS para subirse. Cada una vale 5 puntos, por lo que la suma de ambas es 10.
+
+- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 9 de febrero. [Solución]()
+- Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
