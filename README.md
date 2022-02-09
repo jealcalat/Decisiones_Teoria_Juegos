@@ -81,5 +81,5 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
 
 Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, las que lleven `b` son en grupos de 3. Ambas tendrán su respectiva entrada de CANVAS para subirse. Cada una vale 5 puntos, por lo que la suma de ambas es 10.
 
-- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 9 de febrero. [Solución]()
+- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución]()
 - Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
