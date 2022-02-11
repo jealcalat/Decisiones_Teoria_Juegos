@@ -73,7 +73,8 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
   - 24 de enero. *Teoría de utilidad, funciones de utilidad*. [YT](https://youtu.be/iDQsm-UXDjk)
   - 26 de enero. *Teoría de utilidad, decisiones bajo incertidumbre, utilidad esperada*. [YT](https://youtu.be/zlnxZpKQtZA)
   - 31 de enero. *Juegos estáticos con información completa. Introducción*. [YT](https://youtu.be/cR2iN1-MRfQ)
-  - 02 de febrero. *Juegos estáticos con información completa. Definiciones, ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
+  - 02 de febrero. *Juegos estáticos con información completa. Continuación de EN, ENm y ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
+  - 09 de febrero.  [YT](https://youtu.be/50SQWpUPZqA)
 
 ---
 
