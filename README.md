@@ -84,3 +84,6 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 
 - [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución]()
 - Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
+
+## Examen 1
+- [`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
