@@ -65,7 +65,7 @@ Las notas del curso fueron compuestas en LaTeX, pero se provee aquí solo el PDF
 
 Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las clases y videograbaré el escritorio, de tal forma que la clase esté disponible.
 
-### **Unidad 1** - Teoría de utilidad y Juegos estáticos con información completa
+### **Unidad 1** - = 9.562Teoría de utilidad y Juegos estáticos con información completa
 
 - [`Unidad 1`](Unidad_1/main.pdf):
   - 18 de enero. Asuntos administrativos: presentación, horarios, salón, evaluación e introducción al curso.

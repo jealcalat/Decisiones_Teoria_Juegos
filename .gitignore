@@ -12,6 +12,7 @@
 *.cb
 *.cb2
 .*.lb
+*.tex
 
 # otros
 .Unidad*
