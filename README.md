@@ -65,7 +65,7 @@ Las notas del curso fueron compuestas en LaTeX, pero se provee aquí solo el PDF
 
 Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las clases y videograbaré el escritorio, de tal forma que la clase esté disponible.
 
-### **Unidad 1** - Teoría de utilidad y Juegos estáticos con información completa
+### **Unidad 1** - = 9.562Teoría de utilidad y Juegos estáticos con información completa
 
 - [`Unidad 1`](Unidad_1/main.pdf):
   - 18 de enero. Asuntos administrativos: presentación, horarios, salón, evaluación e introducción al curso.
@@ -73,7 +73,8 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
   - 24 de enero. *Teoría de utilidad, funciones de utilidad*. [YT](https://youtu.be/iDQsm-UXDjk)
   - 26 de enero. *Teoría de utilidad, decisiones bajo incertidumbre, utilidad esperada*. [YT](https://youtu.be/zlnxZpKQtZA)
   - 31 de enero. *Juegos estáticos con información completa. Introducción*. [YT](https://youtu.be/cR2iN1-MRfQ)
-  - 02 de febrero. *Juegos estáticos con información completa. Definiciones, ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
+  - 02 de febrero. *Juegos estáticos con información completa. Continuación de EN, ENm y ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
+  - 09 de febrero.  [YT](https://youtu.be/50SQWpUPZqA)
 
 ---
 
@@ -81,5 +82,8 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
 
 Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, las que lleven `b` son en grupos de 3. Ambas tendrán su respectiva entrada de CANVAS para subirse. Cada una vale 5 puntos, por lo que la suma de ambas es 10.
 
-- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 9 de febrero. [Solución]()
+- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución]()
 - Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
+
+## Examen 1
+- [`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
