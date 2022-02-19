@@ -75,15 +75,26 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
   - 31 de enero. *Juegos estáticos con información completa. Introducción*. [YT](https://youtu.be/cR2iN1-MRfQ)
   - 02 de febrero. *Juegos estáticos con información completa. Continuación de EN, ENm y ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
   - 09 de febrero.  [YT](https://youtu.be/50SQWpUPZqA)
+- [`Unidad 2`](Unidad_2/main.pdf)
 
 ---
 
 ## *Tareas*
 
+### Unidad 1
+
 Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, las que lleven `b` son en grupos de 3. Ambas tendrán su respectiva entrada de CANVAS para subirse. Cada una vale 5 puntos, por lo que la suma de ambas es 10.
 
-- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución]()
+- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución](tareas/tarea1a_solucion.pdf)
 - Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
+
+### Unidad 2
+
+- [`Tarea 2a`]()
+- [`Tarea 2b`](tareas/tarea2b.md)
+
+## Exámenes
 
 ## Examen 1
 - [`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
+
