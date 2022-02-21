@@ -49,7 +49,11 @@ Por lo tanto, mi tarea principal como profesor es formar *universitarios*, más 
 
 ## Guía de estudio
 
-La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf)
+La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf).
+
+
+Algunas referencias en [`este link`](Guia/../Guía/referencias.md).
+
 
 ---
 
@@ -65,7 +69,11 @@ Las notas del curso fueron compuestas en LaTeX, pero se provee aquí solo el PDF
 
 Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las clases y videograbaré el escritorio, de tal forma que la clase esté disponible.
 
-### **Unidad 1** - = 9.562Teoría de utilidad y Juegos estáticos con información completa
+
+### **Unidad 1** 
+Teoría de utilidad y Juegos estáticos con información completa
+
+
 
 - [`Unidad 1`](Unidad_1/main.pdf):
   - 18 de enero. Asuntos administrativos: presentación, horarios, salón, evaluación e introducción al curso.
@@ -74,7 +82,11 @@ Una vez que el curso sea presencial, usaré pizarra electrónica para dictar las
   - 26 de enero. *Teoría de utilidad, decisiones bajo incertidumbre, utilidad esperada*. [YT](https://youtu.be/zlnxZpKQtZA)
   - 31 de enero. *Juegos estáticos con información completa. Introducción*. [YT](https://youtu.be/cR2iN1-MRfQ)
   - 02 de febrero. *Juegos estáticos con información completa. Continuación de EN, ENm y ejemplos*. [YT](https://youtu.be/21Sh5C_TDQQ)
-  - 09 de febrero.  [YT](https://youtu.be/50SQWpUPZqA)
+    - Lectura sugerida: [`Qué es un equilibrio de Nash`]( https://www.ams.org/journals/notices/201605/rnoti-p526.pdf) por Rajiv Sethi y Jörgen Weibull.
+  - 09 de febrero. [YT](https://youtu.be/50SQWpUPZqA)
+
+## **Unidad 2**
+Juegos dinámicos/secuenciales con información completa (perfecta e imperfecta)
 - [`Unidad 2`](Unidad_2/main.pdf)
 
 ---
@@ -96,5 +108,5 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 ## Exámenes
 
 ## Examen 1
-- [`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
+- [`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución](Unidad_1/sol_ex1.pdf)
 

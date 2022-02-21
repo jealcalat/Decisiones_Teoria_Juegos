@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1645054861 "/home/mrrobot/Documentos/GitHub/Decisiones_Teoria_Juegos/Unidad_2/main.tex" "main.pdf" "main" 1645054868
-  "/home/mrrobot/Documentos/GitHub/Decisiones_Teoria_Juegos/Unidad_2/main.tex" 1645054863 82835 5f0aaf51e5889cef4939ee69f75ec96b ""
+["pdflatex"] 1645475162 "/home/mrrobot/Documentos/GitHub/Decisiones_Teoria_Juegos/Unidad_2/main.tex" "main.pdf" "main" 1645475171
+  "/home/mrrobot/Documentos/GitHub/Decisiones_Teoria_Juegos/Unidad_2/main.tex" 1645475152 82835 5f0aaf51e5889cef4939ee69f75ec96b ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1640600964 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1640600964 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1640600964 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -334,17 +334,17 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1640600964 39911 2da6c67557ec033436fe5418a70a8a61 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1642045154 4245775 05c8d9f91b0a32c19054846b73e457ec ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1642045139 2920105 381c23199f753617b2df44901bcb19d9 ""
-  "bank_run.aux" 1645054866 1055 9c6aabc59426c5cffa4cd917c211571e "pdflatex"
+  "bank_run.aux" 1645475168 1055 9c6aabc59426c5cffa4cd917c211571e "pdflatex"
   "bank_run.tex" 1645075512 6370 051c247ec613d1c30dfe89478066c7ad ""
-  "bank_run_sub.aux" 1645054866 1059 7fb890f3b01356f1a520d049bb2b0820 "pdflatex"
+  "bank_run_sub.aux" 1645475168 1059 7fb890f3b01356f1a520d049bb2b0820 "pdflatex"
   "bank_run_sub.tex" 1645075512 2867 2dc8f800b4faeeb8bbb99185005e2532 ""
   "dtj_notas.sty" 1645075512 5224 25822de096aae44ce1fad65c9f3a610d ""
   "figs/arbol_cournot.pdf" 1645075512 12045 261c74d2f3c4ead9f7ebc7d81831b81c ""
   "figs/bergaining_game.png" 1645075512 21059 c7dc4f1d1b8c92673ab2674a91fd8f42 ""
   "logo_ITESO.png" 1645075512 9632 be58a587849bc4e54a0efe5ffaadc5b2 ""
-  "main.aux" 1645054868 18527 0deead41de16a165ddb77793b588450f "pdflatex"
-  "main.out" 1645054862 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "main.tex" 1645054863 82835 5f0aaf51e5889cef4939ee69f75ec96b ""
+  "main.aux" 1645475170 18527 0deead41de16a165ddb77793b588450f "pdflatex"
+  "main.out" 1645475164 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "main.tex" 1645475152 82835 5f0aaf51e5889cef4939ee69f75ec96b ""
   "sgamex.sty" 1645075512 5527 dceea0226fd436270f4719fcb2e91f51 ""
   (generated)
   "bank_run.aux"

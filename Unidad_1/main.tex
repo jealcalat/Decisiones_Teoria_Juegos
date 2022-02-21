@@ -1171,13 +1171,37 @@ Ahora, en estrategias mixtas, cada jugador evalúa la utilidad de una estrategia
         La utilidad cuando ambos juegas estrategias mixtas es:
         
         \[ u_i(\sigma_i, \sigma_{j}) = \sum_{s_{i}} \sigma_{i}(s_i)u_i(s_i,\sigma_{j}) \]
+
         \label{def:def_mix_util}
     \end{defi}
 \end{mybox}
 
-Notar que en la definición \ref{def:def_mix_util}, en el primer caso la utilidad del jugador $i$ se compara \textit{dejando fija} la estrategia mixta del jugador $j$. Se compara la utilidad de una estrategia pura vs una estrategia mixta. Ahora, si el jugador $j$ juega una estrategia mixta, entonces el jugador $i$ enfrenta incertidumbre en sus decisiones. Es decir, si elige una opción versus otra, enfrenta diferentes loterías, por lo que su utilidad es en realidad una utilidad esperada $u_i(s_i, \sigma_{j}) = UE_i(s_i, \sigma_{j})$. 
+Notar que en la definición \ref{def:def_mix_util}, en el primer caso la utilidad del jugador $i$ se compara \textit{dejando fija} la estrategia mixta del jugador $j$. Se compara la utilidad de una estrategia pura vs una estrategia mixta. Ahora, si el jugador $j$ juega una estrategia mixta, entonces el jugador $i$ enfrenta incertidumbre en sus decisiones. Es decir, si elige una opción versus otra, enfrenta diferentes loterías, por lo que su utilidad es en realidad una utilidad esperada $u_i(s_i, \sigma_{j}) = UE_i(s_i, \sigma_{j})$. Básicamente, es una \textit{expectación} bajo la distribución de $ j $:
 
-En el segundo caso, cuando ambos juegan estrategias mixtas, la utilidad del jugador $i$ se computa \textit{a través} de las estrategias mixtas del jugador $j$. Sigue siendo una utilidad esperada. Notar que $u_i(s_i,\sigma_{j})$ en la segunda ecuación se computa usando la primera ecuación.
+\[
+    UE_i(s_i, \sigma_{j}) = \mathbf{E}[u(s_i)]_{\sigma_j(s_j)}
+\]
+
+\begin{table}[H]
+    \centering
+    \begin{game}{2}{2}[JFila ($i$)][JCol ($j$)]
+            &  $s_{j1}$    & $s_{j2}$  \\
+        $s_{i1}$   & $u_i(s_{i1}, s_{j1}), u_j(s_{i1}, s_{j1})$  & $u_i(s_{i1}, s_{j2}), u_j(s_{i1}, s_{j2})$\\
+        $s_{i2}$   & $u_i(s_{i2}, s_{j1}), u_j(s_{i2}, s_{j2})$  & $u_i(s_{i2}, s_{j2}), u_j(s_{i2}, s_{j2})$
+    \end{game}
+    \caption{}
+    \label{tbl:tbl_acomodo}
+\end{table}
+
+Suponer que ambos jugador solo tienen dos estrategias, como en la tabla \ref{tbl:tbl_acomodo} y que $ \sigma_i = (p, 1-p)\, \sigma_j = (q, 1-q) $, la utilidad en estrategias mixtas para el jugador $ i $, $u_i(\sigma_i, \sigma_{j}) $, es 
+
+\begin{align*}
+    u_i(\sigma_i, \sigma_{j}) &=   p UE_i(s_{i1}, \sigma_{j}) + (1-p)UE_i(s_{i2}, \sigma_{j}) \\ 
+    & \text{expandiendo para } j \\
+    &=p \left [q u_i(s_{i1},s_{j1}) + (1-q)u_i(s_{i1}, s_{j2}) \right ] + (1-p) \left [q u_i(s_{i2},s_{j1}) + (1-q)u_i(s_{i2}, s_{j2}) \right]
+\end{align*}
+
+% En el segundo caso, cuando ambos juegan estrategias mixtas, la utilidad del jugador $i$ se computa \textit{a través} de las estrategias mixtas del jugador $j$. Sigue siendo una utilidad esperada. Notar que $u_i(s_i,\sigma_{j})$ en la segunda ecuación se computa usando la primera ecuación.
 
 Ahora definimos un EN para estrategias mixtas.
 
@@ -1295,7 +1319,7 @@ Ahora ya estamos listos para calcular las utilidades esperadas para cada jugador
         u_{J1}(B, \sigma_{J2}) &= \frac{1}{2}(-2) + \frac{1}{2}2 = -1 + 1 = 0
     \end{align*}
     
-    Para calcular $u_{J1}(\sigma_{J1}, \sigma_{J2})$ necesitamos ahora la utilidad esperada \textit{bajo} la estrategia mixta de J1, que requiere multiplicar las utilidades $u_{J1}(A, \sigma_{J2})$ y $u_{J1}(B, \sigma_{J2})$ por el vector de estrategias de J1 $\sigma_{J1}=(1/2, 1/2)$.
+    Para calcular $u_{J1}(\sigma_{J1}, \sigma_{J2})$ necesitamos ahora la utilidad esperada \    \label{tbl:tbl_acomodo}textit{bajo} la estrategia mixta de J1, que requiere multiplicar las utilidades $u_{J1}(A, \sigma_{J2})$ y $u_{J1}(B, \sigma_{J2})$ por el vector de estrategias de J1 $\sigma_{J1}=(1/2, 1/2)$.
     \vspace{-0.6cm}
     
     \begin{align*}
