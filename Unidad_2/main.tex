@@ -1249,7 +1249,7 @@ Por lo tanto, $u=1+\delta u$, lo que significa
 el la cantidad esperada de etapas antes de que el juego termine. Esto a su vez implica que
 
 \[ 
-    u_i = u_i^{(1)} + \delta u_i^{(2)} + \delta^2 u_i^{(3)} + \dots + \delta^{t-1} u_i^{(t)} = \sum_{t=1}^{T}\delta u_i^{(t)} = \frac{u_i}{1-\delta}\quad \text{ para $T = \infty$}
+    u_i = u_i^{(1)} + \delta u_i^{(2)} + \delta^2 u_i^{(3)} + \dots + \delta^{t-1} u_i^{(t)} = \sum_{t=1}^{T}\delta^{t-1} u_i^{(t)} = \frac{u_i}{1-\delta}\quad \text{ para $T = \infty$}
 \]
 
 Que es la \textit{suma descontada de ganancia}, una utilidad esperada.
