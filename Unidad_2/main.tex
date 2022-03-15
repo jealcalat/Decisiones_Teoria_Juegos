@@ -1218,7 +1218,7 @@ Sea $\delta \in [0, 1]$ el factor de descuento. Si se invierte una unidad (e.g.,
 El monto por una inversión en un periodo $t$, en términos nominales, es inverso al monto en ese mismo periodo si el dinero no es invertido. En dos años, a una tasa de interés anual de $r$, una inversión $x_0$ valdrá $x_0(1+r)^2$. Por otro lado, si no invierto, una cantidad $v$ tendrá un valor presente en 2 años de $v=\frac{x_2}{(1+r)^2}$, precisamente porque $v$ es la cantidad que tendría que invertir \textit{ahora} para obtener $x_2$, porque $x_2=v(1+r)^2$.
 }. 
 
-En $T$ períodos sucesivos, el factor de descuento multiplica a a una cantidad en cada etapa $t$ que dure el juego. Si $u_i^{(t)}$ es la utilidad del jugador $i$ en la etapa $t$, el valor presente de una secuencia de ganancias será
+En $T$ períodos sucesivos, el factor de descuento multiplica a una cantidad en cada etapa $t$ que dure el juego. Si $u_i^{(t)}$ es la utilidad del jugador $i$ en la etapa $t$, el valor presente de una secuencia de ganancias será
 
 \[ 
     u_i = u_i^{(1)} + \delta u_i^{(2)} + \delta^2 u_i^{(3)} + \dots + \delta^{t-1} u_i^{(t)} = \sum_{t=1}^{T}\delta^{t-1} u_i^{(t)}
@@ -1238,7 +1238,7 @@ Es fácil probar esto. Sea $ \delta $ la probabilidad de $ X = 1 $ y $1-\delta$ 
 
 Y dado que cada ensayo es independiente, la probabilidad de que el juego dure 4 etapas es $ \delta^{t-1}\times(1-\delta) $
 
-En una distribución geométrica, la cantidad de etapas esperadas que dura un juego es $\frac{1}{1-\delta}$. Para probar que una distribución geométrica tiene una esperanza $ \mathbb{E}[X] $ debemos encontrar el primer momento de la distribución geométrica usando su función generadora de momentos, $ M_X(k) = \mathbb{E}[e^{tX}]$. El primer momento es la media o esperanza.
+En una distribución geométrica, la cantidad de etapas esperadas que dura un juego es $\frac{1}{1-\delta}$. Para probar que una distribución geométrica tiene una esperanza $ \mathbb{E}[X] = \frac{1}{1-\delta} $ debemos encontrar el primer momento de la distribución geométrica usando su función generadora de momentos, $ M_X(k) = \mathbb{E}[e^{kX}]$. El primer momento es la media o esperanza.
 
 \begin{align*}
 	\mathbb{E}[X]&=\sum_{t=1}^{\infty}t(1-\delta)\delta^{t-1} \\
