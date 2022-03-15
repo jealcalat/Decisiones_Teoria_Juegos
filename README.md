@@ -114,7 +114,7 @@ Juegos dinámicos/secuenciales con información completa (perfecta e imperfecta)
     - Habrá segunda versión de esta clase, dado que no se observa nada.
   - 02 de marzo. *Pánico bancario y ejemplo de IBM OS/2.* [YT](https://youtu.be/h9sE0I4emFM)
   - 07 de marzo
-  - 09 de marzo
+  - 09 de marzo. *Juegos repetidos* [YT](https://youtu.be/rJMZpM3MS6o)
 
 ---
 
