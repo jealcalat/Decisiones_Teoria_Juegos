@@ -5,7 +5,7 @@
 
 % \newcommand{\linebullet}[2]{$\bullet_{#1}${\hspace{-5.5pt}\rule[3.5pt]{15pt}{1pt}}$\bullet_{#2}$} 
 \newcommand{\linebullet}[2]{$\prescript{}{#1}{\bullet}${\rule[3.5pt]{15pt}{1pt}}$\bullet_{\hspace{2pt}#2}$}
-
+\newcommand\tline[2]{\underset{\text{#1}}{\text{\underline{\hspace{#2}}}}}
 
 \title{Notas de Unidad 2\\ \textbf{Juegos dinámicos con información completa}\\ \normalsize Decisiones y Teoría de Juegos}
 \author{Emmanuel Alcalá}
@@ -1230,7 +1230,25 @@ Si el juego durará $T$ periodos, podemos pensar en la cantidad de dinero como u
     p(t)=\delta^{t-1}(1-\delta)
 \]
 
-En una distribución geométrica, la cantidad de etapas esperadas que dura un juego es $\frac{1}{1-\delta}$. Esta misma expresión se puede obtener de la siguiente forma: supongamos que un jugador puede obtener una unidad en cada periodo en un número infinito de periodos. La suma de sus ganancias descontadas es
+Es fácil probar esto. Sea $ \delta $ la probabilidad de $ X = 1 $ y $1-\delta$ la probabilidad de $ X = 0 $. Dado que cada etapa es esencialmente un ensayo de Bernoulli, si tenemos 4 etapas, tenemos 
+
+\[
+	\underset{\text{etapa 1}}{\delta} \times \underset{\text{etapa 2}}{\delta}\times \underset{\text{etapa } t - 1}{\delta}\times \underset{\text{etapa } t}{(1-\delta)}
+\]
+
+Y dado que cada ensayo es independiente, la probabilidad de que el juego dure 4 etapas es $ \delta^{t-1}\times(1-\delta) $
+
+En una distribución geométrica, la cantidad de etapas esperadas que dura un juego es $\frac{1}{1-\delta}$. Para probar que una distribución geométrica tiene una esperanza $ \mathbb{E}[X] $ debemos encontrar el primer momento de la distribución geométrica usando su función generadora de momentos, $ M_X(k) = \mathbb{E}[e^{tX}]$. El primer momento es la media o esperanza.
+
+\begin{align*}
+	\mathbb{E}[X]&=\sum_{t=1}^{\infty}t(1-\delta)\delta^{t-1} \\
+	&=(1-\delta)\sum_{t=1}^{\infty}t\delta^{t-1} \\
+	&=(1-\delta)\left(-\frac{d}{d\delta}\sum_{t=1}^{\infty}\delta^t\right) \\
+	&=(1-\delta)\left(-\frac{d}{d\delta}\frac{\delta}{(1-\delta)}\right) \\
+	&=(1-\delta)\left(\frac{d}{d\delta}\left(1-\frac{1}{(1-\delta)}\right)\right)=(1-\delta)\left(\frac{1}{(1-\delta)^2}\right)=\frac{1}{1-\delta}
+\end{align*}
+
+Esta misma expresión se puede obtener de la siguiente forma: supongamos que un jugador puede obtener una unidad en cada periodo en un número infinito de periodos. La suma de sus ganancias descontadas es
 
 \[ 
 u = 1 + 1\delta + 1\delta^2 + \dots = 1 + \delta + \delta^2 + \dots
