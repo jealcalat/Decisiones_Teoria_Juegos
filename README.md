@@ -38,13 +38,15 @@ Contenidos:
 
 ---
 
+**Ver el modo de evaluación en la siguiente liga**
+
+[`Actitud, motivación y evaluación`](motivation_evaluation.md)
 
 ## Guía de estudio
 
-La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf).
+La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf). Contiene la bibliografía recomendad por unidad.
 
-
-Algunas referencias en [`este link`](Guia/../Guía/referencias.md).
+Algunas referencias extras se pueden ver en [`este link`](Guia/../Guía/referencias.md).
 
 ---
 

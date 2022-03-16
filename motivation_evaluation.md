@@ -25,6 +25,9 @@ Por lo tanto, mi tarea principal como profesor es formar *universitarios*, más 
 </p>
 
 - El curso estará compuesto de 4 unidades, y un examen por unidad. Consultar la Guía (siguiente apartado) y en CANVAS para más información sobre el programa.
-- Respuestas a exámenes o tareas *excepcionales* podrán ser acreedores a puntos extras hasta por un 0.05 de la calificación.
+  - Cada examen tendrá un valor de 15 puntos (4x15 = 60).
+  - Las tareas se dividirán en a y b. Las tareas a son resolución de ejercicios, y las tareas b son una investigación de aplicación. La suma de ambas dará un total de 10 puntos (4 x 10 = 40).
+  - La suma de ambos dará el total de 100.
+- Respuestas a exámenes o tareas *excepcionales* podrán ser acreedores a puntos extras hasta por un 0.05 de la calificación (que se puede usar en cualquier tarea o examen en la que les haya ido mal).
 
 ---
