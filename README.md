@@ -22,13 +22,13 @@ Contenidos:
 </p>
 
 - [Decisiones y Teoria de Juegos](#decisiones-y-teoria-de-juegos)
-  - [Aprender para trascender](#aprender-para-trascender)
-  - [Evaluación](#evaluación)
   - [Guía de estudio](#guía-de-estudio)
-  - [Estilo LaTeX](#estilo-latex)
   - [Notas del curso](#notas-del-curso)
     - [**Unidad 1**](#unidad-1)
     - [**Unidad 2**](#unidad-2)
+    - [**Unidad 3**](#unidad-3)
+    - [**Unidad 4**](#unidad-4)
+  - [Estilo LaTeX](#estilo-latex)
   - [Tareas](#tareas)
     - [Unidad 1](#unidad-1-1)
     - [Unidad 2](#unidad-2-1)
@@ -38,33 +38,6 @@ Contenidos:
 
 ---
 
-## Aprender para trascender
-
-Normalmente, los estudiantes se preguntan *¿para qué me sirve esto?*, especialmente si una materia es demandante. Al respecto, mi postura acerca de la educación es la misma que la expresada en las **Orientaciones fundamentales del ITESO**:
-
-<p align="center">
-  <img width="380" src="iteso_mision.png" />
-</p>
-
-En específico
-
-> ... el `ITESO` no se contenta con ser un simple conjunto de carreras, ni se interesa solamente en preparar técnicos o profesionales, por cualificados que sean. Por el contrario, el `ITESO` intenta ser ante todo una universidad
-
-Por lo tanto, mi tarea principal como profesor es formar *universitarios*, más que técnicos. No obstante, en este curso se procurará mantener un saludable balance entre las generalidades teóricas más abstractas y ejemplos prácticos, teniendo en cuenta que entre más concreto y específico es un ejemplo, es menos general y, en ese sentido, su rango de aplicación reducido.
-
----
-
-## Evaluación
-
-- De acuerdo con el [`Reglamento de evaluación para alumnos de licenciatura de ITESO`](https://www.iteso.mx/documents/2624322/0/Reglamento+de+evaluaciones+acad%C3%A9micas+para+los+estudiantes+de+licenciatura.pdf/faf8a50e-4411-4f8c-adfd-6097ef8f3881), deben acreditar por lo menos el 80 % de asistencia.
-
-<p align="center">
-  <img width="360" src="evaluacion80.png" />
-</p>
-
-- El curso estará compuesto de 4 unidades, y un examen por unidad. Consultar la Guía (siguiente apartado) y en CANVAS para más información sobre el programa.
-- Respuestas a exámenes o tareas *excepcionales* podrán ser acreedores a puntos extras hasta por un 0.05 de la calificación.
-
 
 ## Guía de estudio
 
@@ -72,13 +45,6 @@ La guía de estudio en PDF se encuentra en [`Guía`](Guía/GuiaAprendizajeTJ.pdf
 
 
 Algunas referencias en [`este link`](Guia/../Guía/referencias.md).
-
-
----
-
-## Estilo LaTeX
-
-Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentra en [`MWE`](MWE), con el archivo `tex` en [`tex`](MWE/MWE.tex); se verá [`así`](MWE/MWE.pdf). Puedes comprimirla en formato `zip` y cargarla a Overleaf.
 
 ---
 
@@ -116,10 +82,26 @@ Juegos dinámicos/secuenciales con información completa (perfecta e imperfecta)
   - 07 de marzo
   - 09 de marzo. *Juegos repetidos* [YT](https://youtu.be/rJMZpM3MS6o)
 
+### **Unidad 3**
+Juegos estáticos con información *incompleta*
+
+- [`Unidad 3`](Unidad_3/main.pdf)
+  - 23 de marzo
+
+### **Unidad 4**
+Juegos *dinámicos* con información *incompleta*
+
+- [`Unidad 4`](Unidad_4/DTJ_unidad4_notas.pdf)
+  - 23 de marzo
+
 ---
 
-## Tareas
+## Estilo LaTeX
 
+Para quienes deseen entregar sus tareas en LaTeX, un ejemplo mínimo se encuentra en [`MWE`](MWE), con el archivo `tex` en [`tex`](MWE/MWE.tex); se verá [`así`](MWE/MWE.pdf). Puedes comprimirla en formato `zip` y cargarla a Overleaf.
+
+
+## Tareas
 
 Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, las que lleven `b` son en grupos de 3. Ambas tendrán su respectiva entrada de CANVAS para subirse. Cada una vale 5 puntos, por lo que la suma de ambas es 10.
 
