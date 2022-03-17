@@ -128,4 +128,4 @@ Los exámenes deben entregarse por CANVAS en su entrada correspondiente. Aquí s
 
 ### Unidad 2
 
-[`Examen 2`](). [Solución]()
+[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución]()
