@@ -88,7 +88,7 @@ Juegos dinámicos/secuenciales con información completa (perfecta e imperfecta)
 Juegos estáticos con información *incompleta*
 
 - [`Unidad 3`](Unidad_3/main.pdf)
-  - 23 de marzo
+  - 30 de marzo. *Juegos estáticos con información incompleta. Definiciones: juegos bayesianos en su forma normal, Equilibrio Bayesiano de Nash.* [YT](https://youtu.be/DGvpAYc8TkI)
 
 ### **Unidad 4**
 Juegos *dinámicos* con información *incompleta*
