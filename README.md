@@ -117,7 +117,7 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 - [`Tarea 2a`](tareas/tarea2a.pdf): entrega para el 21 de marzo 9:00 AM
   - [`Solución`]()
 - [`Tarea 2b`](tareas/tarea2b.md): entrega para el 21 de marzo 9:00 AM
-  - [`Solución`]()
+  - [`Solución`](tareas/tarea2a_solucion.pdf).
 
 ## Exámenes
 
@@ -128,4 +128,4 @@ Los exámenes deben entregarse por CANVAS en su entrada correspondiente. Aquí s
 
 ### Unidad 2
 
-[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución]()
+[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución](Unidad_2/sol_examen2.pdf)
