@@ -149,6 +149,143 @@ En el segundo juego, conceptualizamos a un nuevo jugador Naturaleza que elige co
 Asumimos, además, que $p$ representa una creencia del jugador 1 sobre los tipos del jugador 2. A esto se le conoce como \textit{la asunción a priori común}. Significa que todos los jugadores están de acuerdo en que la Naturaleza escoja con cuerta probabilidad los diferentes tipos de jugadores.
 
 
+\subsection{Acuerdo de Munich (cáp. 10 de Harrington)}
+
+En 1938, la Alemania nazi se había anexado Austria y se creía que Hitler consideraba hacer algo similar con Sudetenland, una región de Checoslovaquia con una alta concentración de alemanes (conocidmos como alemanes Sudeten, un grupo étnico que adoptó ese nombre luego del alza del nacionalismo germánico posterior a la caída del imperio Austro-Húngaro en la primera guerra mundial). Durante la crisis de Sudeten de 1938, provocada por pan-germanistas (la unión de los publos germánicos), fue demandado que la región de Sudetenland fuera anexada a Alemania, lo cuál sucedió con el acuerdo de Munich.
+
+Con la Gran Guerra (luego, Primera Guerra Mundial) reciente en la memoria, el primer ministro de Gran Bretaña, Neville Chamberlain, viajó a Alemania para lograr un acuerdo con Hitler y así poder preservar la paz. El acuerdo de Munich se firmó el 28 de septiembre de 1938, como estrategia de prevención de la guerra: Hitler obtuvo la región de Sudetenland y prometió no avanzar más allá. Chamberlain dio un discurso el 30 de septiembre, famoso e infame a la vez, llamado Paz para nuestros tiempos, y que dice (traducción mía):
+
+``La solución del problema Checo, que ha sido alcanzado ahora, es, en mi opinión, solo el preludio de un acuerdo mayor en el que toda Europa podría alcanzar la paz. Esta mañana tuve otra conversación con el canciller alemán, Herr Hitler, y aquí está el papel que lleva su nombre y el mío... Algunos de ustedes, quizá, ya han escuchado su contenido pero quiero leerlo para ustedes: "... Consideramos nuestro acuerdo firmado anoche y el acuerdo naval Anglo-Germano como un símbolo del deseo de que nuestra gente nunca vayan a otra guerra nuevamente".
+
+Epic fail. En retrospectiva, ¿qué debía hacer Chamberlain? Cuando firmó el acuerdo, Chamberlain estaba indeciso (tenía incertidumbre) respecto a las intenciones de Hitler (no las públicas, sino las intenciones internas). ¿Hitler quería mayor terreno para su gente, proteger a los alemanes étnicos de Sudetenland? En ese caso, habría bastado la concesión de esa región de Checoslovaquia a Alemania para evitar la guerra. Pero si no era eso, ¿Estaba Hitler confeccionando un plan mayor para invadir gran parte de Europa?
+
+Desconocemos las ganancias de Hitler, lo que impide determinar qué le conviene. ¿Cuál sería su utilidad de ir a la guerra respecto a no ir si se le hace la concesión? Y si no se le hace ¿cuál será su utilidad si va a la guerra respecto a no? POr lo tanto, ¿qué debería hacer Chamberlain? En Teoría de Juegos todo se trata sobre poder anticipar qué hará el oponente. Chamberlain, a toda costa, desea evitar la guerra. En el siguiente juego se representa como un juego en forma extensiva.
+
+\begin{figure}[H]
+	\centering
+	\footnotesize{
+		\begin{forest} decision tree,for tree={s sep=25pt}
+				[Chamberlain, plain content
+						[Hitler;\text{Concesión},plain content,elo={yshift=4pt}
+								[{1,$x$};\text{Guerra}]
+								[{3,$x$};\text{NG}]
+						]
+						[Hitler;\text{NC},plain content,elo={yshift=4pt}
+								[{2,$x$};\text{Guerra}]
+								[{4,$x$};\text{NG}]
+						]
+				]
+		\end{forest}}
+	\caption{Juego de Acuerdo de Munich con ganancias desconocidas para Hitler}
+	% \label{fig:fig6}
+\end{figure}
+
+El mejor estado posible para Chamberlain es NC (no conceder Sudetenland), sin embargo, debe evitar aquella opción en donde Hitler tenga más utilidad por ir a la guerra que por no hacerlo. En el caso de hacer una concesión, Hitler podría tener más tiempo para prepararse para la guerra, en cuyo caso, si habrá guerra de cualquier manera, es preferible que Chamberlain vaya a la guerra sin hacer concesiones.
+
+El problema es que las preferencias de Hitler dependen de sus ganancias en cada subjuego que se forma, pero son desconocidas para Chamberlain.
+
+Pongamos dos casos
+
+\begin{figure}[H]
+	\centering
+	\begin{minipage}{.5\textwidth}
+		\footnotesize{
+			\begin{forest} decision tree,for tree={s sep=25pt}
+				[Chamberlain, plain content, alias=izq
+				[Hitler;\text{Concesión},plain content,elo={yshift=4pt}
+					[{1,3};\text{Guerra}]
+					[{3,4};\text{NG}]
+				]
+				[Hitler;\text{NC},plain content,elo={yshift=4pt}
+					[{2,2};\text{Guerra}]
+					[{4,1};\text{NG}]
+				]
+				]
+			\end{forest}}
+		\caption{Hitler amigable}
+	\end{minipage}%
+	\begin{minipage}{.5\textwidth}
+		\footnotesize{
+			\begin{forest} decision tree,for tree={s sep=25pt}
+				[Chamberlain, plain content,alias=der
+				[Hitler;\text{Concesión},plain content,elo={yshift=4pt}
+					[{1,4};\text{Guerra}]
+					[{3,2};\text{NG}]
+				]
+				[Hitler;\text{NC},plain content,elo={yshift=4pt}
+					[{2,3};\text{Guerra}]
+					[{4,1};\text{NG}]
+				]
+				]
+			\end{forest}}
+		\caption{Hitler beligerante}
+	\end{minipage}
+\end{figure}
+
+Dado que en ambos juegos la estrategia dominante de Hitler es ir a la guerra, la mejor decisión de Chamberlain sería no haber concedido Sudetenland. Se trata de un juego con información incompleta. Chamberlain no sabe con qué \textit{tipo} de Hitler tratará.
+
+En este caso, el truco para resolver este juego es convertirlo en un juego con información \textit{imperfecta}.
+
+\begin{figure}[H]
+	\centering
+	\footnotesize{
+		\begin{forest} decision tree,for tree={s sep=25pt}
+			[Naturaleza, plain content
+			[Chamberlain;\text{Amigable, $p=0.6$},plain content,elo={yshift=10pt},alias=izq
+			[Hitler;\text{Concesión},plain content,elo={yshift=4pt}
+				[{1,3};\text{Guerra}]
+				[{3,4};\text{NG}]
+			]
+			[Hitler;\text{NC},plain content,elo={yshift=4pt}
+				[{2,2};\text{Guerra}]
+				[{4,1};\text{NG}]
+			]
+			]
+			[Chamberlain;\text{Beligerante, $p=0.4$}, plain content,elo={yshift=10pt},alias=der
+			[Hitler;\text{Concesión},plain content,elo={yshift=4pt}
+				[{1,4};\text{Guerra}]
+				[{3,2};\text{NG}]
+			]
+			[Hitler;\text{NC},plain content,elo={yshift=4pt}
+				[{2,3};\text{Guerra}]
+				[{4,1};\text{NG}]
+			]
+			]
+			]
+			\draw[dashed,transform canvas={yshift=-6pt}] (izq) to[right=45] (der);
+		\end{forest}
+	}
+
+\end{figure}
+
+Notar que introdujimos a un nuevo jugador, la Naturaleza. En este juego, la Naturaleza (un agente exógeno o externo) determina las ganancias de Hitler.
+
+Este juego comienza con la Naturaleza decidiendo si Hitler es amigable o beligerante. Este movimiento (como en los imperfectos) no es observado por Chamberlain, pero es \textit{observado} por Hitler.
+
+La estrategia de Hitler es sencilla. Operamos por introducción hacia atrás:
+
+Si Hitler es amigable pueden suceder dos cosas: Si Chamberlain concede, NG es mejor; si Chamberlain NC, Guerra es mejor.
+
+Si Hitler es beligerante: Si Chamberlain concede, Guerra, si NC, Guerra.
+
+Por lo tanto, el conjunto de estrategias óptimas para Hitler es $ \{NG, Guerra, Guerra, Guerra\} $.
+
+¿Qué hay de Chamberlain? Dadas las estrategias de Hitler, Chamberlain debe computar sus utilidades como utilidades esperadas.
+
+\[
+	\UE{\text{Chamberlain}}{\text{Conceder}} = \underbrace{0.6 * 3}_{\text{Hitler Amigable, NG}} + \underbrace{0.4 * 1}_{\text{Hitler NA, Guerra}} = 2.2
+\]
+
+
+
+\[
+	\UE{\text{Chamberlain}}{\text{NC}} = \underbrace{0.6 * 2}_{\text{Hitler Amigable, Guerra}} + \underbrace{0.4 * 2}_{\text{Hitler NA, Guerra}} = 2
+\]
+
+Desde esta perspectiva, Chamberlain obtiene más utilidad haciendo concesiones.
+
+¿Cuál debió haber sido la creencia de Chamberlain para escoger NC? Es decir, ¿qué tan bajo debe ser $ p $ para que Chamberlain escogiera NG?
+
 
 \textbf{En resumen:}
 \begin{myitemize}
@@ -968,9 +1105,9 @@ Cuando $\alpha = 1$, $r_A(w) = 0$, por lo que el jugador es neutral al riesgo.
 
 	\begin{align*}
 		s_i(t_i)=\begin{cases}
-			0 & \text{ si } t_i < \hat{t}_i \text{ (holgazanea)}    \\
-			1 & \text{ si } t_i \geq \hat{t}_i \text{ (contribuye)}
-		\end{cases}
+			         0 & \text{ si } t_i < \hat{t}_i \text{ (holgazanea)}    \\
+			         1 & \text{ si } t_i \geq \hat{t}_i \text{ (contribuye)}
+		         \end{cases}
 	\end{align*}
 
 	Ahora podemos derivar la MR del jugador $ i $ para algún valor de  $ \hat{t}_j $.
@@ -1140,80 +1277,80 @@ Cuando $\alpha = 1$, $r_A(w) = 0$, por lo que el jugador es neutral al riesgo.
 
 	\textbf{Ejemplo 2}
 
-Caso general.
+	Caso general.
 
-Considera una industria con dos empresas compitiendo a la Cournot con precios $ p(Q) = 1 - Q $. Las empresas interactúan en información incompleta. La 2 tiene un costo marginal que puede ser $ c_A $ o $ c_B $, la 1 solo tiene $ c_B$. El costo alto ocurre con probabilidad $ \theta $.
+	Considera una industria con dos empresas compitiendo a la Cournot con precios $ p(Q) = 1 - Q $. Las empresas interactúan en información incompleta. La 2 tiene un costo marginal que puede ser $ c_A $ o $ c_B $, la 1 solo tiene $ c_B$. El costo alto ocurre con probabilidad $ \theta $.
 
-Encuentra la mejor función de mejor respuesta para cada empresa, $ q_i^k $ con $ k = \{A, B\} $. Asume que el costo bajo es de 0.
+	Encuentra la mejor función de mejor respuesta para cada empresa, $ q_i^k $ con $ k = \{A, B\} $. Asume que el costo bajo es de 0.
 
-Para la empresa 1
+	Para la empresa 1
 
-\[ q_1^* = \argmax_{q_1 \geq 0}~\theta\biggl([1 - q_1 - q_2^A]q_1 -cq_1\biggr) + (1 - \theta)\biggl([1 - q_1 - q_2^B]q_1 -cq_1\biggr) \]
+	\[ q_1^* = \argmax_{q_1 \geq 0}~\theta\biggl([1 - q_1 - q_2^A]q_1 -cq_1\biggr) + (1 - \theta)\biggl([1 - q_1 - q_2^B]q_1 -cq_1\biggr) \]
 
-Para la empresa 2
+	Para la empresa 2
 
-\begin{align*}
-q_2^{A*} & = \argmax_{ q_1^A\geq 0}~[(1-q_1 - q_2^A)q_2^A - c_Aq_2^A]      \\
-q_2^{B*} & = \argmax_{q_1^B\geq 0 }~[(1-q_1 - q_2^B)q_2^B - c_Bq_2^B]  
-\end{align*}
+	\begin{align*}
+		q_2^{A*} & = \argmax_{ q_1^A\geq 0}~[(1-q_1 - q_2^A)q_2^A - c_Aq_2^A] \\
+		q_2^{B*} & = \argmax_{q_1^B\geq 0 }~[(1-q_1 - q_2^B)q_2^B - c_Bq_2^B]
+	\end{align*}
 
-La mejor respuesta de $ q_1 $ se puede reacomodar. Crece con $(1-c)/2 $ y decrece con la producción de la empresa 2.
+	La mejor respuesta de $ q_1 $ se puede reacomodar. Crece con $(1-c)/2 $ y decrece con la producción de la empresa 2.
 
-Encontrar el ENB, y evaluar cómo cambia la cantidad de $q_2$ con respecto a su costo. 
-
-
-% 	Considera un duopolio de Cournot con información completa. Primero, la naturaleza escoge una cantidad $ a $ que puede ser alta o baja ($ a^A, a^B $).
-
-% 	La empresa 1 hace investigación de mercado para conocer la demanda y observa qué $ a $ sucede. La empresa 2 no observa $ a $. Luego, las empresas simultáneamente seleccionan las cantidades $ q_1 $ y $ q_2 $, y el precio de mercado es determinado por la función
-
-% 	$$ p(Q) = a_k - Q; \text{ con } k = \{A, B\} $$
-
-% 	Asumir, por simplicidad, que producen con costo de 0. Las utilidades son
-
-% 	\begin{align*}
-% 		                       & \text{para la empresa 1}                                            \\
-% 		u_1(q_1, q_2)          & = (x - q_1 - q_2)q_1 \Longrightarrow                                \\
-% 		u_2(q_1, q_2^t)        & = \begin{cases}
-% 			(10 - q_1^B - q_2)q_1^B, \text{ si $t$ = B} \\
-% 			(10 - q_1^A - q_2^A)q_1^A, \text{ si $t$ = A}
-% 		\end{cases}                                        \\
-% 		                       & \text{para la empresa 2}                                            \\
-% 		u_2(q_1, q_2)          & = (x-q_1-q_2)q_2 \Longrightarrow                                    \\
-% 		u_2(q_1^A, q_1^B; q_2) & = \frac{1}{2}(8-q_1^A-q_2)q_1^A + \frac{1}{2}(4 - q_1^B - q_2)q_1^B \\
-% 	\end{align*}
-
-% 	Ahora notar que los tipos ocurren para la empresa 1, dado que es la empresa 1 quien tiene información privada. Si la demanda es alta ($ x = 8 $), el tipo de la empresa 1 es $ q_1^A $, si no es $ q_1^B $.
-
-% 	Obtener el EBN.
-
-% 	\textbf{Sol.}
-
-% 	Las funciones de utilidad quedan como
+	Encontrar el ENB, y evaluar cómo cambia la cantidad de $q_2$ con respecto a su costo.
 
 
-% 	Tenemos que encontrar las soluciones al problema de optimización
+	% 	Considera un duopolio de Cournot con información completa. Primero, la naturaleza escoge una cantidad $ a $ que puede ser alta o baja ($ a^A, a^B $).
 
-% 	\begin{align*}
-% 		q_2^*    & = \argmax_{0\leq q_2 \leq \infty} u_2(q_1^A, q_1^B; q_2) \\
-% 		q_1^{A*} & = \argmax_{0\leq q_1^A \leq \infty} u_2(q_1^A, q_2)      \\
-% 		q_1^{B*} & = \argmax_{0\leq q_1^B \leq \infty} u_2(q_1^B, q_2)
-% 	\end{align*}
+	% 	La empresa 1 hace investigación de mercado para conocer la demanda y observa qué $ a $ sucede. La empresa 2 no observa $ a $. Luego, las empresas simultáneamente seleccionan las cantidades $ q_1 $ y $ q_2 $, y el precio de mercado es determinado por la función
 
-% 	Que corresponden a las CPO
+	% 	$$ p(Q) = a_k - Q; \text{ con } k = \{A, B\} $$
 
-% 	$$ \frac{\partial u_2}{\partial q_2}=0,\quad \frac{\partial u_1^B}{\partial q_1^B},\quad \text{y } \frac{\partial u_1^A}{\partial q_1^A} $$
+	% 	Asumir, por simplicidad, que producen con costo de 0. Las utilidades son
 
-% 	Estas soluciones son
+	% 	\begin{align*}
+	% 		                       & \text{para la empresa 1}                                            \\
+	% 		u_1(q_1, q_2)          & = (x - q_1 - q_2)q_1 \Longrightarrow                                \\
+	% 		u_2(q_1, q_2^t)        & = \begin{cases}
+	% 			(10 - q_1^B - q_2)q_1^B, \text{ si $t$ = B} \\
+	% 			(10 - q_1^A - q_2^A)q_1^A, \text{ si $t$ = A}
+	% 		\end{cases}                                        \\
+	% 		                       & \text{para la empresa 2}                                            \\
+	% 		u_2(q_1, q_2)          & = (x-q_1-q_2)q_2 \Longrightarrow                                    \\
+	% 		u_2(q_1^A, q_1^B; q_2) & = \frac{1}{2}(8-q_1^A-q_2)q_1^A + \frac{1}{2}(4 - q_1^B - q_2)q_1^B \\
+	% 	\end{align*}
 
-% 	\begin{align*}
-% 		                                            & \text{para la empresa 2}                                         \\
-% 		6 - 2q_2 -\frac{q_1^B}{2} - \frac{q_1^A}{2} & = 0 \Longrightarrow q_2^* = 3 -\frac{q_1^B}{4} - \frac{q_1^A}{4} \\
-% 		                                            & \text{para la empresa 1}                                         \\
-% 		8 - 2q_1^B - q_2                            & = 0 \Longrightarrow q_1^{B*} = 4 - \frac{q_2}{2}                 \\
-% 		4 - 2q_1^A - q_2                            & = 0 \Longrightarrow q_1^{A*} = 2 - \frac{q_2}{2}
-% 	\end{align*}
+	% 	Ahora notar que los tipos ocurren para la empresa 1, dado que es la empresa 1 quien tiene información privada. Si la demanda es alta ($ x = 8 $), el tipo de la empresa 1 es $ q_1^A $, si no es $ q_1^B $.
 
-% 	Resolviendo (sustituyendo $ q_1^{A*}, q_1^{B*} $ para $ q_2^* $) encontramos $ q_2^* = 2, q_1^{A*} = 3, q_1^{B*}=1 $.
+	% 	Obtener el EBN.
+
+	% 	\textbf{Sol.}
+
+	% 	Las funciones de utilidad quedan como
+
+
+	% 	Tenemos que encontrar las soluciones al problema de optimización
+
+	% 	\begin{align*}
+	% 		q_2^*    & = \argmax_{0\leq q_2 \leq \infty} u_2(q_1^A, q_1^B; q_2) \\
+	% 		q_1^{A*} & = \argmax_{0\leq q_1^A \leq \infty} u_2(q_1^A, q_2)      \\
+	% 		q_1^{B*} & = \argmax_{0\leq q_1^B \leq \infty} u_2(q_1^B, q_2)
+	% 	\end{align*}
+
+	% 	Que corresponden a las CPO
+
+	% 	$$ \frac{\partial u_2}{\partial q_2}=0,\quad \frac{\partial u_1^B}{\partial q_1^B},\quad \text{y } \frac{\partial u_1^A}{\partial q_1^A} $$
+
+	% 	Estas soluciones son
+
+	% 	\begin{align*}
+	% 		                                            & \text{para la empresa 2}                                         \\
+	% 		6 - 2q_2 -\frac{q_1^B}{2} - \frac{q_1^A}{2} & = 0 \Longrightarrow q_2^* = 3 -\frac{q_1^B}{4} - \frac{q_1^A}{4} \\
+	% 		                                            & \text{para la empresa 1}                                         \\
+	% 		8 - 2q_1^B - q_2                            & = 0 \Longrightarrow q_1^{B*} = 4 - \frac{q_2}{2}                 \\
+	% 		4 - 2q_1^A - q_2                            & = 0 \Longrightarrow q_1^{A*} = 2 - \frac{q_2}{2}
+	% 	\end{align*}
+
+	% 	Resolviendo (sustituyendo $ q_1^{A*}, q_1^{B*} $ para $ q_2^* $) encontramos $ q_2^* = 2, q_1^{A*} = 3, q_1^{B*}=1 $.
 
 \end{exbox}
 
