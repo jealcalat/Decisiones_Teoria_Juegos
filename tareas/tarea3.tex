@@ -1,0 +1,129 @@
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+% \usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+\usepackage{exercise}
+
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\usepackage{dtj_iteso} % creación mía
+\usepackage{kpfonts}
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Tarea - Unidad 3 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\begin{summarybox}{Instrucciones} 
+
+Valor: 10 puntos, distribuidos en las 5 preguntas de forma equitativa.
+
+  \begin{description}
+      \item[1] - Formar equipos de 4 personas.
+      \item[2] - Esta actividad contará como tarea de la unidad 3. Deberá comenzarse el 18 de abril y terminarse el 20 de abril, durante la clase. 
+      \item[3] - Pasar las soluciones en limpio en una hoja en blanco, con los nombres del equipo, el 20 de abril a más tardar a las 8pm. 
+      \item[4] - Podrán consultar apuntes, libros o videos. 
+      \item[5] - Pueden hacerle al profesor hasta 4 preguntas por equipo, pero puedo negarme a contestar si la pregunta implica la solución de un ejercicio.  
+  \end{description}
+  
+\end{summarybox}
+
+\begin{Exercise}[name=Pregunta]
+
+  Considerar una subasta de sobre cerrado a la primera puja con 3 jugadores
+
+  Valoraciones $ x_1, x_2, x_3 \sim \text{uniforme}(0, 30) $
+  
+  Supón que los jugadores 2 y 3 anuncian que pujarán de la siguiente manera
+
+  \begin{align*}
+    b_2(x_2) = \frac{3}{4}x_2 \\ 
+    b_3(x_3) = \frac{4}{5}x_3
+  \end{align*}
+
+  Y que el jugador 1 puja con $ b_1 $ tal que gana si $ b_1 > ax_2 $ y $ b_1 > ax_3 $ para los valores de $a$ de los jugadores 2 y 3 mencionados antes.
+
+  \textit{Resuelve:}
+
+  ¿Qué valor debe tomar $ a $ para que la puja del jugador 1 ($ b_1 $) sea óptima contra la puja de los otros jugadores? 
+
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+
+Tomando el ejercicio anterior, desechar los valores de $ a $ para los jugadores 2 y 3 (es decir, ahora su puja será $ b_j(x_j)=ax_j $ para $ j=\{2, 3\} $).  
+
+\textit{Resuelve:}
+
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\parsep}{0pt}
+  \item Vuelve a calcular el valor de $ a $ en equilibrio para el jugador 1.
+  \item Compara este valor de $ a $ contra los que usaron los jugadores en la anterior pregunta. ¿De qué depende el valor de $ a $ en equilibrio?
+\end{enumerate}
+  
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+
+  En una subasta de sobre cerrado al primer precio, dos jugadores tienen función de utilidad cóncava $ u(w_i)=w_i^\alpha $, en donde $ w_i $ es la ganancia que obtienen si ganan la subasta, $ w_i = x_i - b_i $ si $ b_i > b_j $. Si los jugadores pujan una fracción $0 < a < 1$ de su valuación $ x_i \sim \text{uniforme} (0, 1) $ (es decir, distribuida uniformemente entre 0 y 1).
+
+  \textit{Resuelve:}
+
+  ¿Para qué valor de $ \alpha $ se obtendría un valor de $ a = 1/1.5 $?
+  
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+
+  En un duopolio de Cournot con información privada sobre costos, considerar:
+
+  \begin{itemize}
+    \item Dos jugadores que compiten en cantidad.
+    \item Una función de precio $ p(Q)=10 - Q $, en donde $ Q $ es la cantidad agregada de los dos jugadores.
+    \item La empresa 1 escoge $ q_1 $ con costo de 0. La empresa 2 tiene costo de producción privado. 
+    \item Con probabilidad $ 1/2 $ la empresa 2 produce a costo 0 (costo bajo, o $ c_B $), y con la misma probabilidad produce a costo de 4 (costo alto, o $c_A$).
+    \item Empresa 1 solo conoce la distribución de probabilidad de los costos de la empresa 2.
+    \item La empresa 2 debe producir cantidades $ q_{2,B} $ y $ q_{2,A} $ cuando sus costos son bajos y altos, respectivamente. 
+  \end{itemize}
+
+  Responder:
+
+ \begin{itemize}
+   \setlength{\itemsep}{0pt}
+   \setlength{\parskip}{0pt}
+   \setlength{\parsep}{0pt}
+   \item ¿Cuáles son las funciones de utilidad para ambas empresas? \textit{Pista:} la empresa 2 tiene función $ u_2(q_1, q_{2,t}) $ donde $ t $ es el \textit{tipo} de la empresa 2; la empresa 1 tomará una decisión bajo incertidumbre.
+   \item Escribe el problema de optimización que debes resolver para encontrar el ENB, que consiste en el perfil $\{q_1^*, q_{2,A}^*, q_{2,B}^* \}$
+   \item ¿Qué valores deben tener $\{q_1^*, q_{2,A}^*, q_{2,B}^* \}$ en \textit{Equilibrio}?
+   \item ¿Cuál es la utilidad de la empresa 2 si tiene costos altos?
+ \end{itemize}
+  
+\end{Exercise}
+
+\begin{Exercise}[name=Pregunta]
+
+  Considera ahora que la función de precio es $ p(Q) = 1 - Q $, los costos para la empresa 2 son $ c_A $ y $ c_B $, y las probabilidades $ p(c_A) = \theta, p(c_B) = 1-\theta $.
+  Responder:
+
+ \begin{itemize}
+   \setlength{\itemsep}{0pt}
+   \setlength{\parskip}{0pt}
+   \setlength{\parsep}{0pt}
+   \item Escribe el problema de optimización que debes resolver para encontrar el ENB, que consiste en el perfil $\{q_1^*, q_{2,A}^*, q_{2,B}^* \}$
+   \item Encuentra las expresiones para el perfil que forma un ENB.
+   \item ¿Cómo cambia $ q_{2,A}^*, q_{2,B}^*  $ con respecto a $ \theta $?
+ \end{itemize}
+  
+\end{Exercise}
+
+\end{document}
