@@ -1,0 +1,101 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+\usepackage{exercise}
+\usepackage{tikzsymbols}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\usepackage{dtj_iteso} % creación mía
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Examen - Unidad 4 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\hrule
+
+\begin{summarybox}{Instrucciones}
+
+  \begin{description}
+    \item[1] - Entregar el examen en la fecha acordada en CANVAS, \textbf{\color{blue} en formato pdf}. %Puedes contestar en papel, tomar fotos y colocarlas en un archivo Word y convertirlo a pdf, luego subirlo en la entrada de CANVAS correspondiente al examen, o como te parezca apropiado, pero en \textbf{pdf}.
+    \item[2] - Escribe \textbf{claramente} los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta.
+    \item[3] - {\color{blue} IMPORTANTE}: 1) problemas que solo contengan respuestas sin desarrollo los consideraré {\color{red} erróneos}; 2) copiar y plagiar respuestas no será tolerado, y cada respuesta identificada como copia de la respuesta de otro estudiante será {\color{red} anulada} para ambos estudiantes.
+    \item[4] - No habrá plazos extras. Si existe una situación \textit{extraordinaria}, házmelo saber con tiempo y evidencia.
+    \item[5] - Las únicas dudas que contestaré serán relativas a la redacción (errores o alguna confusión). %No responderé si un resultado es correcto, ni mucho menos cómo resolver algo. Los ejercicios han sido seleccionados estrictamente dentro del material revisado en clases y en las notas de clase. 
+  \end{description}
+
+\end{summarybox}
+
+\begin{center}
+  \Coffeecup[1.5]
+\end{center}
+
+% Respuestas enumeradas con paquete Exercise
+\begin{Exercise}[title={Subasta de sobre cerrado con $n$ jugadores},name={Pregunta}]
+  \textit{7.5 pt}
+
+  Considera el siguiente juego de dos entre un empleador y un aplicante. El tipo del aplicante es su intelecto, que puede ser bajo (\textit{low}), medio (\textit{moderate}) o alto (\textit{high}), con probabilidades de $ 1/3, 1/2 $ y 1/6, respectivamente. 
+
+  Luego de que el aplicante conozca su tipo, decide si ir o no a la universidad (\textit{college, no college} o para simplificar, \textit{C, NC}). El costo personal de ir a la universidad es mayor si el aplicante es menos inteligente.
+  
+  Asumir que el costo de obtener un grado es de 2, 4 y 6 para un aplicante cuyo tipo sea alto, mediano y bajo, respectivamente. 
+
+  El empleador decide si ofrecer al aplicante un trabajo como administrador (\textit{manager}) u oficinista (\textit{clerk}). El pago del aplicante por ser contratado como administrador es de 15, y por oficinista de 10. Esos pagos son independientes del tipo del aplicante. 
+
+  El empleador gana 7 si emplea a alguien como oficinista, \textit{independientemente} del tipo del aplicante. 
+
+  Por otro lado, si el aplicante es contratado como administrador, las ganancias del empleador crecen acorde al intelecto del aplicante: de 4, 6 a 14, dependiento de si el intelecto es bajo, moderado o alto, respectivamente.
+
+\begin{center}
+  \includegraphics[width=\textwidth]{p1.png}
+\end{center}
+
+\textbf{Resuelve:}
+(Respuestas \textit{completas})
+
+\begin{enumerate}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+  \item ¿De qué dependen las ganancias de cada jugador? (\textit{2pt})
+  \item ¿Cuántos conjuntos de información existen? (\textit{2pt})
+  \item Encuentra un EBP en donde los estudiantes de bajo intelecto no van a la universidad, y los de moderado y alto sí van (es decir, un EBP con la estrategia del estudiante $ \{NC_{low}, C_{moderate}, C_{high}\} $).
+  \begin{itemize}
+    \item ¿Cuáles son las creencias del empleador? (\textit{4pt})
+    \item ¿Cuáles son las mejores respuestas del empleador? (\textit{4pt})
+    \item Evalúa las posibles desviaciones del aplicante para todos sus tipos, y concluye si la estrategia considerada es un EBP (\textit{3pt})
+  \end{itemize}
+\end{enumerate}
+
+\textbf{Pista:} Comienza con las creencias del empleador. Recuerda que actualiza sus creencias de acuerdo al teorema de Bayes. Por ejemplo, si \textit{observa} que el estudiante no fue al colegio, su creencia se computa según:
+
+\begin{align*}
+  p(\text{low}|NC) = \frac{p(NC | \text{low})p(\text{low})}{p(NC | \text{low})p(\text{low}) + p(NC | \text{moderate})p(\text{moderate})+p(NC | \text{hight})p(\text{hight})}
+\end{align*}
+
+Nota que $ p(NC | \text{low}) $ hace referencia a lo observado por el empleador según la estrategia del aplicante. Para esta estrategia, esa probabilidad es de 1 (ahora computa el resto). 
+
+Luego evalúa las utilidades del empleador por contratar como administrador o como oficinista. Evalúa cada mensaje: si va a la universidad, y si no va a la universidad, usando $ UE_{Empleador}(\text{Manager}), UE_{Empleador}(\text{Clerk}) $.
+
+Luego, evalúa por tipo de aplicante si le conviene desviarse de sus estrategias, \textit{dadas} las mejores respuestas del empleador.
+
+\end{Exercise}
+
+\begin{center}
+  ¡Suerte!
+
+  \LARGE\Cat[1.2]
+\end{center}
+
+
+\end{document}

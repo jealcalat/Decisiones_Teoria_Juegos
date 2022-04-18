@@ -1,0 +1,108 @@
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+\usepackage{exercise}
+\usepackage{tikzsymbols}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+\usepackage{dtj_iteso} % creación mía
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Examen - Unidad 3 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\hrule
+
+\begin{summarybox}{Instrucciones}
+
+    % \begin{description}
+    %     \item[1] - Entregar el examen en la fecha acordada en CANVAS, \textbf{\color{blue} en formato pdf}. %Puedes contestar en papel, tomar fotos y colocarlas en un archivo Word y convertirlo a pdf, luego subirlo en la entrada de CANVAS correspondiente al examen, o como te parezca apropiado, pero en \textbf{pdf}.
+    %     \item[2] - Escribe \textbf{claramente} los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta. 
+    %     \item[3] - {\color{blue} IMPORTANTE}: 1) problemas que solo contengan respuestas sin desarrollo los consideraré {\color{red} erróneos}; 2) copiar y plagiar respuestas no será tolerado, y cada respuesta identificada como copia de la respuesta de otro estudiante será {\color{red} anulada} para ambos estudiantes.
+    %     \item[4] - No habrá plazos extras. Si existe una situación \textit{extraordinaria}, házmelo saber con tiempo y evidencia.
+    %     \item[5] - Las únicas dudas que contestaré serán relativas a la redacción (errores o alguna confusión). %No responderé si un resultado es correcto, ni mucho menos cómo resolver algo. Los ejercicios han sido seleccionados estrictamente dentro del material revisado en clases y en las notas de clase. 
+    % \end{description}
+    
+    \begin{description} % instrucciones para examen durante la clase
+      \item[1] - El examen tendrá lugar entre la semana del 2 de mayo al 6 de mayo, de forma presencial.
+      \item[2] - Formar equipos de cuatro personas. 
+      \item[3] - Entregar un solo examen físico en hojas blancas el miércoles 04 de mayo con los nombres de todos los integrantes y las soluciones en limpio. 
+      \item[4] - Reglas:
+     \begin{itemize}
+       \setlength{\itemsep}{0pt}
+       \setlength{\parskip}{0pt}
+       \setlength{\parsep}{0pt}
+       \item Cada equipo podrá hacerle al profesor dos preguntas. Si me niego a contestarla (e.g., si me preguntan algo que no pueda contestar sin resolver el problema) pueden volver a hacer la pregunta, pero solo una vez. Piensen bien qué preguntar.
+       \item Pueden consultar apuntes y libros. Prepárense de forma previa al examen para saber qué podrían necesitar o facilitar el examen. Esto pueden saberlo consultando la guía. 
+       \item La fecha de entrega del examen es inaplazable. Recomiendo que, cada que estén seguros de una respuesta, vayan pasándola en limpio.
+       \item La hoja de soluciones debe ser legible y ordenada.
+       \item La calificación de cada ejercicio se divide equitativamente en cada inciso.
+     \end{itemize}   
+      
+    \end{description}
+
+\end{summarybox}
+
+\begin{center}
+  \Coffeecup[1.5]
+\end{center}
+
+% Respuestas enumeradas con paquete Exercise
+\begin{Exercise}[title={Subasta de sobre cerrado con $n$ jugadores},name={Pregunta}]
+\textit{7.5 pt}
+
+  Considera la subasta de sobre cerrado al primer precio considerada en clase. Las valoraciones $x_1, x_2,...,x_n$ de los jugadores son desconocidas pero \textit{independientes} y uniformemente distribuidas entre 0 y 100. Asume que los jugadores usan una función de puja $b_i(x_i)=ax_i$.
+  
+  \begin{enumerate}
+      \item Demuestra que $a=\frac{n-1}{n}$.
+      \item Compara las pujas $n=2$ con $n=3$. ¿Qué le conviene más al vendedor, una $n$ grande o una pequeña?
+      \item Demuestra que cuando $n \rightarrow \infty$, los jugadores van a pujar su valuación, es decir $b_i = x_i$.
+  \end{enumerate}
+  
+  \textbf{Pista}: para que el jugador $ i $ gane, su puja debe ser mayor que la de cada uno de los jugadores, es decir, $ b_i > b_1, b_i > b_2, ..., b_i > b_{i-1}, b_i > b_{i+1}, b_i > b_{n-1} $, y cada uno de estos eventos es independiente. %Lo primero, y más difícil, es resolver la probabilidad de ganar. Para el cálculo de la probabilidad, toma en cuenta que cada puja de los otros $ n-1 $ jugadores es independiente, por lo que, asumiendo, $ i \neq j $, el evento en el que el jugador $ i $ puja más alto que el jugador $j$ es independiente del evento en el que el jugadores $ i $ puja más alto que el jugador $ j+1 $, y así por el estilo.
+
+  % \textbf{Hints:} 1) Asume que los jugadores usan una función de puja $b_i=ax_i$; 2) para $n-1$ jugadores (es decir, $n$ menos el jugador $i$, dado que obtendremos el resultado desde su perspectiva), la probabilidad de que las $n-1$ valuaciones de los $n-1$ jugadores sean menor que la puja del jugador $i$, o sea $y$, el producto de la probabilidad de un solo jugador multiplicada $n-1$ veces por sí misma. Si la probabilidad de $j$ es $p(x_j < y/a)=\frac{y}{100a}$, para $n-1$ jugadores es $p(x_1 < y/a)\cdot p(x_2 < y/a) \dots p(x_{n-1} < y/a)$; 3) recuerda que, para dos jugadores, la utilidad del jugador 1 por su puja $y$ es $UE_1(y, b_2)=ganancia \times p(ganar) + 0\times p(perder)$.  
+  
+  
+  \end{Exercise}
+
+  \begin{Exercise}[title={Duopolio de Cournot con información asimétrica}, name={Pregunta}]
+    \textit{7.5 pt}
+
+    Considera un duopolio de Cournot con demanda inversa $P(Q) = a - Q$, en donde $Q = q_1 + q_2$ es la cantidad agregada en el mercado. Ambas empresas tienen un costo $c_i(q_i) = cq_i$, pero la demanda $a$ es desconocida: es alta ($a = a_A)$ con probabilidad $\theta$ y baja ($a=a_B$) con probabilidad $1-\theta$. Es un juego de información asimétrica. La empresa 1 sabe si la demanda es alta o baja, pero la empresa 2 no lo sabe. Las dos empresas deben escoger simultáneamente las cantidades. Contesta:
+    
+    \begin{enumerate}
+        \item ¿Cuál es el Equilibrio de Nash Bayesiano en este juego? Es decir, ¿qué cantidades $q_i^{k*}$ deben escoger las empresas, en función de la demanda $a_k$?
+        \item ¿Cómo varían las cantidades en equilibrio para cada empresa con respecto a $ \theta \text{ y } a_A$?
+        \item Para la empresas 2, ¿cuál sería la cantidad en equilibrio si la probabilidad de demanda alta fuese de 0?
+    \end{enumerate}
+    
+    % \textbf{Hint}: La empresa 2 no sabe los tipos de la empresa 1, pero conoce su propio tipo. Asume que la empresa 2 solo tiene un tipo, por lo que su utilidad se computa distinto que la de la empresa 1. El espacio de estrategias se construye a partir de una regla de decisión. Por ejemplo, para empresa 1, $s^*_1(a_k)=q_1^*(a_k) = ...$ dependiendo de qué valor tome $a_k$, que puede ser $a_A, a_B$. 
+    \definecolor{cadet}{rgb}{0.33, 0.41, 0.47}
+    \textbf{Pista:} \textbf{\color{cadet} nota que la demanda es la misma para ambas empresas} por lo que, para la empresa 2, el problema de optimización para $q_2^*$ es 
+    
+    $$
+    \argmax_{q_2 \geq 0} ~ \{ \theta({\color{red}a_A} - q_1^{A} - q_2 - c)q_2 + (1 - \theta)({\color{red}a_B}- q_1^{B}-q_2-c)q_2 \}
+    $$
+    
+    \end{Exercise}
+
+  \begin{center}
+    ¡Suerte! 
+    
+    \LARGE\Cat[1.2] 
+  \end{center}
+
+
+\end{document}
