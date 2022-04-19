@@ -32,6 +32,7 @@ Contenidos:
   - [Tareas](#tareas)
     - [Unidad 1](#unidad-1-1)
     - [Unidad 2](#unidad-2-1)
+    - [Unidad 3](#unidad-3-1)
   - [Exámenes](#exámenes)
     - [Unidad 1](#unidad-1-2)
     - [Unidad 2](#unidad-2-2)
@@ -118,6 +119,10 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
   - [`Solución`]()
 - [`Tarea 2b`](tareas/tarea2b.md): entrega para el 21 de marzo 9:00 AM
   - [`Solución`](tareas/tarea2a_solucion.pdf).
+  
+### Unidad 3
+- [`Tarea 3`](tareas/tarea3.pdf)
+   - [`Solución`]()
 
 ## Exámenes
 
