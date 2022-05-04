@@ -122,7 +122,7 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
   
 ### Unidad 3
 - [`Tarea 3`](tareas/tarea3.pdf)
-   - [`Solución`]()
+   - [`Solución`](tareas/tarea3_solucion.pdf)
 
 ## Exámenes
 

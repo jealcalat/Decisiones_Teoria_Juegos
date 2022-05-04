@@ -1,0 +1,189 @@
+\documentclass[12pt]{scrartcl} % se puede cambiar por article
+\RequirePackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{eulervm} % tipografía con soporte para matemáticas
+\usepackage{caption}
+
+\usepackage{exercise}
+\usepackage{graphicx}
+\DeclareMathOperator*{\argmax}{argmax}
+
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+
+\usepackage{setspace}
+\onehalfspacing % doble espacio: \doublespacing
+
+\title{Solución de la tarea 3}
+\author{Emmanuel Alcalá}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% Respuestas enumeradas con paquete Exercise
+\begin{Exercise}[name={Respuesta}]
+
+Las valuaciones tienen distribución
+$ x_1, x_2, x_2 \sim \text{uniforme}(0, 30) $
+Los jugadores 2 y 3 pujan según
+
+\begin{align*}
+  b_2(x_2) &= \frac{3}{4}x_2\\
+  b_3(x_3) &= \frac{4}{5}x_3
+\end{align*}
+
+Jugador 1 gana si $ b_1 > b_2 $ \textbf{y} si $ b_1 > b_3$. Por lo tanto, la probabilidad de ganar es 
+
+\[p(\text{ganar}) = p( b_1 > b_2 ) \times p ( b_1 > b_3 )\]
+
+es decir
+
+\begin{align*}
+  p(\text{ganar}) &= p \left( x_2 < \frac{4}{3}b1 \right) \times p \left( x_3 < \frac{5}{4}b1 \right)\\
+  \text{que es} & \text{ a su vez}\\
+  p(\text{ganar}) &= \frac{4}{3}\times\frac{b_1}{30}\times\frac{5}{4}\times\frac{b_1}{30}\\
+  p(\text{ganar}) &= \frac{b_1^2}{540}
+\end{align*}
+
+La utilidad esperada del jugador 1 si gana es 
+
+\[UE_1(b_1, b_2, b_3) = p(\text{ganar})(x_1 - b_1)\]
+
+Sustituyendo $ p(\text{ganar}) $ tenemos
+
+\[UE_1(b_1, b_2, b_3) = \frac{1}{540}b_1^2(x_1 - b_1)\]
+
+dado que la condición de optimalidad es
+
+\[b_1^* = \argmax_{b_1 \in [0, x_1]} UE_1(b_1, b_2, b_3)\]
+
+se satisface con la CPO:
+
+\begin{align*}
+  \frac{\partial UE_1(b_1, b_2, b_3)}{\partial b_1} &= 0\\
+  \frac{1}{540} \frac{\partial (b_1^2x_1 - b_1^3)}{\partial b_1} &=0\\
+   2b_1x_1 - 3b_1^2 &= 0\\
+   b_1(2x_1 - 3b_1) &= 0\\
+\end{align*}
+
+del cual resultan dos soluciones:
+
+\begin{enumerate}
+  \item $b_1 = 0$
+  \item $b_2 = \frac{2}{3}x_1$
+\end{enumerate}
+
+\end{Exercise}
+
+\begin{Exercise}[name={Respuesta}]
+
+  \begin{enumerate}
+    \item $ a = \frac{2}{3} $
+    \item El valor de $ a $ en equilibrio depende solo del número de jugadores, y no de sus pujas.
+  \end{enumerate}
+
+\end{Exercise}
+
+\begin{Exercise}[name={Respuesta}]
+
+De la solución en clase de Subasta de sobre cerrado al primer precio con aversión al riesgo, con la función $ u(w) = w^\alpha $, llegamos a la siguiente solución
+    \[b_1^* = \frac{1}{1+\alpha}x_1\]
+    con lo que concluimos que, si la estrategia óptima del jugador es $ b_1^* = ax_1$, entonces $ a = \frac{1}{1+\alpha} $, por lo que el valor de $ \alpha $ debe ser $ 0.5 $.
+
+\end{Exercise}
+
+\begin{Exercise}[name={Respuesta}]
+
+  Los datos del problema son: $ P(Q) = 10 - Q\; \text{ para la empresa 2 } c_A = 4 \text{ con } p =1/2, c_B = 0  \text{ con } p =1/2, \text{ y para la empresa 1 } c = 0$.
+
+  \begin{enumerate}
+    \item La función de utilidad para el jugador 1 es 
+    \[u_1(q_1; q_{2,A}, q_{2, B}) = \frac{1}{2}(10 - q_1 - q_{2,A})q_1 + \frac{1}{2}(10 - q_1 - q_{2,B})q_1\]
+    Que simplificando queda
+    \[u_1(q_1; q_{2,A}, q_{2, B}) = \left( 10 - q_1 - \frac{q_{2,B}}{2}- \frac{q_{2,A}}{2} \right)q_1\]
+    La función de utilidad para el jugador 2 es
+    \begin{align*}
+      u_2(q_1, q_{2,t}) =%
+      \begin{cases}
+        (10 - q_1 - q_{2,B})q_{2,B} &\text{si } t = \text{B}\\
+        (10 - q_1 - q_{2,A})q_{2,A} - 4q_{2,A} &\text{si } t = \text{A}
+      \end{cases}
+    \end{align*}
+  
+    \item Las condiciones de optimización son
+    \begin{align*}
+      q_1^*    & = \argmax_{0\leq q_1 \leq \infty} u_1(q_1; q_{2,A}, q_{2,B}) \\
+      q_{2,A}^* & = \argmax_{0\leq q_{2,A} \leq \infty} u_2(q_1, q_{2,A})      \\
+      q_{2,B}^* & = \argmax_{0\leq q_{2,B} \leq \infty} u_2(q_1, q_{2,B})
+    \end{align*}
+    y 
+    \[\frac{\partial u_1}{\partial q_1}=0,\quad \frac{\partial u_{2,B}}{\partial q_{2,B}},\quad \text{y } \frac{\partial u_{2,A}}{\partial q_{2,A}} \]
+    \item Para $ \frac{\partial u_1}{\partial q_1}=0 $ tenemos
+    \[\frac{\partial u_1}{\partial q_1} = 10 - 2q_1 - \frac{1}{2}q_{2,B} - \frac{1}{2}q_{2,A}= 0\]
+    Para $\frac{\partial u_{2,B}}{\partial q_{2,B}} = 0$ y $ \frac{\partial u_{2,A}}{\partial q_{2,A}} = 0 $
+    \[\frac{\partial u_{2,B}}{\partial q_{2,B}} \longrightarrow q_{2,B}^* = \frac{10-q_1}{2} \]
+    y 
+    \[\frac{\partial u_{2,A}}{\partial q_{2,A}} \longrightarrow q_{2,A}^* = \frac{6-q_1}{2} \]
+    Sustituyendo $  q_{2,A}^* \text{ y }  q_{2,B}^* \text{ en } q_1^*$, tenemos (luego de algunas manipulaciones):
+    \[q_1^* = 4, q_{2,A}^* = 1 \text{ y } q_{2,B}^* = 3\]
+    \item $ u_2(q_1, q_{2,A}) = (10-q_1-q_{2,A})q_{2,A} - 4q_{2,A} = (10-4-1)1-4=1$
+  \end{enumerate}
+
+\end{Exercise}
+
+\begin{Exercise}[name={Respuesta}]
+
+  Los datos del problema son: $ P(Q) = 1 - Q$ para la empresa 2 $c_A$ con probabilidad $\theta$, $c_B \text{ con probabilidad } 1-\theta$,y para la empresa 1 $c = 0$.
+
+  Las funciones de utilidad son
+
+  \begin{align*}
+    u_1(q_1; q_{2,A}, q_{2, B}) &= \theta(1 - q_1 - q_{2,A})q_1 + (1-\theta)(1 - q_1 - q_{2,B})q_1\\
+      u_2(q_1, q_{2,t}) &=%
+      \begin{cases}
+        (1 - q_1 - q_{2,B})q_{2,B} - c_Bq_{2,B}&\text{si } t = \text{B}\\
+        (1 - q_1 - q_{2,A})q_{2,A} - c_Aq_{2,A} &\text{si } t = \text{A}
+      \end{cases}
+  \end{align*}
+
+  \begin{enumerate}
+    \item   Las condiciones de optimización son
+    \begin{align*}
+      q_1^*    & = \argmax_{0\leq q_1 \leq \infty} u_1(q_1; q_{2,A}, q_{2,B}) \\
+      q_{2,A}^* & = \argmax_{0\leq q_{2,A} \leq \infty} u_2(q_1, q_{2,A})      \\
+      q_{2,B}^* & = \argmax_{0\leq q_{2,B} \leq \infty} u_2(q_1, q_{2,B})
+    \end{align*}
+    y 
+    \[\frac{\partial u_1}{\partial q_1}=0,\quad \frac{\partial u_{2,B}}{\partial q_{2,B}},\quad \text{y } \frac{\partial u_{2,A}}{\partial q_{2,A}} \]
+    \item Resolviendo para $ \frac{\partial u_1}{\partial q_1}=0 $ nos da:
+    \[q_1* = \frac{1 - q_{2,B}- \theta q_{2,A} + \theta q_{2,B}}{2}, \text{ equivalente a } q_1^* = \frac{1}{2} - \frac{(1-\theta)q_{2,B}-  \theta q_{2,A}}{2}\]
+    Y para $ \frac{\partial u_{2,t}}{\partial q_{2,t}}=0 $
+    \begin{align*}
+      q_{2,t}^* =%
+      \begin{cases}
+        \frac{1-q_1-c_A}{2} \text{ si } t = A\\
+        \frac{1-q_1-c_B}{2} \text{ si } t = B
+      \end{cases}
+    \end{align*}
+    Sustituyendo $ q_{2,A}^*, q_{2,B}^*$ en $ q_1^* $, y haciendo manipulaciones algebraicas, nos retorna
+    \begin{align*}
+      q_1^* &= \frac{1+(1-\theta)c_B + \theta c_A}{3} \text{ y sustituyendo en } q_{2,A}^*, q_{2,B}^*\\
+      \color{blue!70!cyan}q_{2,A}^* &{\color{blue!70!cyan}= \frac{2-(1-\theta)c_B - \theta c_A - 3 c_A}{6}} \text{ o equivalentemente}\\
+      \color{blue!70!cyan}q_{2,A}^* &{\color{blue!70!cyan}= \frac{1-2c_A}{3} - \frac{(1-\theta)(c_B-c_A)}{6}} \\
+      \color{red!60!black}q_{2,B}^* &{\color{red!60!black}= \frac{2-(1-\theta)c_B - \theta c_A  3c_B}{6}} \text{ o equivalentemente}\\
+      \color{red!60!black}q_{2,B}^* & {\color{red!60!black} = \frac{1-2c_B}{3} + \frac{\theta(c_B-c_A)}{6}}
+    \end{align*}
+    \item $ \frac{\partial q_{2,A}^*}{\partial \theta} $ y $ \frac{\partial q_{2,B}^*}{\partial \theta}  $
+    \begin{align*}
+      \frac{\partial q_{2,A}^*}{\partial \theta} &= \frac{\partial}{\partial \theta} \left[ \frac{1-2c_A}{3} - \frac{(1-\theta)(c_B-c_A)}{6} \right] = \frac{1}{6}(c_B - c_A) \\
+      \frac{\partial q_{2,B}^*}{\partial \theta} &= \frac{\partial}{\partial \theta} \left[\frac{1-2c_B}{3} + \frac{\theta(c_B-c_A)}{6}\right] = \frac{1}{6}(c_B - c_A)
+    \end{align*}
+    La cantidad en equilibro en ambos costos depende de la diferencia de los costos. Dado que $ c_A > c_B $ por definición, la cantidad en ambos casos decrece conforme $ \theta $ crece. 
+  \end{enumerate}
+  
+\end{Exercise}
+
+\end{document}
+
