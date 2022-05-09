@@ -36,6 +36,7 @@ Contenidos:
   - [Exámenes](#exámenes)
     - [Unidad 1](#unidad-1-2)
     - [Unidad 2](#unidad-2-2)
+    - [Unidad 3 y 4](#unidad-3-y-4)
 
 ---
 
@@ -134,3 +135,7 @@ Los exámenes deben entregarse por CANVAS en su entrada correspondiente. Aquí s
 ### Unidad 2
 
 [`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución](Unidad_2/sol_examen2.pdf)
+
+### Unidad 3 y 4
+
+[`Examen 3/4`](Unidad_3/examen3.pdf). [Solución]()
