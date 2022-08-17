@@ -95,7 +95,7 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 
 ### Unidad 1
 
-- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución](tareas/tarea1a_solucion.pdf)
+- [`Tarea 1a`](tareas/tarea1a.pdf): entrega para el 10 de febrero. [Solución]()
 - Tarea1b: entrega para el 13 de febrero, en equipos de 3 personas.
 
 ### Unidad 2
@@ -103,11 +103,11 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 - [`Tarea 2a`](tareas/tarea2a.pdf): entrega para el 21 de marzo 9:00 AM
   - [`Solución`]()
 - [`Tarea 2b`](tareas/tarea2b.md): entrega para el 21 de marzo 9:00 AM
-  - [`Solución`](tareas/tarea2a_solucion.pdf).
+  - [`Solución`]().
   
 ### Unidad 3
 - [`Tarea 3`](tareas/tarea3.pdf)
-   - [`Solución`](tareas/tarea3_solucion.pdf)
+   - [`Solución`]()
 
 ---
 
@@ -116,11 +116,11 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 Los exámenes deben entregarse por CANVAS en su entrada correspondiente. Aquí solo coloco el PDF y su solución para documentar.
 
 ### Unidad 1
-[`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución](Unidad_1/sol_ex1.pdf)
+[`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
 
 ### Unidad 2
 
-[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución](Unidad_2/sol_examen2.pdf)
+[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución]()
 
 ### Unidad 3 y 4
 
