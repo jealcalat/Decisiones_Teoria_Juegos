@@ -1,0 +1,175 @@
+\documentclass[12pt]{scrartcl}
+\usepackage{dtj_iteso}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+% sgamex.sty from Rubinstein
+\usepackage{sgamex}
+
+\title{Examen Parcial 1 \\ \normalsize Decisiones y Teoría de Juegos}
+\author{Emmanuel Alcalá\\ \url{jaime.alcala@iteso.mx}}
+\date{}
+
+\begin{document}
+% \setlength{\parskip}{5mm}
+
+\maketitle
+
+\hrule
+
+\begin{summarybox}{Instrucciones}
+
+    \begin{description}
+        \item[1] - Entregar el examen en la fecha acordada en CANVAS.
+        \item[2] - Llega a tiempo, solo dispones de 2 horas para realizar el examen.
+        \item[3] - Escribe \textbf{claramente} los cálculos que desarrollaste para resolver los problemas, y \textbf{encierra en un recuadro} la respuesta correcta.
+        \item[4] - {\color{blue} IMPORTANTE}: 1) problemas que solo contengan respuestas sin desarrollo los consideraré {\color{red} erróneos}; 2) copiar y plagiar respuestas no será tolerado, y cada respuesta identificada como copia de la respuesta de otro estudiante será {\color{red} anulada} para ambos estudiantes.
+        \item[5] - No habrá plazos extras en este examen. Si existe una situación \textit{extraordinaria}, házmelo saber con tiempo y evidencia.
+    \end{description}
+
+\end{summarybox}
+
+\begin{Exercise}[name={Problema}]
+
+    \textbf{5 pts}
+
+    Regina tiene una propiedad que vale \$1M. Con probabilidad de 0.1, la propiedad puede sufrir un incendio, lo que reduce el valor de su propiedad a \$640k; con probabilidad de 0.9, la propiedad no sufre daños y conserva su valor. La función de utilidad de Regina es $u_{R}(W) = \sqrt{W}$.
+
+    Carlos, un asegurador, puede pagar $q$ (cobertura) si la casa se quema sufre el incendio a cambio de $r$ (su prima). Si Regina compra el seguro, tendrá una una riqueza de $640000 + q -r$ con probabilidad de 0.1, y con probabilidad de 0.9, su riqueza será de $1 000 000 - r$. Carlos, también con probabilidad de 0.1, tendrá un ingreso de $r-q$, mientras que con probabilidad de 0.9, tendrá un ingreso de $r$. Carlos tiene una función de utilidad $u_{C}(y)=y$.
+
+    \textbf{Responder}:
+
+    \begin{enumerate}
+        \setlength{\itemsep}{0pt}
+        \setlength{\parskip}{0pt}
+        \setlength{\parsep}{0pt}
+        \item ¿Cuál es la utilidad de Regina cuando no compra un seguro? ¿Cuál es su EC \textit{para esta utilidad}?\\
+              % \item ¿Proveerá Carlos cobertura total ($q=\$360k$) en caso de daño por incendio? Explica en qué caso sí y en qué caso no.\\
+        \item Supón que Carlos provee cobertura total. Si Regina compra el seguro, ella tendrá una riqueza de $1 000 000 - r$ segura independientemente de si hay daño o no (porque Carlos provee cobertura total). Regina desea estar \textit{al menos tan bien} comprando el seguro a que si no lo comprara. Calcula la prima máxima $r^*$ que está dispuesta a pagar.
+              % \item Si la función de utilidad de Regina es $u(W)=1000-\sqrt(W)$ ¿con qué \textit{probabilidad} de incendio estaría dispuesta a pagar la prima?
+    \end{enumerate}
+
+\end{Exercise}
+
+\rule{5cm}{1pt}
+
+\begin{Exercise}[name={Problema}]
+
+    \textbf{10 pts}
+
+    Tres empresas que comparten mercado producen el mismo producto. Las empresas tienen que decidir simultáneamente las cantidades $q_1, q_2$ y $q_3$ a producir. La cantidad agregada del producto es $Q=q_1+q_2+q_3$. Asumir que el precio es una función de demanda inversa $P(Q)=200-Q$, y que el costo de producción es $C_i(q_i)=100q_i^2$.
+
+    \textbf{Responder:}
+
+    Encontrar la cantidad $q_i^*$  en equilibrio, asumiendo estrategias simétricas para las tres empresas.
+
+\end{Exercise}
+\rule{5cm}{1pt}
+
+% \begin{Exercise}[name={Problema}]
+
+% \textbf{3 pts}
+
+% \begin{center}
+%     \begin{game}{3}{3}[Jugador 1][Jugador 2]
+%             &   L   &   C   &   R \\
+%         T   &  2,0  &  1,1  &  4,2\\
+%         M   &  3,4  &  1,2  &  2,3\\
+%         B   &  1,3  &  0,2  &  3,0
+%     \end{game}
+% \end{center}
+% \vspace{1em}
+
+% \textbf{Responder:}
+
+% 1) ¿Qué estrategias sobreviven la eliminación iterativa de estrategias estrictamente dominadas (EED)?
+
+% 2) ¿Cuáles son los equilibrios de Nash (EN) de estrategias puras?
+
+% Pista: podría suceder que en una ronda de eliminación no haya EED. Si no existen EED, debe aplicarse el método de tres pasos de EN en matrices.
+% \end{Exercise}
+
+% \begin{Exercise}[name={Problema}]
+
+% \textbf{4 pts}
+
+% Dos empresas ofrecen un puesto de trabajo cada una. Supongamos que las empresas ofrecen salarios diferentes $w_i$, con $\frac{w_1}{2} < w_2 < 2w_1$ (es decir, el salario de la empresa dos es mayor que la mitad del salario de la empresa 1, pero menor que el doble).
+% Existen dos trabajadores, cada uno de los cuales puede solicitar trabajo en una de las empresas. Deciden simultáneamente si solicitar en la empresa 1 o la empresa 2. Si solo un trabajador solicita trabajo en una de ellas, obtiene el trabajo. Si ambos trabajadores solicitan en la misma empresa, la empresa contrata a uno de ellos de forma aleatoria (con probabilidad de $1/2$), y el otro queda desempleado.
+
+% \begin{center}
+%     \begin{game}{2}{2}[Trabajador 1][Trabajador 2]
+%                     &               Aplicar E1                  & Aplicar E2 \\
+%         Aplicar E1  & $\frac{1}{2}w_1, \frac{1}{2}w_1$ & $w_1, w_2$ \\ 
+%         Aplicar E2  & $w_2, w_1$                       & $\frac{1}{2}w_2, \frac{1}{2}w_2$
+%     \end{game}
+% \end{center}
+
+% Nótese que existen dos EN en estrategias puras, cuando aplican a distintas empresas. Una solución más apropiada requiere estrategias mixtas.
+
+% \textbf{Responder:}
+
+% 1) ¿Cuál es el EN en estrategias mixtas para cada empleado? Es decir, encontrar la probabilidad con la que deberían aplicar a cada empresa (que estará dada en función del salario). 
+
+% 2) Asigna los valores $w_1 = 10, w_2 = 8$, ¿cuál es la utilidad esperada para el trabajador 1 (T1) por cada estrategia?
+
+% \end{Exercise}
+
+% Respuestas:\\
+% 1) $UE_{R}(ns)= 980$; $EC=980^2=960400$.\\
+% 2) Si la prima que recibe $r\geq 36k$, con las probabilidades mencionadas.\\
+% 3) Debe ser $UE_R(s)\geq UE_R(ns)=\sqrt{1000000-r}\geq 980$ lo que nos da $r^*=39600$
+
+% Unidad 4
+
+\begin{Exercise}[name={Problema}]
+
+    \textbf{5 pts}
+
+    Tenemos el siguiente juego extensivo
+
+    \begin{figure}[H]
+        \centering
+        \begin{istgame}
+            \xtdistance{15mm}{30mm}
+            \istroot[-135](0)[initial node]<0>{J1}
+            \istb{t}[a]{(3,5)}[l] \istb{s}[r] \endist
+            \istroot(1)(0-2)<135>{J2}
+            \istb{a}[al] \istb{b}[ar] \endist
+            \xtdistance{10mm}{15mm}
+            \istroot(2)(1-1)<135>{J1}
+            \istb{c}[al]{(2,2)} \istb{d}[ar]{(0,0)} \endist
+            \istroot(3)(1-2)<45>{J1}
+            \istb{e}[al]{(1,1)} \istb{f}[ar]{(4,4)} \endist
+        \end{istgame}
+    \end{figure}
+
+    \begin{myenum}
+        % \item Encontrar ENPS y ganancias.
+        \item Suponer ahora que J1 (en la tercera etapa) no sabe si J2 ha elegido \textit{a} o \textit{b}.
+        \begin{myitemize}
+            \item Representar este nuevo juego en su forma extensiva.
+            \item Econtrar el ENPS en este nuevo juego (estrategias por jugador y ganancias).
+        \end{myitemize}
+    \end{myenum}
+\end{Exercise}
+
+\begin{Exercise}[name={Problema}]
+
+    \textbf{10 pts}
+
+    \textit{Disuación de entrada estratégica}
+
+    Considera una industria con dos firmas, cada una $i=\{1, 2 \}$, con función de \textit{demanda} $q_i = 1 - 2p_i + p_j$. La firma 2 (entrante) tiene un costo marginal de 0. La firma 1 (la titular o líder) tiene un costo marginal inicial de 1/2. Si la firma 1 invierte $I = 0.205$, puede comprar nueva tecnología y reducir su costo marginal a 0. Considerando una función de ganancia $u_i(p_i, p_j)=(1-2p_i+p_j)p_i$ si la firma 1 invierte (en cuyo caso ambas firmas tienen la misma función); de $u_1(p_1, p_2)=(1-2p_1+p_2)(p_1 - 1/2)$ si la firma 1 no invierte (la función de la firma 2 sigue siendo con costo igual a 0).
+
+    Resuelve:
+
+    \begin{myenum}
+        \item Representar el juego en su forma extensiva
+        \item Mostrar que en el ENPS la firma 1 \textit{no invierte}.
+        \item (EXTRA por 3 pt). Encuentra para qué valores $I$ la firma 1 \textit{sí} invertiría.
+    \end{myenum}
+
+    \textit{Pista:} la estructura temporal del juego es la siguiente. Primero, el titular (firma 1) decide si invierte o no. El entrante (firma 2) observa esa decisión. Posteriormente, los jugadores compiten en precios. Debes resolver con inducción hacia atrás, en la segunda etapa, y encontrar $p_i^*=\argmax_{p_i} u_i(p_i, p_j)$. Si la firma 1 invierte, el costo es idéntico para ambas, si no invierte, debes encontrar $p_1^* \neq p_2^*$. Resolviendo la primera etapa para $p_i^*$ (similar a cuando encuentras la cantidad $q_i^*$ en Cournot), comparas la utilidad de invertir vs no invertir de la firma 1.
+
+\end{Exercise}
+
+\end{document}

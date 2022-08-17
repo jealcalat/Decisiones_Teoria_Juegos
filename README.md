@@ -33,9 +33,6 @@ Contenidos:
     - [Unidad 2](#unidad-2-1)
     - [Unidad 3](#unidad-3-1)
   - [Exámenes](#exámenes)
-    - [Unidad 1](#unidad-1-2)
-    - [Unidad 2](#unidad-2-2)
-    - [Unidad 3 y 4](#unidad-3-y-4)
 
 ---
 
@@ -113,15 +110,7 @@ Las tareas tienen el número de la unidad. Las que lleven `a` son individuales, 
 
 ## Exámenes
 
-Los exámenes deben entregarse por CANVAS en su entrada correspondiente. Aquí solo coloco el PDF y su solución para documentar.
+Los exámenes serán presenciales en la fecha acordada
 
-### Unidad 1
-[`Examen 1`](Unidad_1/DTJ_Examen1.pdf). [Solución]()
-
-### Unidad 2
-
-[`Examen 2`](Unidad_2/DTJ_Examen2.pdf). [Solución]()
-
-### Unidad 3 y 4
-
-[`Examen 3/4`](Unidad_3/examen3.pdf). [Solución]()
+- [Examen Parcial 1](examenes/1/main.pdf)
+- [Examen Parcial 2](examenes/2/2.pdf)

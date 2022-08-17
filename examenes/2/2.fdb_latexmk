@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1660759824 "/home/mrrobot/Documents/GitHub/Decisiones_Teoria_Juegos/Unidad_3/examen3.tex" "examen3.pdf" "examen3" 1660759826
-  "/home/mrrobot/Documents/GitHub/Decisiones_Teoria_Juegos/Unidad_3/examen3.tex" 1660759823 13070 d6b101342fd16c4dabcc9efd5b1081e7 ""
+["pdflatex"] 1660759948 "/home/mrrobot/Documents/GitHub/Decisiones_Teoria_Juegos/examenes/2/2.tex" "2.pdf" "2" 1660759950
+  "/home/mrrobot/Documents/GitHub/Decisiones_Teoria_Juegos/examenes/2/2.tex" 1660759948 13070 d6b101342fd16c4dabcc9efd5b1081e7 ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1650183167 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/euex10.tfm" 1650183167 808 f0482638b09e07d31277eba36400f7dc ""
   "/usr/share/texmf-dist/fonts/tfm/public/amsfonts/euler/eufm10.tfm" 1650183167 1040 b84415f97d114011685943ade933dc71 ""
@@ -297,14 +297,14 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1650183167 39911 2da6c67557ec033436fe5418a70a8a61 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1660576095 4278762 af3ac1370db81a450c1118eabf1fe718 ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1660576060 2927662 0802e310aa0e6227a491ee8d801dc3b6 ""
+  "2.aux" 1660759950 1443 677de124853dacb6817d64a4285e4483 "pdflatex"
+  "2.out" 0 -1 0 "pdflatex"
+  "2.tex" 1660759948 13070 d6b101342fd16c4dabcc9efd5b1081e7 ""
   "dtj_iteso.sty" 1659371698 4888 39cc25f22b8cf0d8e098ca388d1bfbdf ""
-  "examen3.aux" 1660759826 1443 677de124853dacb6817d64a4285e4483 "pdflatex"
-  "examen3.out" 0 -1 0 "pdflatex"
-  "examen3.tex" 1660759823 13070 d6b101342fd16c4dabcc9efd5b1081e7 ""
   "logo_ITESO.png" 1659371698 9632 be58a587849bc4e54a0efe5ffaadc5b2 ""
   "sgamex.sty" 1659371698 5527 dceea0226fd436270f4719fcb2e91f51 ""
   (generated)
-  "examen3.aux"
-  "examen3.log"
-  "examen3.out"
-  "examen3.pdf"
+  "2.aux"
+  "2.log"
+  "2.out"
+  "2.pdf"
