@@ -43,7 +43,7 @@ Nota 2: Las tareas y exámenes se pueden ver dando click a los links en Entrega.
 | Fecha                  | Entrega                                           | Anotaciones                                                           |
 | ---------------------- | ------------------------------------------------- | --------------------------------------------------------------------- |
 | 9 de septiembre        | [Tarea 1](tareas/tarea1a.pdf) - [Solución]()      | Unidad [1](Unidad_1/main.pdf)                                         |
-| 30 de septiembre       | [Tarea 1](tareas/tarea1a.pdf) - [Solución]()      | Unidad [2](Unidad_2/main.pdf)                                         |
+| 30 de septiembre       | [Tarea 2](tareas/tarea2a.pdf) - [Solución]()      | Unidad [2](Unidad_2/main.pdf)                                         |
 | **3 de octubre**       | [Examen Parcial 1](examenes/1/main.pdf)           | Unidades [1](Unidad_1/main.pdf) y [2](Unidad_2/main.pdf)              |
 | 31 de octubre          | [Tarea 3](tareas/tarea3.pdf) - [Solución]()       | Unidad [3](Unidad_3/main.pdf)                                         |
 | 21 de noviembre        | [Tarea 4](tareas/tarea4)                          | Unidad [4](Unidad_4/DTJ_unidad4_notas.pdf)                            |
