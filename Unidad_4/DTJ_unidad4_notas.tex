@@ -184,7 +184,7 @@ Normalmente, tener más de una solución no es algo deseable, a menos de que se 
 
 Los refinamientos que hemos revisado se pueden resumir en la siguiente table
 
-\begin{table}
+\begin{table}[H]
 	\centering
 	\begin{game}{2}{2}[Información][Desarollo temporal]
 		& Simultáneo    &   Secuencial    \\
@@ -211,224 +211,245 @@ Como vimos en la pasada unidad, cuando existe información privada, los jugadore
 En un juego dinámico, esos tipos pueden dar lugar a muchos subjuegos (cada uno iniciado con la probabilidad de algún tipo), debido a que habrá muchos conjuntos de información.
 
 
-% \begin{mybox}[colback=red!20]{Nota:}
-% 	Antes de comenzar, necesitamos saber \textit{qué nos hace falta} para poder analizar juegos dinámicos con información incompleta.
-% \end{mybox}
+\begin{mybox}[colback=red!20]{Nota:}
+	Antes de comenzar, necesitamos saber \textit{qué nos hace falta} para poder analizar juegos dinámicos con información incompleta.
+\end{mybox}
 
 
-% \subsection{Juego de Stackelberg}
+\subsection{Juego de Stackelberg}
 
-% En la competencia de Stackelberg una empresa líder, llamémosla E1 decide una cantidad a producir $ q_1 $.
+En la competencia de Stackelberg una empresa líder, llamémosla E1 decide una cantidad a producir $ q_1 $.
 
-% Supongamos que E1 puede tener costo marginal bajo o costo marginal alto ($ c_B $ o m,$ c_A $, respectivamente). El costo de E2 es conocido. E1 escoge $ q_1=4 $ ó $ q_1=8 $.
+Supongamos que E1 puede tener costo marginal bajo o costo marginal alto ($ c_B $ o m,$ c_A $, respectivamente). El costo de E2 es conocido. E1 escoge $ q_1=4 $ ó $ q_1=8 $.
 
-% De nuevo haremos la simplificación de que es la Naturaleza (N) quien elige qué tipo de costo tendrá E1. Recordar que el jugador N se ignora posteriormente.
+De nuevo haremos la simplificación de que es la Naturaleza (N) quien elige qué tipo de costo tendrá E1. Recordar que el jugador N se ignora posteriormente.
 
-% \textbf{Crucial:} E2 \textit{observa} la cantidad elegida de por E1, pero \textit{no observa} el tipo de E1 (es decir, no observa si el costo fue alto o bajo). Por lo tanto, si E1 eligió $ q_1=4 $, esto puede ocurrir bajo costo bajo $ c_B $ o bajo costo alto $ c_A $.
+\textbf{Crucial:} E2 \textit{observa} la cantidad elegida de por E1, pero \textit{no observa} el tipo de E1 (es decir, no observa si el costo fue alto o bajo). Por lo tanto, si E1 eligió $ q_1=4 $, esto puede ocurrir bajo costo bajo $ c_B $ o bajo costo alto $ c_A $.
 
-% En el árbol, el conjunto de información cuando E2 tome su decisión son dos nodos con diferente predecesor: cuando E1 tiene costo bajo y cuando E1 tiene costo alto. Lo mismo ocurre si E1 elige $ q_1=8 $.
+En el árbol, el conjunto de información cuando E2 tome su decisión son dos nodos con diferente predecesor: cuando E1 tiene costo bajo y cuando E1 tiene costo alto. Lo mismo ocurre si E1 elige $ q_1=8 $.
 
-% \begin{figure}[H]
-% 	\centering
-% 	\footnotesize{
-% 		\begin{forest} decision tree,for tree={s sep=25pt, l sep=20pt}
-% 			[N,plain content,elo={yshift=4pt}
-% 			[E1;c_B,plain content,elo={yshift=4pt},alias=c2i
-% 			[E2;{q_1=4},plain content,elo={yshift=4pt},alias=E20
-% 			[{5,5}; {q_2=4},elo={xshift=-3pt}]
-% 			[{3,7}; {q_2=8}]
-% 			]
-% 			[E2;{q_1=8},plain content,elo={yshift=4pt},alias=E21
-% 			[{7,7}; {q_2=4}]
-% 			[{10,12}; {q_2=8}]
-% 			]
-% 			]
-% 			[E1;c_A,plain content,elo={yshift=4pt},alias=c2d
-% 			[E2;{q_1=4},plain content,elo={yshift=4pt},alias=E22
-% 			[{2,5}; {q_2=4}]
-% 			[{1,6}; {q_2=8}]
-% 			]
-% 			[E2;{q_1=8},plain content,elo={yshift=4pt},alias=E23
-% 			[{0,12}; {q_2=4}]
-% 			[{5,5}; {q_2=8}]
-% 			]
-% 			]
-% 			]
-% 			\draw[dashed,transform canvas={yshift=-10pt}] (E20) to[out=15, in=165] (E22);
-% 			\draw[dashed,transform canvas={yshift=-9pt}] (E21) to[out=15, in=165] (E23);
-% 			\node[draw=white, fill=white,right=9pt of c2i] at (c2i) {$ [\theta] $};
-% 			\node[draw=white, fill=white,left=9pt of c2d] at (c2d) {$ [1-\theta] $};
-% 		\end{forest}}
-% \end{figure}
+\begin{figure}[H]
+	\centering
+	\footnotesize{
+		\begin{forest} decision tree,for tree={s sep=25pt, l sep=20pt}
+			[N,plain content,elo={yshift=4pt}
+			[E1;c_B,plain content,elo={yshift=4pt},alias=c2i
+			[E2;{q_1=4},plain content,elo={yshift=4pt},alias=E20
+			[{5,5}; {q_2=4},elo={xshift=-3pt}]
+			[{3,7}; {q_2=8}]
+			]
+			[E2;{q_1=8},plain content,elo={yshift=4pt},alias=E21
+			[{7,7}; {q_2=4}]
+			[{10,12}; {q_2=8}]
+			]
+			]
+			[E1;c_A,plain content,elo={yshift=4pt},alias=c2d
+			[E2;{q_1=4},plain content,elo={yshift=4pt},alias=E22
+			[{2,5}; {q_2=4}]
+			[{1,6}; {q_2=8}]
+			]
+			[E2;{q_1=8},plain content,elo={yshift=4pt},alias=E23
+			[{0,12}; {q_2=4}]
+			[{5,5}; {q_2=8}]
+			]
+			]
+			]
+			\draw[dashed,transform canvas={yshift=-10pt}] (E20) to[out=15, in=165] (E22);
+			\draw[dashed,transform canvas={yshift=-9pt}] (E21) to[out=15, in=165] (E23);
+			\node[draw=white, fill=white,right=9pt of c2i] at (c2i) {$ [\theta] $};
+			\node[draw=white, fill=white,left=9pt of c2d] at (c2d) {$ [1-\theta] $};
+		\end{forest}}
+\end{figure}
 
-% El perfil de estrategias se debe asignar por jugador y por tipo. Por cada nodo de decisión, una estrategias mapea a una acción. Para E1
+El perfil de estrategias se debe asignar por jugador y por tipo. Por cada nodo de decisión, una estrategias mapea a una acción. Para E1
 
-% \begin{align*}
-% 	S_1^B = \{4, 8\} \\
-% 	S_1^A = \{4, 8\}
-% \end{align*}
+\begin{align*}
+	S_1^B = \{4, 8\} \\
+	S_1^A = \{4, 8\}
+\end{align*}
 
-% Tiene las mismas estrategias pero porque así lo definimos. Podría tener estrategias diferentes.
+Tiene las mismas estrategias pero porque así lo definimos. Podría tener estrategias diferentes.
 
-% Para E2 tenemos 4 nodos, por lo que necesitamos 4 acciones
+Para E2 tenemos 4 nodos, por lo que necesitamos 4 acciones
 
-% \[
-% 	S_2 =	\{44, 48, 84, 88\}
-% \]
+\[
+	S_2 =	\{44, 48, 84, 88\}
+\]
 
-% El perfil del jugador 2 es una acción por cada infoset: $ S_2 = S_2^BS_2^A $. En el primer caso, 44 significa que E2 escogerá 4 en ambos conjuntos de información; 48 significa que en el primero escogerá 4 y en el segundo 8, 84 que escogerá 8 en el primero y 4 en el segundo y 88 que escogerá 8 en ambos. La representación se hace así por la razón de que la E2 no sabe en qué nodo se encuentra.
-
-
-
-% Algunos autores suelen representar los juegos dinámicos como juegos estratégicos (normales), pero esta representación hace que la información temporal se pierda. El juego se puede representar en forma normal como
-
-% \begin{figure}[H]
-% 	\centering
-% 	\begin{tikzpicture}
-% 		\node(0)[circle,draw,inner sep=1.5,fill=black,label=above:$N$]{}
-% 		[grow'=south,sibling distance=8cm,transform canvas={xshift = 0.6cm}]
-% 		child{edge from parent node[right=4pt]{$c_A$}}
-% 		child{edge from parent node[left=6pt]{$c_B$}}
-% 		;
-% 		\node[anchor=north]at(0-1){
-% 			\begin{game}24[$E1$][$E2$]
-% 				& 44   & 48  & 84   & 88 \\
-% 				4 & 2,5  & 2,5 & 1,6  & 1,6 \\
-% 				8 & 0,12 & 5,5 & 0,12 & 5,5
-% 			\end{game}
-% 		};
-% 		\node[anchor=north]at(0-2){
-% 			\begin{game}24[$E1$][$E2$]
-% 				& 44 & 48 & 84 & 88 \\
-% 				4 & 5,5 & 5,5 & 3,7 & 3,7\\
-% 				8 & 7,7 & 10,12  & 7,7 & 10,12
-% 			\end{game}
-% 		};
-
-% 	\end{tikzpicture}
-% \end{figure}
-
-% La matriz izquierda solo tiene que ver con los costos bajos. El primer número de cada estrategia indica el infoset. Cuando E1 escoge 4, y si E2 escoge 4 (que sucede dos veces: 44 y 48), su ganancia es (5,5). Si E1 escoge 8 y E2 escoge 4 (segunda acción), ganan 7,7, pero si E2 escoge 8 (segunda acción), ganan 10,12.
-
-% Notar que la primera acción en el par 44 corresponde a la respuesta de E1 a la primera acción de E1.
-
-% ¿Cuál es el equilibrio en este juego?
-
-% Podemos evaluar cada una de las estrategias de cada jugador.
-
-% \begin{figure}[H]
-% 	\centering
-% 	\begin{tikzpicture}
-% 		\node(0)[circle,draw,inner sep=1.5,fill=black,label=above:$N$]{}
-% 		[grow'=south,sibling distance=8cm,transform canvas={xshift = 0.6cm}]
-% 		child{edge from parent node[right=4pt]{$c_A$}}
-% 		child{edge from parent node[left=6pt]{$c_B$}}
-% 		;
-% 		\node[anchor=north]at(0-1){
-% 			\begin{game}24[$E1$][$E2$]
-% 				& 44   & 48  & 84   & 88 \\
-% 				4 & (2),5  & 2,5 & (1),6  & 1,6 \\
-% 				8 & 0,12 & (5),5 & 0,12 & (5),5
-% 			\end{game}
-% 		};
-% 		\node[anchor=north]at(0-2){
-% 			\begin{game}24[$E1$][$E2$]
-% 				& 44 & 48 & 84 & 88 \\
-% 				4 & 5,5 & 5,5 & 3,7 & 3,7\\
-% 				8 & (7),7 & (10),12  & (7),7 & (10),12
-% 			\end{game}
-% 		};
-
-% 	\end{tikzpicture}
-% \end{figure}
-
-% Podemos hacernos la pregunta: si el E1 juega (8,4) (para sus tipos bajo y alto), y el jugador E2 juega 44, ¿es este un EBN? Es decir, ¿44 es una MR de E2 a (8,4) de E1?
-
-% \[
-% 	UE_2(8,4; 44)=7q + 5(1-q)	= 5 + 2q
-% \]
-
-% Podemos compararla con otra estrategia de E2
-
-% \[
-% 	UE_2(8,4; 48)=12q + 5(1-q)= 5 + 7q
-% \]
-
-% Podemos ver que para cualquier valor de $ q $, 48 sería mejor estrategia. El perfil de estrategias $ s^*=(8,4; 44) $ no es un ENB. Podemos repetir el proceso de forma interativa para todas las estrategias. Deberíamos encontrar el equilibrio, pero \textit{sería un ENB}. ¿Nos sirve esto?
-
-% Veamos otro problema.
-
-% \begin{figure}[H]
-% 	\centering
-% 	\includegraphics{gift_game.pdf}
-% \end{figure}
-
-% El jugador 1 decide darle un regalo ($ Reg $) al jugador 2. El jugador 1 está privadamente informado acerca de si es un jugador amistoso ($ A $) o enemistoso ($ E $). El jugador 2 no lo sabe, y debe decidir si Aceptar (A) o Rechazar (R).
-
-% Las estrategias del jugador 1 son $ S_2 = S^FS^E = \{Reg^A Reg^E, Reg^A N^E, N^A Reg^E ,N^A N^E \} $, y las del jugador 2 $S_2= \{A, R\} $.
-
-% \begin{center}
-% 	\begin{game}42[$j1$][$j2$]
-% 		& A & R  \\
-% 		$Reg^A Reg^E$ & 1, $ p $ & -1, $ p - 1$ \\
-% 		$Reg^A N^E$ & $ p,p $  & $ -p, 0 $    \\
-% 		$N^A Reg^E$ 		& $1-p,0$  & $ p-1, p-1 $ \\
-% 		$N^A N^E$ 		& 0,0			 & 0,0
-% 	\end{game}
-
-% \end{center}
+El perfil del jugador 2 es una acción por cada infoset: $ S_2 = S_2^BS_2^A $. En el primer caso, 44 significa que E2 escogerá 4 en ambos conjuntos de información; 48 significa que en el primero escogerá 4 y en el segundo 8, 84 que escogerá 8 en el primero y 4 en el segundo y 88 que escogerá 8 en ambos. La representación se hace así por la razón de que la E2 no sabe en qué nodo se encuentra.
 
 
-% Las ganancias fueron computadas ya como utilidades esperadas. Por ejemplo,
 
-% \[
-% 	UE_1(Reg^A Reg^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)1}_{\text{1 no amigable regala, 2 acepta}}=1
-% \]
+Algunos autores suelen representar los juegos dinámicos como juegos estratégicos (normales), pero esta representación hace que la información temporal se pierda. El juego se puede representar en forma normal como
 
-% \[
-% 	UE_2(Reg^A Reg^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable regala, 2 acepta}}=p
-% \]
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node(0)[circle,draw,inner sep=1.5,fill=black,label=above:$N$]{}
+		[grow'=south,sibling distance=8cm,transform canvas={xshift = 0.6cm}]
+		child{edge from parent node[right=4pt]{$c_A$}}
+		child{edge from parent node[left=6pt]{$c_B$}}
+		;
+		\node[anchor=north]at(0-1){
+			\begin{game}24[$E1$][$E2$]
+				& 44   & 48  & 84   & 88 \\
+				4 & 2,5  & 2,5 & 1,6  & 1,6 \\
+				8 & 0,12 & 5,5 & 0,12 & 5,5
+			\end{game}
+		};
+		\node[anchor=north]at(0-2){
+			\begin{game}24[$E1$][$E2$]
+				& 44 & 48 & 84 & 88 \\
+				4 & 5,5 & 5,5 & 3,7 & 3,7\\
+				8 & 7,7 & 10,12  & 7,7 & 10,12
+			\end{game}
+		};
 
-% \[
-% 	UE_1(Reg^A N^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable N, 2 acepta}}=p
-% \]
+	\end{tikzpicture}
+\end{figure}
 
-% \[
-% 	UE_1(Reg^A N^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable N, 2 acepta}}=p
-% \]
+La matriz izquierda solo tiene que ver con los costos bajos. El primer número de cada estrategia indica el infoset. Cuando E1 escoge 4, y si E2 escoge 4 (que sucede dos veces: 44 y 48), su ganancia es (5,5). Si E1 escoge 8 y E2 escoge 4 (segunda acción), ganan 7,7, pero si E2 escoge 8 (segunda acción), ganan 10,12.
 
-% Y así por el estilo. Si tratamos de encontrar el EN en este juego con el método de 3 pasos, nos quedaría (asumiendo $ 0<p<1 $). \footnote{
-% 	Para cada columna, evaluar a j1, para cada fila, evaluar a j2.
-% }.
+Notar que la primera acción en el par 44 corresponde a la respuesta de E1 a la primera acción de E1.
 
-% Si j2 elige A, la mejor respuesta de j1 es $ Reg^A Reg^E $ (obtiene 1), pero si j2 elige R, la mejor respuesta de j1 es $ N^A N^E $, y obtiene 0.
+¿Cuál es el equilibrio en este juego?
 
-% \begin{center}
-% 	\begin{game}42[$j1$][$j2$]
-% 		& A & R  \\
-% 		$Reg^A Reg^E$ & (1), $ (p) $ & -1, $ p - 1$ \\
-% 		$Reg^A N^E$ & $ p,(p) $  & $ -p, 0 $    \\
-% 		$N^A Reg^E$ 		& $1-p,(0)$  & $ p-1, p-1 $ \\
-% 		$N^A N^E$ 		& 0,(0)		 & (0),(0)
-% 	\end{game}
+Podemos evaluar cada una de las estrategias de cada jugador.
 
-% \end{center}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}
+		\node(0)[circle,draw,inner sep=1.5,fill=black,label=above:$N$]{}
+		[grow'=south,sibling distance=8cm,transform canvas={xshift = 0.6cm}]
+		child{edge from parent node[right=4pt]{$c_A$}}
+		child{edge from parent node[left=6pt]{$c_B$}}
+		;
+		\node[anchor=north]at(0-1){
+			\begin{game}24[$E1$][$E2$]
+				& 44   & 48  & 84   & 88 \\
+				4 & (2),5  & 2,5 & (1),6  & 1,6 \\
+				8 & 0,12 & (5),5 & 0,12 & (5),5
+			\end{game}
+		};
+		\node[anchor=north]at(0-2){
+			\begin{game}24[$E1$][$E2$]
+				& 44 & 48 & 84 & 88 \\
+				4 & 5,5 & 5,5 & 3,7 & 3,7\\
+				8 & (7),7 & (10),12  & (7),7 & (10),12
+			\end{game}
+		};
 
-% Tenemos dos equilibrios: $ (Reg^A Reg^E, A) $ y $( N^A N^E, R )$. Pero... ¿$( N^A N^E, R )$ es racional para el jugador 2? No. Revisar la parte derecha del árbol. Independientemente del tipo del jugador 1, j2 siempre acepta regalos, pero el equilibrio $( N^A N^E, R )$ no incorpora esa preferencia. El infoset del jugador 2 nunca es alcanzado en ese equilibrio.
+	\end{tikzpicture}
+\end{figure}
+
+Podemos hacernos la pregunta: si el E1 juega (8,4) (para sus tipos bajo y alto), y el jugador E2 juega 44, ¿es este un EBN? Es decir, ¿44 es una MR de E2 a (8,4) de E1?
+
+\[
+	UE_2(8,4; 44)=7q + 5(1-q)	= 5 + 2q
+\]
+
+Podemos compararla con otra estrategia de E2
+
+\[
+	UE_2(8,4; 48)=12q + 5(1-q)= 5 + 7q
+\]
+
+Podemos ver que para cualquier valor de $ q $, 48 sería mejor estrategia. El perfil de estrategias $ s^*=(8,4; 44) $ no es un ENB. Podemos repetir el proceso de forma interativa para todas las estrategias. Deberíamos encontrar el equilibrio, pero \textit{sería un ENB}. ¿Nos sirve esto?
+
+Veamos otro problema.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics{gift_game.pdf}
+\end{figure}
+
+El jugador 1 decide darle un regalo ($ Reg $) al jugador 2. El jugador 1 está privadamente informado acerca de si es un jugador amistoso ($ A $) o enemistoso ($ E $). El jugador 2 no lo sabe, y debe decidir si Aceptar (A) o Rechazar (R).
+
+Las estrategias del jugador 1 son $ S_2 = S^FS^E = \{Reg^A Reg^E, Reg^A N^E, N^A Reg^E ,N^A N^E \} $, y las del jugador 2 $S_2= \{A, R\} $.
+
+\begin{center}
+	\begin{game}42[$j1$][$j2$]
+		& A & R  \\
+		$Reg^A Reg^E$ & 1, $ p $ & -1, $ p - 1$ \\
+		$Reg^A N^E$ & $ p,p $  & $ -p, 0 $    \\
+		$N^A Reg^E$ 		& $1-p,0$  & $ p-1, p-1 $ \\
+		$N^A N^E$ 		& 0,0			 & 0,0
+	\end{game}
+
+\end{center}
 
 
-% Tanto en estos juegos como en los revisados en la unidad 2, debemos exigirle a los jugadores ser \textit{secuencialmente racionales}. En la unidad 2 encontramos que la racionalidad secuencial nos llevaba al concepto de ENPS. Pero ¿tenemos subjuegos en este juego? ¿Cuántos subjuegos tenemos? Solo tenemos un subjuego. Cualquier solución a este juego no nos diría qué haría cada jugador en cada etapa del juego.
+Las ganancias fueron computadas ya como utilidades esperadas. Por ejemplo,
+
+\[
+	UE_1(Reg^A Reg^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)1}_{\text{1 no amigable regala, 2 acepta}}=1
+\]
+
+\[
+	UE_2(Reg^A Reg^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable regala, 2 acepta}}=p
+\]
+
+\[
+	UE_1(Reg^A N^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable N, 2 acepta}}=p
+\]
+
+\[
+	UE_1(Reg^A N^E; A) = \underbrace{1p}_{\text{1 amigable regala, 2 acepta}}+\underbrace{(1-p)0}_{\text{1 no amigable N, 2 acepta}}=p
+\]
+
+Y así por el estilo. Si tratamos de encontrar el EN en este juego con el método de 3 pasos, nos quedaría (asumiendo $ 0<p<1 $). \footnote{
+	Para cada columna, evaluar a j1, para cada fila, evaluar a j2.
+}.
+
+Si j2 elige A, la mejor respuesta de j1 es $ Reg^A Reg^E $ (obtiene 1), pero si j2 elige R, la mejor respuesta de j1 es $ N^A N^E $, y obtiene 0.
+
+\begin{center}
+	\begin{game}42[$j1$][$j2$]
+		& A & R  \\
+		$Reg^A Reg^E$ & (1), $ (p) $ & -1, $ p - 1$ \\
+		$Reg^A N^E$ & $ p,(p) $  & $ -p, 0 $    \\
+		$N^A Reg^E$ 		& $1-p,(0)$  & $ p-1, p-1 $ \\
+		$N^A N^E$ 		& 0,(0)		 & (0),(0)
+	\end{game}
+
+\end{center}
+
+Tenemos dos equilibrios: $ (Reg^A Reg^E, A) $ y $( N^A N^E, R )$. Pero... ¿$( N^A N^E, R )$ es racional para el jugador 2? No. Revisar la parte derecha del árbol. Independientemente del tipo del jugador 1, j2 siempre acepta regalos, pero el equilibrio $( N^A N^E, R )$ no incorpora esa preferencia. El infoset del jugador 2 nunca es alcanzado en ese equilibrio.
 
 
-% \begin{mybox}[colback=red!15, coltitle=black]{Nota: racionalidad secuencial y equlibrio bayesiano perfecto}
+Tanto en estos juegos como en los revisados en la unidad 2, debemos exigirle a los jugadores ser \textit{secuencialmente racionales}. En la unidad 2 encontramos que la racionalidad secuencial nos llevaba al concepto de ENPS. Pero ¿tenemos subjuegos en este juego? ¿Cuántos subjuegos tenemos? Solo tenemos un subjuego. Cualquier solución a este juego no nos diría qué haría cada jugador en cada etapa del juego.
 
-% 	Los jugadores  mazimizan sus ganancias \textit{en cada infoset} en el que se encuentran. Esto debería ser suficiente para analizar un juego dinámico, pero en el juego que presentamos no es así, porque solo existe un subjuego (el propio juego).
+\begin{mybox}[colback=red!15, coltitle=black]{Nota: racionalidad secuencial y equlibrio bayesiano perfecto}
 
-% 	Necesitamos \textit{aislar} cada conjunto de información para analizarlo y verificar qué estrategias en ese infoset son racionales.
+	\begin{figure}[H]
+		\centering
+		\footnotesize{
+			\begin{forest} decision tree,for tree={s sep=20pt, l sep=25pt,anchor=center}
+				[1,plain content,elo={yshift=4pt}
+				[{{\scriptsize[\phi]}, 2};L,plain content,elo={yshift=4pt},alias=c2i
+				[{2,1}; {u}]
+				[{0,0}; {D}]
+				]
+				[{2, {\scriptsize[1-\phi]}};M,plain content,elo={yshift=4pt},alias=c2d
+				[{0,2}; u,elo={yshift=4pt}]
+				[{0,1}; D,elo={yshift=4pt}]
+				]
+				[{1,3}; R, elo={yshift=4pt}]
+				]
+				\draw[dashed,transform canvas={yshift=-10pt}] (c2i) to[out=15, in=165] (c2d);
+				% \draw[dashed,transform canvas={yshift=-9pt}] (E21) to[out=15, in=165] (E23);
+				% \node[draw=white, fill=white,left=10pt of c2i] at (c2i) {\scriptsize$ [\theta] $};
+				% \node[draw=white, left=5pt of c2d] at (c2d) {\scriptsize$ [1-\theta] $};
+			\end{forest}}
+	\end{figure}
 
-% 	Eso es lo que hace el equilibrio bayesiano perfecto (EBP).
+	Los jugadores  maximizan sus ganancias \textit{en cada infoset} en el que se encuentran. Esto debería ser suficiente para analizar un juego dinámico, pero en el juego que presentamos no es así, porque solo existe un subjuego (el propio juego).
 
-% \end{mybox}
+	Necesitamos \textit{aislar} cada conjunto de información para analizarlo y verificar qué estrategias en ese infoset son racionales.
+
+	Eso es lo que hace el equilibrio bayesiano perfecto (EBP).
+
+\end{mybox}
 
 \section{Equilibrio Bayesiano Perfecto, EBP}
 
